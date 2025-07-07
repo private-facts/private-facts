@@ -1,0 +1,24 @@
+@startuml
+skinparam Shadowing false
+
+actor "User" as user
+entity "Private\nFacts" as app
+Boundary "Tahoe\n'Client' " as tahoe
+Collections "Tahoe\nStorage0" as disk
+
+group Send to Tahoe
+activate app
+user --> app : "Submit some content"
+    activate tahoe
+    app -> tahoe : HTTP Put...
+    tahoe -> tahoe : create capability string
+    tahoe -> tahoe : encrypt & fragment
+    tahoe ->  disk : send fragments in "shares"
+    tahoe -> app : return capability string
+    deactivate tahoe
+app -> app : store capability string
+app --> user : "Content OK"
+deactivate app
+
+end
+@enduml

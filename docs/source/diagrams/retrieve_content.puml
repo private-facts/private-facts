@@ -1,0 +1,33 @@
+@startuml
+<style>
+    Element {
+        LineColor : #403f3e; }
+    sequenceDiagram {
+        actor {
+          FontColor: darkblue;
+        }
+      arrow {
+      FontColor: darkblue;
+      LineColor: blue;
+        }
+</style>
+actor "User\nApp" as user
+entity "Private\nFacts" as app
+entity "Tahoe\n'Client' " as tahoe
+collections "Tahoe\nGrid" as disk
+
+group Read
+activate app
+user --> app : Request content
+app -> tahoe : HTTP Get... URI
+    activate tahoe
+    tahoe -> tahoe : lookup URI
+    tahoe ->  disk : request the shares
+    tahoe <--  disk : return the shares
+    tahoe -> tahoe : decrypt content
+    tahoe -> app : return content
+    app --> user : display content
+    deactivate tahoe
+deactivate app
+end
+@enduml

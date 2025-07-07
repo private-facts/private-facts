@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "private-facts"
+version = "0.1.0"
+description = "Tahoe-lafs example app"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "attrs==23.2.0",
+    "cryptography<42",
+    "pytest>=8.3.4",
+    "pytest-twisted>=1.14.3",
+    "sphinx>=8.1.3",
+    "tahoe-lafs>=1.19.0",
+]
+
+[project.scripts]
+hello = "src.hello.hello_local:main"
+hello_file = "src.hello.hello_local_file:main"
+hello_system = "src.hello.hello_local_filesystem:main"
+hello_mutable = "src.hello.hello_local_mutable:main"
+
+[tool.hatch.build]
+exclude = [
+  "packages",
+  "dist",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
