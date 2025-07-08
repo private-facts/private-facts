@@ -45,7 +45,7 @@ uv run tahoe-server/client0
 ```
 
 ### 4. Run the demo scripts
-```
+```bash
 uv run hello
 uv run hello_file
 uv run hello_system
@@ -58,6 +58,11 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ### Getting ready for your first pull request
 
 Please make sure to update tests as appropriate.
+
+To run the tests:
+```bash
+uv run pytest
+```
 
 ## License
 
