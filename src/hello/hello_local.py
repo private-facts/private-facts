@@ -33,7 +33,7 @@ def get_string(tahoe_client, cap_string):
     Retrieve the contents of the string by passing the capability string to the tahoe_client.
     """
 
-    retrieved_string, status = tahoe_client.retrieve_data(cap_string)
+    retrieved_string, status = tahoe_client.get_data(cap_string)
 
     if status != 200:
         print(f"An error occurred retrieving the data with error code: {status}")
