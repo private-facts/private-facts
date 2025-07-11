@@ -11,7 +11,7 @@ class TahoeClient:
         self.base_url = base_url
         self.http = http
 
-    def upload_data(self, data, dir_cap=None, mutable=False, cap_string=None):
+    def post_data(self, data, dir_cap=None, mutable=False, cap_string=None):
         if dir_cap:
             url = self.base_url + dir_cap + "/my_data.txt"
         else:
@@ -46,7 +46,7 @@ class TahoeClient:
 
         return response.data.decode("utf-8")
 
-    def retrieve_data(self, cap_string, dir_cap=None):
+    def get_data(self, cap_string, dir_cap=None):
         if dir_cap:
             url = self.base_url + dir_cap + "/my_data.txt"
         else:
