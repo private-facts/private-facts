@@ -21,7 +21,7 @@ def upload_file(tahoe_client, file_path):
     """
     try:
         with open(file_path, "rb") as f: 
-            cap_string = tahoe_client.upload_data(f)
+            cap_string = tahoe_client.post_data(f)
 
         if cap_string is None:
             print(f"An error occurred during upload.")
