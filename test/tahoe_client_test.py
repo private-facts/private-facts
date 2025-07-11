@@ -154,42 +154,42 @@ def test_post_data_file_dircap_exception(client, mock_http, data_file):
     with pytest.raises(Exception):
         client.post_data(data_file, dir_cap="$DIRCAP")
 
-# Retrieve data tests
-def test_retrieve_data_happy(client, mock_http):
+# Get data tests
+def test_get_data_happy(client, mock_http):
     mock_response = Mock(status=200, data=b"test data")
     mock_http.request.return_value = mock_response
 
-    result = client.retrieve_data("cap_string")
+    result = client.get_data("cap_string")
 
     mock_http.request.assert_called_once_with("GET", BASE_URL+"cap_string")
     assert result[0] == "test data"
     assert result[1] == 200
 
-def test_retrieve_data_bad_response(client, mock_http):
+def test_get_data_bad_response(client, mock_http):
     mock_response = Mock(status=404)
     mock_http.request.return_value = mock_response
 
-    result = client.retrieve_data("cap_string")
+    result = client.get_data("cap_string")
 
     mock_http.request.assert_called_once_with("GET", BASE_URL+"cap_string")
     assert result[0] is None
     assert result[1] == 404
 
-def test_retrieve_data_dircap_happy(client, mock_http):
+def test_get_data_dircap_happy(client, mock_http):
     mock_response = Mock(status=200, data=b"test data")
     mock_http.request.return_value = mock_response
 
-    result = client.retrieve_data("cap_string", dir_cap="$DIRCAP")
+    result = client.get_data("cap_string", dir_cap="$DIRCAP")
 
     mock_http.request.assert_called_once_with("GET", BASE_URL+"$DIRCAP/my_data.txt")
     assert result[0] == "test data"
     assert result[1] == 200
 
-def test_retrieve_data_dircap_bad_response(client, mock_http):
+def test_get_data_dircap_bad_response(client, mock_http):
     mock_response = Mock(status=404)
     mock_http.request.return_value = mock_response
 
-    result = client.retrieve_data("cap_string", dir_cap="$DIRCAP")
+    result = client.get_data("cap_string", dir_cap="$DIRCAP")
 
     mock_http.request.assert_called_once_with("GET", BASE_URL+"$DIRCAP/my_data.txt")
     assert result[0] is None
@@ -208,10 +208,10 @@ def test_update_mutable_happy(client, mock_http):
 
     client.update_data('datatest', cap_string=cap_string, mutable=True)
     mock_http.request.return_value = Mock(status=200, data=b'datatest')
-    retrieve_update_result = client.retrieve_data(cap_string)
+    get_update_result = client.get_data(cap_string)
 
-    assert retrieve_update_result[0] == 'datatest'
-    assert retrieve_update_result[1] == 200
+    assert get_update_result[0] == 'datatest'
+    assert get_update_result[1] == 200
 
 # Make dir tests
 def test_make_dir_happy(client, mock_http):
