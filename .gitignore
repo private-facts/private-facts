@@ -212,5 +212,5 @@ __marimo__/
 scratch.*
 hello_world_out.txt
 
-tahoe-server/storage0/private
-tahoe-server/client0/private
+tahoe-server/storage0/private/*
+tahoe-server/client0/private/*

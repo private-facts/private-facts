@@ -42,7 +42,7 @@ def get_file(tahoe_client, cap_string, output_path):
     """
     Retrieve the contents of a file by passing the capability string to the tahoe_client and write them to output_path.
     """
-    retrieved_data, status = tahoe_client.retrieve_data(cap_string)
+    retrieved_data, status = tahoe_client.get_data(cap_string)
 
     if status != 200:
         print(f"An error occurred retrieving the data with error code: {status}")
