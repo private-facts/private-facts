@@ -15,7 +15,7 @@ class FakeTahoe:
         self.storage = storage
         self.bad_response = bad_response
 
-    def upload_data(self, data, exception=False):
+    def post_data(self, data, exception=False):
         if exception:
             raise ValueError("Simulated exception.")
         if self.bad_response:
@@ -24,7 +24,7 @@ class FakeTahoe:
         self.storage[uri] = data # Store the URI as key and the data as value for later retrieval
         return uri
 
-    def retrieve_data(self, uri):
+    def get_data(self, uri):
         if self.bad_response:
             status = 400
             return None, status
@@ -34,7 +34,7 @@ class FakeTahoe:
 # FakeTahoe tests
 def test_fake_tahoe_upload_string_happy():
     fake_tahoe = FakeTahoe()
-    result = fake_tahoe.upload_data('test_string')
+    result = fake_tahoe.post_data('test_string')
     expected = fake_data.get('test_string')
     
     assert result == expected
@@ -42,19 +42,19 @@ def test_fake_tahoe_upload_string_happy():
 def test_fake_tahoe_upload_string_exception():
     fake_tahoe = FakeTahoe()
     with pytest.raises(ValueError) as e:
-        fake_tahoe.upload_data('test_string', exception=True)
+        fake_tahoe.post_data('test_string', exception=True)
     assert str(e.value) == 'Simulated exception.'
 
 def test_fake_tahoe_upload_string_bad_response():
     fake_tahoe = FakeTahoe(bad_response=True)
-    result = fake_tahoe.upload_data('test_string')
+    result = fake_tahoe.post_data('test_string')
 
     assert result is None
 
 def test_fake_Tahoe_retrieve_string():
     fake_tahoe = FakeTahoe()
     uri = fake_data.get('test_string')
-    result, status = fake_tahoe.retrieve_data(uri)
+    result, status = fake_tahoe.get_data(uri)
     expected = 'test_string'
     expected_status = 200
 
@@ -64,7 +64,7 @@ def test_fake_Tahoe_retrieve_string():
 def test_fake_tahoe_retrieve_string_bad_response():
     fake_tahoe = FakeTahoe(bad_response=True)
     uri = fake_data.get('test_string')
-    result, status = fake_tahoe.retrieve_data(uri)
+    result, status = fake_tahoe.get_data(uri)
 
     assert result is None
     assert status == 400
@@ -72,8 +72,8 @@ def test_fake_tahoe_retrieve_string_bad_response():
 
 def test_fake_tahoe_upload_and_retrieve_string():
     fake_tahoe = FakeTahoe()
-    uri = fake_tahoe.upload_data('test_string')
-    result, status = fake_tahoe.retrieve_data(uri)
+    uri = fake_tahoe.post_data('test_string')
+    result, status = fake_tahoe.get_data(uri)
     expected = 'test_string'
     expected_status = 200
     
