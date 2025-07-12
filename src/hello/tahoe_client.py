@@ -62,7 +62,27 @@ class TahoeClient:
 
         return response.data.decode("utf-8"), response.status
     
-    
+    def put_data(self, data, cap_string):
+        url = self.base_url + "?format=SDMF"
+
+        try:
+            if hasattr(data, "read"):
+                data = data.read()
+
+            response = self.http.request(
+                "PUT",
+                url,
+                data,
+                cap_string
+            )
+
+        except Exception:
+            raise
+
+        if response.status != 200 and response.status != 201:
+            return None
+
+        return response.data.decode("utf-8")
 
     def make_dir(self):
         try:
