@@ -62,7 +62,7 @@ def test_post_data_mutable_happy(client, mock_http):
 
     result = client.post_data("test data", mutable=True)
 
-    mock_http.request.assert_called_once_with("PUT", request_url, "test data", None)
+    mock_http.request.assert_called_once_with("PUT", request_url, "test data")
     assert result == "cap_string"
 
 def test_post_data_bad_response(client, mock_http):
