@@ -43,6 +43,11 @@ uv sync
 uv run tahoe-server/storage0
 uv run tahoe-server/client0
 ```
+### Or, if you have [Just](https://github.com/casey/just) installed:
+```bash
+just dev
+```
+which will start both processes in their own tmux panes and focus a third pane.
 
 ### 4. Run the demo scripts
 ```bash
