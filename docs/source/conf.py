@@ -25,14 +25,8 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 
-html_theme = 'pydata_sphinx_theme'
-html_theme_options = {
-    "content_footer_items": ["last-updated"],
-    "inherit" : "basic",
-    "stylesheet" : "styles/pydata-sphinx-theme.css",
-    "pygments_style" : "tango",
-    "sidebars" : "sidebar-nav-bs.html",
-}
+html_theme = 'furo'
+
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
 
@@ -46,7 +40,7 @@ html_static_path = ['_static']
 html_show_sourcelink = True
 html_show_sphinx = True
 html_show_copyright = True
-htmlhelp_basename = 'Tahoe-LAFSdoc'
+htmlhelp_basename = 'Tahoe-LAFS-doc'
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
