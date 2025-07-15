@@ -62,7 +62,7 @@ def test_post_data_mutable_happy(client, mock_http):
 
     result = client.post_data("test data", mutable=True)
 
-    mock_http.request.assert_called_once_with("PUT", request_url, "test data", None)
+    mock_http.request.assert_called_once_with("PUT", request_url, "test data")
     assert result == "cap_string"
 
 def test_post_data_bad_response(client, mock_http):
@@ -195,18 +195,17 @@ def test_get_data_dircap_bad_response(client, mock_http):
     assert result[0] is None
     assert result[1] == 404
 
-""" Update section follows
-"""
-def test_update_mutable_happy(client, mock_http):
+# Put data tests
+def test_put_data_happy(client, mock_http):
     mock_create_response = Mock(status=201, data=b"cap_string")
     mock_http.request.return_value = mock_create_response
 
-    cap_string = client.upload_data('testdata', mutable=True)
+    cap_string = client.post_data('testdata', mutable=True)
 
     mock_update_response = Mock(status=200, data=b"cap_string")
     mock_http.request.return_value = mock_update_response
 
-    client.update_data('datatest', cap_string=cap_string, mutable=True)
+    client.put_data('datatest', cap_string=cap_string)
     mock_http.request.return_value = Mock(status=200, data=b'datatest')
     get_update_result = client.get_data(cap_string)
 

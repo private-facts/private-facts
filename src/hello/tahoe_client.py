@@ -11,7 +11,7 @@ class TahoeClient:
         self.base_url = base_url
         self.http = http
 
-    def post_data(self, data, dir_cap=None, mutable=False, cap_string=None):
+    def post_data(self, data, dir_cap=None, mutable=False):
         if dir_cap:
             url = self.base_url + dir_cap + "/my_data.txt"
         else:
@@ -29,15 +29,15 @@ class TahoeClient:
                     "PUT",
                     url,
                     data,
-                    cap_string
                 )
             else:
                 response = self.http.request(
                 "PUT",
-
                 url,
                 data
                 )
+
+
         except Exception:
             raise
 
@@ -62,7 +62,26 @@ class TahoeClient:
 
         return response.data.decode("utf-8"), response.status
     
-    
+    def put_data(self, data, cap_string):
+        url = self.base_url + cap_string + "?format=SDMF"
+
+        try:
+            if hasattr(data, "read"):
+                data = data.read()
+
+            response = self.http.request(
+                "PUT",
+                url,
+                data,
+            )
+
+        except Exception:
+            raise
+
+        if response.status != 200 and response.status != 201:
+            return None
+
+        return response.data.decode("utf-8")
 
     def make_dir(self):
         try:

@@ -21,7 +21,7 @@ def upload_string(tahoe_client, data):
     Upload the contents of the test string via tahoe_client and return its capability string.
     """
 
-    cap_string = tahoe_client.upload_data(data, mutable=True)
+    cap_string = tahoe_client.post_data(data, mutable=True)
     if cap_string is None:
         print(f"An error occurred during upload.")
         return None
@@ -34,7 +34,7 @@ def update_string(tahoe_client, data, target_cap_string):
     Upload the contents of the test string via tahoe_client and return its capability string.
     """
 
-    cap_string = tahoe_client.upload_data(data, target_cap_string, mutable=True)
+    cap_string = tahoe_client.put_data(data, target_cap_string)
     if cap_string is None:
         print(f"An error occurred during upload.")
         return None
@@ -47,7 +47,7 @@ def get_string(tahoe_client, cap_string):
     Retrieve the contents of the string by passing the capability string to the tahoe_client.
     """
 
-    retrieved_string, status = tahoe_client.retrieve_data(cap_string)
+    retrieved_string, status = tahoe_client.get_data(cap_string)
 
     if status != 200:
         print(f"An error occurred retrieving the data with error code: {status}")
@@ -72,8 +72,8 @@ def main():
     if get_string(tahoe_client, cap_string) is None:
         print("Are you sure the storage is running?")
         sys.exit(1)
-    cap_string = update_string(tahoe_client, NEW_TEST_STRING, cap_string)
-    if cap_string is None:
+    new_cap_string = update_string(tahoe_client, NEW_TEST_STRING, cap_string)
+    if new_cap_string is None:
         print("No update capability string retrieved.")
         sys.exit(1)
     if get_string(tahoe_client, cap_string) is None:
