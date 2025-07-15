@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 extensions = ['sphinx.ext.autodoc',
-              'pydata_sphinx_theme',
+              'furo',
               ]
 
 templates_path = ['_templates']
