@@ -43,7 +43,7 @@ uv sync
 uv run tahoe-server/storage0
 uv run tahoe-server/client0
 ```
-### Or, if you have [Just](https://github.com/casey/just) installed:
+#### Or, if you have [Just](https://github.com/casey/just) installed:
 ```bash
 just dev
 ```
@@ -68,6 +68,11 @@ To run the tests:
 ```bash
 uv run pytest
 ```
+#### Or, with [Just](https://github.com/casey/just):
+```bash
+just test
+```
+
 
 ## License
 

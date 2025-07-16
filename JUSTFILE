@@ -2,6 +2,10 @@
 default SESSION_NAME="tahoe-dev":
     @just --list
 
+# Run tests
+test:
+    uv run pytest
+
 # Start the development environment
 dev SESSION_NAME="tahoe-dev":
     tmux new-session -d -s {{SESSION_NAME}}
