@@ -26,10 +26,15 @@ Later, if you want the hands-on experience, clone the repo and go through the in
 
 These instructions assume you are using [uv](https://docs.astral.sh/uv/) for project management; if you use another approach, you will have to modify some of the commands below. Project dependencies are listed in `pyproject.toml`.
 
-### 1. Clone the repo
+### 1. [Clone the repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 
+#### With SSH:
 ```bash
-git clone https://github.com/blaisep/private_facts.git && cd private_facts
+git clone git@github.com:private-facts/private-facts.git && cd private-facts
+```
+#### With https:
+```bash
+git clone https://github.com/private-facts/private-facts.git && cd private-facts
 ```
 
 ### 2. Install dependencies
@@ -43,7 +48,7 @@ uv sync
 uv run tahoe-server/storage0
 uv run tahoe-server/client0
 ```
-### Or, if you have [Just](https://github.com/casey/just) installed:
+#### Or, if you have [Just](https://github.com/casey/just) installed:
 ```bash
 just dev
 ```
@@ -57,6 +62,11 @@ uv run hello_system
 uv run hello_mutable
 ```
 
+### 5. Stop the server and client and close tmux (if using Just)
+```bash
+just stop
+```
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
@@ -68,6 +78,11 @@ To run the tests:
 ```bash
 uv run pytest
 ```
+#### Or, with [Just](https://github.com/casey/just):
+```bash
+just test
+```
+
 
 ## License
 
