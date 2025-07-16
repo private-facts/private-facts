@@ -26,10 +26,15 @@ Later, if you want the hands-on experience, clone the repo and go through the in
 
 These instructions assume you are using [uv](https://docs.astral.sh/uv/) for project management; if you use another approach, you will have to modify some of the commands below. Project dependencies are listed in `pyproject.toml`.
 
-### 1. Clone the repo
+### 1. [Clone the repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 
+#### With SSH:
 ```bash
-git clone https://github.com/blaisep/private_facts.git && cd private_facts
+git clone git@github.com:private-facts/private-facts.git && cd private-facts
+```
+#### With https:
+```bash
+git clone https://github.com/private-facts/private-facts.git && cd private-facts
 ```
 
 ### 2. Install dependencies
