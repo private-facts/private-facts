@@ -57,6 +57,11 @@ uv run hello_system
 uv run hello_mutable
 ```
 
+### 5. Stop the server and client and close tmux (if using Just)
+```bash
+just stop
+```
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
