@@ -1,0 +1,541 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>Tahoe Statistics - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">The Private Facts Project</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">The Private Facts Project</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/reference/Tahoe-LAFS/stats.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="tahoe-statistics">
+<h1>Tahoe Statistics<a class="headerlink" href="#tahoe-statistics" title="Link to this heading">¶</a></h1>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#overview">Overview</a></p></li>
+<li><p><a class="reference internal" href="#statistics-categories">Statistics Categories</a></p></li>
+<li><p><a class="reference internal" href="#using-munin-to-graph-stats-values">Using Munin To Graph Stats Values</a></p></li>
+</ol>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>Each Tahoe node collects and publishes statistics about its operations as it
+runs. These include counters of how many files have been uploaded and
+downloaded, CPU usage information, performance numbers like latency of
+storage server operations, and available disk space.</p>
+<p>The easiest way to see the stats for any given node is use the web interface.
+From the main “Welcome Page”, follow the “Operational Statistics” link inside
+the small “This Client” box. If the welcome page lives at
+<a class="reference external" href="http://localhost:3456/">http://localhost:3456/</a>, then the statistics page will live at
+<a class="reference external" href="http://localhost:3456/statistics">http://localhost:3456/statistics</a> . This presents a summary of the stats
+block, along with a copy of the raw counters. To obtain just the raw counters
+(in JSON format), use /statistics?t=json instead.</p>
+</section>
+<section id="statistics-categories">
+<h2>Statistics Categories<a class="headerlink" href="#statistics-categories" title="Link to this heading">¶</a></h2>
+<p>The stats dictionary contains two keys: ‘counters’ and ‘stats’. ‘counters’
+are strictly counters: they are reset to zero when the node is started, and
+grow upwards. ‘stats’ are non-incrementing values, used to measure the
+current state of various systems. Some stats are actually booleans, expressed
+as ‘1’ for true and ‘0’ for false (internal restrictions require all stats
+values to be numbers).</p>
+<p>Under both the ‘counters’ and ‘stats’ dictionaries, each individual stat has
+a key with a dot-separated name, breaking them up into groups like
+‘cpu_monitor’ and ‘storage_server’.</p>
+<p>The currently available stats (as of release 1.6.0 or so) are described here:</p>
+<p><strong>counters.storage_server.*</strong></p>
+<blockquote>
+<div><p>this group counts inbound storage-server operations. They are not provided
+by client-only nodes which have been configured to not run a storage server
+(with [storage]enabled=false in tahoe.cfg)</p>
+<dl class="simple">
+<dt>allocate, write, close, abort</dt><dd><p>these are for immutable file uploads. ‘allocate’ is incremented when a
+client asks if it can upload a share to the server. ‘write’ is
+incremented for each chunk of data written. ‘close’ is incremented when
+the share is finished. ‘abort’ is incremented if the client abandons
+the upload.</p>
+</dd>
+<dt>get, read</dt><dd><p>these are for immutable file downloads. ‘get’ is incremented
+when a client asks if the server has a specific share. ‘read’ is
+incremented for each chunk of data read.</p>
+</dd>
+<dt>readv, writev</dt><dd><p>these are for immutable file creation, publish, and retrieve. ‘readv’
+is incremented each time a client reads part of a mutable share.
+‘writev’ is incremented each time a client sends a modification
+request.</p>
+</dd>
+<dt>add-lease, renew, cancel</dt><dd><p>these are for share lease modifications. ‘add-lease’ is incremented
+when an ‘add-lease’ operation is performed (which either adds a new
+lease or renews an existing lease). ‘renew’ is for the ‘renew-lease’
+operation (which can only be used to renew an existing one). ‘cancel’
+is used for the ‘cancel-lease’ operation.</p>
+</dd>
+<dt>bytes_freed</dt><dd><p>this counts how many bytes were freed when a ‘cancel-lease’
+operation removed the last lease from a share and the share
+was thus deleted.</p>
+</dd>
+<dt>bytes_added</dt><dd><p>this counts how many bytes were consumed by immutable share
+uploads. It is incremented at the same time as the ‘close’
+counter.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>stats.storage_server.*</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>allocated</dt><dd><p>this counts how many bytes are currently ‘allocated’, which
+tracks the space that will eventually be consumed by immutable
+share upload operations. The stat is increased as soon as the
+upload begins (at the same time the ‘allocated’ counter is
+incremented), and goes back to zero when the ‘close’ or ‘abort’
+message is received (at which point the ‘disk_used’ stat should
+incremented by the same amount).</p>
+</dd>
+<dt>disk_total, disk_used, disk_free_for_root, disk_free_for_nonroot, disk_avail, reserved_space</dt><dd><p>these all reflect disk-space usage policies and status.
+‘disk_total’ is the total size of disk where the storage
+server’s BASEDIR/storage/shares directory lives, as reported
+by /bin/df or equivalent. ‘disk_used’, ‘disk_free_for_root’,
+and ‘disk_free_for_nonroot’ show related information.
+‘reserved_space’ reports the reservation configured by the
+tahoe.cfg [storage]reserved_space value. ‘disk_avail’
+reports the remaining disk space available for the Tahoe
+server after subtracting reserved_space from disk_avail. All
+values are in bytes.</p>
+</dd>
+<dt>accepting_immutable_shares</dt><dd><p>this is ‘1’ if the storage server is currently accepting uploads of
+immutable shares. It may be ‘0’ if a server is disabled by
+configuration, or if the disk is full (i.e. disk_avail is less than
+reserved_space).</p>
+</dd>
+<dt>total_bucket_count</dt><dd><p>this counts the number of ‘buckets’ (i.e. unique
+storage-index values) currently managed by the storage
+server. It indicates roughly how many files are managed
+by the server.</p>
+</dd>
+<dt>latencies.*.*</dt><dd><p>these stats keep track of local disk latencies for
+storage-server operations. A number of percentile values are
+tracked for many operations. For example,
+‘storage_server.latencies.readv.50_0_percentile’ records the
+median response time for a ‘readv’ request. All values are in
+seconds. These are recorded by the storage server, starting
+from the time the request arrives (post-deserialization) and
+ending when the response begins serialization. As such, they
+are mostly useful for measuring disk speeds. The operations
+tracked are the same as the counters.storage_server.* counter
+values (allocate, write, close, get, read, add-lease, renew,
+cancel, readv, writev). The percentile values tracked are:
+mean, 01_0_percentile, 10_0_percentile, 50_0_percentile,
+90_0_percentile, 95_0_percentile, 99_0_percentile,
+99_9_percentile. (the last value, 99.9 percentile, means that
+999 out of the last 1000 operations were faster than the
+given number, and is the same threshold used by Amazon’s
+internal SLA, according to the Dynamo paper).
+Percentiles are only reported in the case of a sufficient
+number of observations for unambiguous interpretation. For
+example, the 99.9th percentile is (at the level of thousandths
+precision) 9 thousandths greater than the 99th
+percentile for sample sizes greater than or equal to 1000,
+thus the 99.9th percentile is only reported for samples of 1000
+or more observations.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>counters.uploader.files_uploaded</strong></p>
+<p><strong>counters.uploader.bytes_uploaded</strong></p>
+<p><strong>counters.downloader.files_downloaded</strong></p>
+<p><strong>counters.downloader.bytes_downloaded</strong></p>
+<blockquote>
+<div><p>These count client activity: a Tahoe client will increment these when it
+uploads or downloads an immutable file. ‘files_uploaded’ is incremented by
+one for each operation, while ‘bytes_uploaded’ is incremented by the size of
+the file.</p>
+</div></blockquote>
+<p><strong>counters.mutable.files_published</strong></p>
+<p><strong>counters.mutable.bytes_published</strong></p>
+<p><strong>counters.mutable.files_retrieved</strong></p>
+<p><strong>counters.mutable.bytes_retrieved</strong></p>
+<blockquote>
+<div><p>These count client activity for mutable files. ‘published’ is the act of
+changing an existing mutable file (or creating a brand-new mutable file).
+‘retrieved’ is the act of reading its current contents.</p>
+</div></blockquote>
+<p><strong>counters.chk_upload_helper.*</strong></p>
+<blockquote>
+<div><p>These count activity of the “Helper”, which receives ciphertext from clients
+and performs erasure-coding and share upload for files that are not already
+in the grid. The code which implements these counters is in
+src/allmydata/immutable/offloaded.py .</p>
+<dl class="simple">
+<dt>upload_requests</dt><dd><p>incremented each time a client asks to upload a file
+upload_already_present: incremented when the file is already in the grid</p>
+</dd>
+<dt>upload_need_upload</dt><dd><p>incremented when the file is not already in the grid</p>
+</dd>
+<dt>resumes</dt><dd><p>incremented when the helper already has partial ciphertext for
+the requested upload, indicating that the client is resuming an
+earlier upload</p>
+</dd>
+<dt>fetched_bytes</dt><dd><p>this counts how many bytes of ciphertext have been fetched
+from uploading clients</p>
+</dd>
+<dt>encoded_bytes</dt><dd><p>this counts how many bytes of ciphertext have been
+encoded and turned into successfully-uploaded shares. If no
+uploads have failed or been abandoned, encoded_bytes should
+eventually equal fetched_bytes.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>stats.chk_upload_helper.*</strong></p>
+<blockquote>
+<div><p>These also track Helper activity:</p>
+<dl class="simple">
+<dt>active_uploads</dt><dd><p>how many files are currently being uploaded. 0 when idle.</p>
+</dd>
+<dt>incoming_count</dt><dd><p>how many cache files are present in the incoming/ directory,
+which holds ciphertext files that are still being fetched
+from the client</p>
+</dd>
+<dt>incoming_size</dt><dd><p>total size of cache files in the incoming/ directory</p>
+</dd>
+<dt>incoming_size_old</dt><dd><p>total size of ‘old’ cache files (more than 48 hours)</p>
+</dd>
+<dt>encoding_count</dt><dd><p>how many cache files are present in the encoding/ directory,
+which holds ciphertext files that are being encoded and
+uploaded</p>
+</dd>
+<dt>encoding_size</dt><dd><p>total size of cache files in the encoding/ directory</p>
+</dd>
+<dt>encoding_size_old</dt><dd><p>total size of ‘old’ cache files (more than 48 hours)</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>stats.node.uptime</strong></dt><dd><p>how many seconds since the node process was started</p>
+</dd>
+</dl>
+<p><strong>stats.cpu_monitor.*</strong></p>
+<blockquote>
+<div><dl class="simple">
+<dt>1min_avg, 5min_avg, 15min_avg</dt><dd><p>estimate of what percentage of system CPU time was consumed by the
+node process, over the given time interval. Expressed as a float, 0.0
+for 0%, 1.0 for 100%</p>
+</dd>
+<dt>total</dt><dd><p>estimate of total number of CPU seconds consumed by node since
+the process was started. Ticket #472 indicates that .total may
+sometimes be negative due to wraparound of the kernel’s counter.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="using-munin-to-graph-stats-values">
+<h2>Using Munin To Graph Stats Values<a class="headerlink" href="#using-munin-to-graph-stats-values" title="Link to this heading">¶</a></h2>
+<p>The misc/operations_helpers/munin/ directory contains various plugins to
+graph stats for Tahoe nodes. They are intended for use with the <a class="reference external" href="http://munin-monitoring.org/">Munin</a>
+system-management tool, which typically polls target systems every 5 minutes
+and produces a web page with graphs of various things over multiple time
+scales (last hour, last month, last year).</p>
+<p>Most of the plugins are designed to pull stats from a single Tahoe node, and
+are configured with the e.g. <a class="reference external" href="http://localhost:3456/statistics?t=json">http://localhost:3456/statistics?t=json</a> URL. The
+“tahoe_stats” plugin is designed to read from the JSON file created by the
+stats-gatherer. Some plugins are to be used with the disk watcher, and a few
+(like tahoe_nodememory) are designed to watch the node processes directly
+(and must therefore run on the same host as the target node).</p>
+<p>Please see the docstrings at the beginning of each plugin for details, and
+the “tahoe-conf” file for notes about configuration and installing these
+plugins into a Munin environment.</p>
+</section>
+<section id="scraping-stats-values-in-openmetrics-format">
+<h2>Scraping Stats Values in OpenMetrics Format<a class="headerlink" href="#scraping-stats-values-in-openmetrics-format" title="Link to this heading">¶</a></h2>
+<p>Time Series DataBase (TSDB) software like <a class="reference external" href="https://prometheus.io/">Prometheus</a> and <a class="reference external" href="https://victoriametrics.com/">VictoriaMetrics</a> can
+parse statistics from the e.g. <a class="reference external" href="http://localhost:3456/statistics?t=openmetrics">http://localhost:3456/statistics?t=openmetrics</a>
+URL in <a class="reference external" href="https://openmetrics.io/">OpenMetrics</a> format. Software like <a class="reference external" href="https://grafana.com/">Grafana</a> can then be used to graph
+and alert on these numbers. You can find a pre-configured dashboard for
+Grafana at <a class="reference external" href="https://grafana.com/grafana/dashboards/16894-tahoe-lafs/">https://grafana.com/grafana/dashboards/16894-tahoe-lafs/</a>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, The Tahoe-LAFS Developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Tahoe Statistics</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#statistics-categories">Statistics Categories</a></li>
+<li><a class="reference internal" href="#using-munin-to-graph-stats-values">Using Munin To Graph Stats Values</a></li>
+<li><a class="reference internal" href="#scraping-stats-values-in-openmetrics-format">Scraping Stats Values in OpenMetrics Format</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

@@ -6,7 +6,7 @@
 <link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
-        <title>The Private Facts Project</title>
+        <title>FAQ - The Private Facts Project</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=25af2a20" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">The Private Facts Project</div></a>
+      <a href="index.html"><div class="brand">The Private Facts Project</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -187,7 +187,7 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   <span class="sidebar-brand-text">The Private Facts Project</span>
   
@@ -216,7 +216,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/index.rst.txt" title="View this page">
+  <a class="muted-link" href="_sources/cases.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -230,26 +230,97 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="private-facts">
-<h1>Private Facts<a class="headerlink" href="#private-facts" title="Link to this heading">¶</a></h1>
-<div class="toctree-wrapper compound">
-</div>
-<blockquote class="pull-quote">
-<div><dl class="simple">
-<dt>The three rules of storing data for other people:</dt><dd><ul class="simple">
-<li><p>Never lose the data</p></li>
-<li><p>Never let the wrong people see it.</p></li>
-<li><p>Never forget the first two rules.</p></li>
+          <section id="faq">
+<h1>FAQ<a class="headerlink" href="#faq" title="Link to this heading">¶</a></h1>
+<section id="what-does-tahoe-not-do-for-you">
+<h2>What does Tahoe (not) do for you?<a class="headerlink" href="#what-does-tahoe-not-do-for-you" title="Link to this heading">¶</a></h2>
+<p>Tahoe doesn’t make storing secrets go away, it just makes them smaller.
+The capabilities are NOT dependent on the provider.</p>
+</section>
+<section id="basic-scenarios">
+<h2>Basic Scenarios<a class="headerlink" href="#basic-scenarios" title="Link to this heading">¶</a></h2>
+<p>A file is stored in cipher on the cloud <em>HOWEVER</em> the cap is in the clear
+* Availability</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Access Control (verify)</p></li>
+<li><p>Access Control (sharing)</p></li>
+<li><p>Access Control (write)</p></li>
 </ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>encryption at rest</p></li>
+</ul>
+<p>RISK: the cap is in the clear</p>
+<section id="incomplete">
+<h3>Incomplete<a class="headerlink" href="#incomplete" title="Link to this heading">¶</a></h3>
+<p>A file is store in cipher on the cloud <em>AND</em> the cap is secret
+* Availability</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Access Control (verify)</p></li>
+<li><p>Access Control (sharing)</p></li>
+<li><p>Access Control (write)</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>encryption at rest</p></li>
+<li><p>Confidentiality (cap is secured) <strong>UNLESS</strong> clear in the client</p></li>
+</ul>
+</section>
+<section id="complete">
+<h3>Complete<a class="headerlink" href="#complete" title="Link to this heading">¶</a></h3>
+<p>A doc is store in cipher on the cloud <em>and</em> user app (using a local binary)
+“end to encryptions”
+* Availability</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Access Control (verify)</p></li>
+<li><p>Access Control (sharing)</p></li>
+<li><p>Access Control (write)</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>encryption at rest</p></li>
+<li><p>Confidentiality (cap is secured)</p></li>
+</ul>
+<dl class="simple">
+<dt>Delete</dt><dd><p>The reference(s) to the shares is removed. The shares may still exist, but there is no way to find them.</p>
+</dd>
+<dt>Recover</dt><dd><p>regain access to content on an existing device</p>
+</dd>
+<dt>Restore</dt><dd><p>copy data onto a new device (eg. the reverse of backup)</p>
 </dd>
 </dl>
-</div></blockquote>
+</section>
+</section>
+<section id="threat-surfaces">
+<h2>Threat Surfaces<a class="headerlink" href="#threat-surfaces" title="Link to this heading">¶</a></h2>
+<dl class="simple">
+<dt>Front end</dt><dd><p>The part facing the human is the front end. Front end is outside of the Tahoe-lafs security domain. Content is in the clear, unless the front end limits exposure somehow.</p>
+</dd>
+<dt>Client</dt><dd><p>The client moves content in and out of Tahoe-lafs. A client creates the capability string and (de)crypts the content in the shares. The tahoe-lafs security boundary is in the client.</p>
+</dd>
+<dt>Storage node</dt><dd><p>Storage nodes contain “shares” (fragments) in cipher.</p>
+</dd>
+<dt>Grid</dt><dd><p>Storage nodes can be accessed from one or more introducers. The collection of nodes an introducer can access is called a grid.</p>
+</dd>
+<dt>Introducer</dt><dd><p>An introducer may be shared or private, depending on how much exposure a user can tolerate. Each introducer has the map of fURL to storages nodes, but the Client decrypts the shares from the storage nodes.</p>
+</dd>
+<dt>Authentication</dt><dd><p>A shared introducer might use a method of granting access to a request from a client. (??)</p>
+</dd>
+</dl>
+</section>
+<section id="use-cases">
+<h2>Use Cases<a class="headerlink" href="#use-cases" title="Link to this heading">¶</a></h2>
+<p>User collects data from disparate sources for long term storage. (eg. medical records from all providers. User doesn’t know when they will need the records but they don’t want to risk losing them. A community grid will self replicate indefinitely.</p>
+</section>
 </section>
 
         </article>
@@ -277,8 +348,34 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">FAQ</a><ul>
+<li><a class="reference internal" href="#what-does-tahoe-not-do-for-you">What does Tahoe (not) do for you?</a></li>
+<li><a class="reference internal" href="#basic-scenarios">Basic Scenarios</a><ul>
+<li><a class="reference internal" href="#incomplete">Incomplete</a></li>
+<li><a class="reference internal" href="#complete">Complete</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#threat-surfaces">Threat Surfaces</a></li>
+<li><a class="reference internal" href="#use-cases">Use Cases</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

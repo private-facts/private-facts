@@ -1,0 +1,461 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>URLs - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">The Private Facts Project</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <span class="sidebar-brand-text">The Private Facts Project</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../_sources/reference/Tahoe-LAFS/specifications/url.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="urls">
+<h1>URLs<a class="headerlink" href="#urls" title="Link to this heading">¶</a></h1>
+<p>The goal of this document is to completely specify the construction and use of the URLs by Tahoe-LAFS for service location.
+This includes, but is not limited to, the original Foolscap-based URLs.
+These are not to be confused with the URI-like capabilities Tahoe-LAFS uses to refer to stored data.
+An attempt is also made to outline the rationale for certain choices about these URLs.
+The intended audience for this document is Tahoe-LAFS maintainers and other developers interested in interoperating with Tahoe-LAFS or these URLs.</p>
+<section id="background">
+<span id="furls"></span><h2>Background<a class="headerlink" href="#background" title="Link to this heading">¶</a></h2>
+<p>Tahoe-LAFS first used <a class="reference external" href="https://github.com/warner/foolscap">Foolscap</a> for network communication.
+Foolscap connection setup takes as an input a Foolscap URL or a <em>fURL</em>.
+A fURL includes three components:</p>
+<ul class="simple">
+<li><p>the base32-encoded SHA1 hash of the DER form of an x509v3 certificate</p></li>
+<li><p>zero or more network addresses <a class="footnote-reference brackets" href="#id4" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p></li>
+<li><p>an object identifier</p></li>
+</ul>
+<p>A Foolscap client tries to connect to each network address in turn.
+If a connection is established then TLS is negotiated.
+The server is authenticated by matching its certificate against the hash in the fURL.
+A matching certificate serves as proof that the handshaking peer is the correct server.
+This serves as the process by which the client authenticates the server.</p>
+<p>The client can then exercise further Foolscap functionality using the fURL’s object identifier.
+If the object identifier is an unguessable, secret string then it serves as a capability.
+This unguessable identifier is sometimes called a <a class="reference external" href="http://wiki.erights.org/wiki/Swiss_number">swiss number</a> (or swissnum).
+The client’s use of the swissnum is what allows the server to authorize the client.</p>
+</section>
+<section id="nurls">
+<span id="id2"></span><h2>NURLs<a class="headerlink" href="#nurls" title="Link to this heading">¶</a></h2>
+<p>The authentication and authorization properties of fURLs are a good fit for Tahoe-LAFS’ requirements.
+These are not inherently tied to the Foolscap protocol itself.
+In particular they are beneficial to <a class="reference internal" href="http-storage-node-protocol.html"><span class="doc">Storage Node Protocol (“Great Black Swamp”, “GBS”)</span></a> which uses HTTP instead of Foolscap.
+It is conceivable they will also be used with WebSockets at some point as well.</p>
+<p>Continuing to refer to these URLs as fURLs when they are being used for other protocols may cause confusion.
+Therefore,
+this document coins the name <strong>NURL</strong> for these URLs.
+This can be considered to expand to “<strong>N</strong>ew URLs” or “Authe<strong>N</strong>ticating URLs” or “Authorizi<strong>N</strong>g URLs” as the reader prefers.</p>
+<p>The anticipated use for a <strong>NURL</strong> will still be to establish a TLS connection to a peer.
+The protocol run over that TLS connection could be Foolscap though it is more likely to be an HTTP-based protocol (such as GBS).</p>
+<p>Unlike fURLs, only a single net-loc is included, for consistency with other forms of URLs.
+As a result, multiple NURLs may be available for a single server.</p>
+</section>
+<section id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Link to this heading">¶</a></h2>
+<p>The EBNF for a NURL is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nurl</span>         <span class="o">=</span> <span class="n">tcp</span><span class="o">-</span><span class="n">nurl</span> <span class="o">|</span> <span class="n">tor</span><span class="o">-</span><span class="n">nurl</span> <span class="o">|</span> <span class="n">i2p</span><span class="o">-</span><span class="n">nurl</span>
+<span class="n">tcp</span><span class="o">-</span><span class="n">nurl</span>     <span class="o">=</span> <span class="s2">&quot;pb://&quot;</span><span class="p">,</span> <span class="nb">hash</span><span class="p">,</span> <span class="s2">&quot;@&quot;</span><span class="p">,</span> <span class="n">tcp</span><span class="o">-</span><span class="n">loc</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">swiss</span><span class="o">-</span><span class="n">number</span><span class="p">,</span> <span class="p">[</span> <span class="n">version1</span> <span class="p">]</span>
+<span class="n">tor</span><span class="o">-</span><span class="n">nurl</span>     <span class="o">=</span> <span class="s2">&quot;pb+tor://&quot;</span><span class="p">,</span> <span class="nb">hash</span><span class="p">,</span> <span class="s2">&quot;@&quot;</span><span class="p">,</span> <span class="n">tcp</span><span class="o">-</span><span class="n">loc</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">swiss</span><span class="o">-</span><span class="n">number</span><span class="p">,</span> <span class="p">[</span> <span class="n">version1</span> <span class="p">]</span>
+<span class="n">i2p</span><span class="o">-</span><span class="n">nurl</span>     <span class="o">=</span> <span class="s2">&quot;pb+i2p://&quot;</span><span class="p">,</span> <span class="nb">hash</span><span class="p">,</span> <span class="s2">&quot;@&quot;</span><span class="p">,</span> <span class="n">i2p</span><span class="o">-</span><span class="n">loc</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">swiss</span><span class="o">-</span><span class="n">number</span><span class="p">,</span> <span class="p">[</span> <span class="n">version1</span> <span class="p">]</span>
+
+<span class="nb">hash</span>         <span class="o">=</span> <span class="n">unreserved</span>
+
+<span class="n">tcp</span><span class="o">-</span><span class="n">loc</span>      <span class="o">=</span> <span class="n">hostname</span><span class="p">,</span> <span class="p">[</span> <span class="s2">&quot;:&quot;</span> <span class="n">port</span> <span class="p">]</span>
+<span class="n">hostname</span>     <span class="o">=</span> <span class="n">domain</span> <span class="o">|</span> <span class="n">IPv4address</span> <span class="o">|</span> <span class="n">IPv6address</span>
+
+<span class="n">i2p</span><span class="o">-</span><span class="n">loc</span>      <span class="o">=</span> <span class="n">i2p</span><span class="o">-</span><span class="n">addr</span><span class="p">,</span> <span class="p">[</span> <span class="s2">&quot;:&quot;</span> <span class="n">port</span> <span class="p">]</span>
+<span class="n">i2p</span><span class="o">-</span><span class="n">addr</span>     <span class="o">=</span> <span class="p">{</span> <span class="n">unreserved</span> <span class="p">},</span> <span class="s2">&quot;.i2p&quot;</span>
+
+<span class="n">swiss</span><span class="o">-</span><span class="n">number</span> <span class="o">=</span> <span class="n">segment</span>
+
+<span class="n">version1</span>     <span class="o">=</span> <span class="s2">&quot;#v=1&quot;</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://tools.ietf.org/html/rfc3986#section-3.3">https://tools.ietf.org/html/rfc3986#section-3.3</a> for the definition of <code class="docutils literal notranslate"><span class="pre">segment</span></code>.
+See <a class="reference external" href="https://tools.ietf.org/html/rfc2396#appendix-A">https://tools.ietf.org/html/rfc2396#appendix-A</a> for the definition of <code class="docutils literal notranslate"><span class="pre">unreserved</span></code>.
+See <a class="reference external" href="https://tools.ietf.org/html/draft-main-ipaddr-text-rep-02#section-3.1">https://tools.ietf.org/html/draft-main-ipaddr-text-rep-02#section-3.1</a> for the definition of <code class="docutils literal notranslate"><span class="pre">IPv4address</span></code>.
+See <a class="reference external" href="https://tools.ietf.org/html/draft-main-ipaddr-text-rep-02#section-3.2">https://tools.ietf.org/html/draft-main-ipaddr-text-rep-02#section-3.2</a> for the definition of <code class="docutils literal notranslate"><span class="pre">IPv6address</span></code>.
+See <a class="reference external" href="https://tools.ietf.org/html/rfc1035#section-2.3.1">https://tools.ietf.org/html/rfc1035#section-2.3.1</a> for the definition of <code class="docutils literal notranslate"><span class="pre">domain</span></code>.</p>
+</section>
+<section id="versions">
+<h2>Versions<a class="headerlink" href="#versions" title="Link to this heading">¶</a></h2>
+<p>Though all NURLs are syntactically compatible some semantic differences are allowed.
+These differences are separated into distinct versions.</p>
+</section>
+<section id="version-0">
+<h2>Version 0<a class="headerlink" href="#version-0" title="Link to this heading">¶</a></h2>
+<p>In theory, a Foolscap fURL with a single netloc is considered the canonical definition of a version 0 NURL.
+Notably,
+the hash component is defined as the base32-encoded SHA1 hash of the DER form of an x509v3 certificate.
+A version 0 NURL is identified by the absence of the <code class="docutils literal notranslate"><span class="pre">v=1</span></code> fragment.</p>
+<p>In practice, real world fURLs may have more than one netloc, so lack of version fragment will likely just involve dispatching the fURL to a different parser.</p>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pb://sisi4zenj7cxncgvdog7szg3yxbrnamy&#64;tcp:127.1:34399/xphmwz6lx24rh2nxlinni</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pb://2uxmzoqqimpdwowxr24q6w5ekmxcymby&#64;localhost:47877/riqhpojvzwxujhna5szkn</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="version-1">
+<h2>Version 1<a class="headerlink" href="#version-1" title="Link to this heading">¶</a></h2>
+<p>The hash component of a version 1 NURL differs in three ways from the prior version.</p>
+<ol class="arabic simple">
+<li><p>The hash function used is SHA-256, to match RFC 7469.
+The security of SHA1 <a class="reference external" href="https://en.wikipedia.org/wiki/SHA-1#Cryptanalysis_and_validation">continues to be eroded</a>; Latacora <a class="reference external" href="https://latacora.micro.blog/2018/04/03/cryptographic-right-answers.html">SHA-2</a>.</p></li>
+<li><p>The hash is computed over the certificate’s SPKI instead of the whole certificate.
+This allows certificate re-generation so long as the public key remains the same.
+This is useful to allow contact information to be updated or extension of validity period.
+Use of an SPKI hash has also been <a class="reference external" href="https://www.rfc-editor.org/rfc/rfc7469">explored by the web community</a> during its flirtation with using it for HTTPS certificate pinning
+(though this is now largely abandoned).</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><em>Only</em> the certificate’s keypair is pinned by the SPKI hash.
+The freedom to change every other part of the certificate is coupled with the fact that all other parts of the certificate contain arbitrary information set by the private key holder.
+It is neither guaranteed nor expected that a certificate-issuing authority has validated this information.
+Therefore,
+<em>all</em> certificate fields should be considered within the context of the relationship identified by the SPKI hash.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>The hash is encoded using urlsafe-base64 (without padding) instead of base32.
+This provides a more compact representation and minimizes the usability impacts of switching from a 160 bit hash to a 256 bit hash.</p></li>
+</ol>
+<p>A version 1 NURL is identified by the presence of the <code class="docutils literal notranslate"><span class="pre">v=1</span></code> fragment.
+Though the length of the hash string (38 bytes) could also be used to differentiate it from a version 0 NURL,
+there is no guarantee that this will be effective in differentiating it from future versions so this approach should not be used.</p>
+<p>It is possible for a client to unilaterally upgrade a version 0 NURL to a version 1 NURL.
+After establishing and authenticating a connection the client will have received a copy of the server’s certificate.
+This is sufficient to compute the new hash and rewrite the NURL to upgrade it to version 1.
+This provides stronger authentication assurances for future uses but it is not required.</p>
+<section id="id3">
+<h3>Examples<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pb://1WUX44xKjKdpGLohmFcBNuIRN-8rlv1Iij_7rQ&#64;tcp:127.1:34399/jhjbc3bjbhk#v=1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pb://azEu8vlRpnEeYm0DySQDeNY3Z2iJXHC_bsbaAw&#64;localhost:47877/64i4aokv4ej#v=1</span></code></p></li>
+</ul>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><code class="docutils literal notranslate"><span class="pre">foolscap.furl.decode_furl</span></code> is taken as the canonical definition of the syntax of a fURL.
+The <strong>location hints</strong> part of the fURL,
+as it is referred to in Foolscap,
+is matched by the regular expression fragment <code class="docutils literal notranslate"><span class="pre">([^/]*)</span></code>.
+Since this matches the empty string,
+no network addresses are required to form a fURL.
+The supporting code around the regular expression also takes extra steps to allow an empty string to match here.</p>
+</aside>
+</aside>
+</section>
+</section>
+<section id="open-questions">
+<h2>Open Questions<a class="headerlink" href="#open-questions" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Should we make a hard recommendation that all certificate fields are ignored?
+The system makes no guarantees about validation of these fields.
+Is it just an unnecessary risk to let a user see them?</p></li>
+<li><p>Should the version specifier be a query-arg-alike or a fragment-alike?
+The value is only necessary on the client side which makes it similar to an HTTP URL fragment.
+The current Tahoe-LAFS configuration parsing code has special handling of the fragment character (<code class="docutils literal notranslate"><span class="pre">#</span></code>) which makes it unusable.
+However,
+the configuration parsing code is easily changed.</p></li>
+</ol>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, The Tahoe-LAFS Developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">URLs</a><ul>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#nurls">NURLs</a></li>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#versions">Versions</a></li>
+<li><a class="reference internal" href="#version-0">Version 0</a><ul>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#version-1">Version 1</a><ul>
+<li><a class="reference internal" href="#id3">Examples</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#open-questions">Open Questions</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

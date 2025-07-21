@@ -1,15 +1,15 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="./">
+<html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+<link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
-        <title>The Private Facts Project</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=25af2a20" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+        <title>Things To Be Careful About As We Venture Boldly Forth - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
 
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">The Private Facts Project</div></a>
+      <a href="../../index.html"><div class="brand">The Private Facts Project</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -187,11 +187,11 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   <span class="sidebar-brand-text">The Private Facts Project</span>
   
-</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
@@ -216,7 +216,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/index.rst.txt" title="View this page">
+  <a class="muted-link" href="../../_sources/reference/Tahoe-LAFS/cautions.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -230,26 +230,60 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="private-facts">
-<h1>Private Facts<a class="headerlink" href="#private-facts" title="Link to this heading">¶</a></h1>
-<div class="toctree-wrapper compound">
-</div>
-<blockquote class="pull-quote">
-<div><dl class="simple">
-<dt>The three rules of storing data for other people:</dt><dd><ul class="simple">
-<li><p>Never lose the data</p></li>
-<li><p>Never let the wrong people see it.</p></li>
-<li><p>Never forget the first two rules.</p></li>
-</ul>
-</dd>
-</dl>
-</div></blockquote>
+          <section id="things-to-be-careful-about-as-we-venture-boldly-forth">
+<h1>Things To Be Careful About As We Venture Boldly Forth<a class="headerlink" href="#things-to-be-careful-about-as-we-venture-boldly-forth" title="Link to this heading">¶</a></h1>
+<p>See also <a class="reference internal" href="known_issues.html"><span class="doc">Known Issues</span></a>.</p>
+<section id="timing-attacks">
+<h2>Timing Attacks<a class="headerlink" href="#timing-attacks" title="Link to this heading">¶</a></h2>
+<p>Asymmetric-key cryptography operations are particularly sensitive to
+side-channel attacks. Unless the library is carefully hardened against timing
+attacks, it is dangerous to allow an attacker to measure how long signature
+and pubkey-derivation operations take. With enough samples, the attacker can
+deduce the private signing key from these measurements. (Note that
+verification operations are only sensitive if the verifying key is secret,
+which is not the case for anything in Tahoe).</p>
+<p>We currently use private-key operations in mutable-file writes, and
+anticipate using them in signed-introducer announcements and accounting
+setup.</p>
+<p>Mutable-file writes can reveal timing information to the attacker because the
+signature operation takes place in the middle of a read-modify-write cycle.
+Modifying a directory requires downloading the old contents of the mutable
+file, modifying the contents, signing the new contents, then uploading the
+new contents. By observing the elapsed time between the receipt of the last
+packet for the download, and the emission of the first packet of the upload,
+the attacker will learn information about how long the signature took. The
+attacker might ensure that they run one of the servers, and delay responding
+to the download request so that their packet is the last one needed by the
+client. They might also manage to be the first server to which a new upload
+packet is sent. This attack gives the adversary timing information about one
+signature operation per mutable-file write. Note that the UCWE
+automatic-retry response (used by default in directory modification code) can
+cause multiple mutable-file read-modify-write cycles per user-triggered
+operation, giving the adversary a slightly higher multiplier.</p>
+<p>The signed-introducer announcement involves a signature made as the client
+node is booting, before the first connection is established to the
+Introducer. This might reveal timing information if any information is
+revealed about the client’s exact boot time: the signature operation starts a
+fixed number of cycles after node startup, and the first packet to the
+Introducer is sent a fixed number of cycles after the signature is made. An
+adversary who can compare the node boot time against the transmission time of
+the first packet will learn information about the signature operation, one
+measurement per reboot. We currently do not provide boot-time information in
+Introducer messages or other client-to-server data.</p>
+<p>In general, we are not worried about these leakages, because timing-channel
+attacks typically require thousands or millions of measurements to detect the
+(presumably) small timing variations exposed by our asymmetric crypto
+operations, which would require thousands of mutable-file writes or thousands
+of reboots to be of use to the adversary. However, future authors should take
+care to not make changes that could provide additional information to
+attackers.</p>
+</section>
 </section>
 
         </article>
@@ -277,15 +311,34 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Things To Be Careful About As We Venture Boldly Forth</a><ul>
+<li><a class="reference internal" href="#timing-attacks">Timing Attacks</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=16df9e97"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+</div><script src="../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
     </body>
 </html>

@@ -1,15 +1,15 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="./">
+<html class="no-js" lang="en" data-content_root="../../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+<link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
-        <title>The Private Facts Project</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=25af2a20" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+        <title>Specifications - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
 
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">The Private Facts Project</div></a>
+      <a href="../../../index.html"><div class="brand">The Private Facts Project</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -187,11 +187,11 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   <span class="sidebar-brand-text">The Private Facts Project</span>
   
-</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
@@ -216,7 +216,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/index.rst.txt" title="View this page">
+  <a class="muted-link" href="../../../_sources/reference/Tahoe-LAFS/specifications/index.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -236,20 +236,103 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="private-facts">
-<h1>Private Facts<a class="headerlink" href="#private-facts" title="Link to this heading">¶</a></h1>
+          <section id="specifications">
+<h1>Specifications<a class="headerlink" href="#specifications" title="Link to this heading">¶</a></h1>
+<p>This section contains various attempts at writing detailed specifications of
+the data formats used by Tahoe.</p>
 <div class="toctree-wrapper compound">
-</div>
-<blockquote class="pull-quote">
-<div><dl class="simple">
-<dt>The three rules of storing data for other people:</dt><dd><ul class="simple">
-<li><p>Never lose the data</p></li>
-<li><p>Never let the wrong people see it.</p></li>
-<li><p>Never forget the first two rules.</p></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="outline.html">Specification Document Outline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="outline.html#share-format-encoding-algorithm">#1: Share Format, Encoding Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outline.html#share-exchange-protocol">#2: Share Exchange Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outline.html#server-selection-algorithm-filecap-format">#3: Server Selection Algorithm, filecap format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outline.html#directory-format">#4: Directory Format</a></li>
 </ul>
-</dd>
-</dl>
-</div></blockquote>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="url.html">URLs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="url.html#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="url.html#nurls">NURLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="url.html#syntax">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="url.html#versions">Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="url.html#version-0">Version 0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="url.html#version-1">Version 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="url.html#open-questions">Open Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="uri.html">Tahoe URIs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="uri.html#file-uris">File URIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uri.html#directory-uris">Directory URIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uri.html#internal-usage-of-uris">Internal Usage of URIs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="file-encoding.html">File Encoding</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file-encoding.html#hashes">Hashes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="URI-extension.html">URI Extension Block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mutable.html">Mutable Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mutable.html#mutable-formats">Mutable Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutable.html#consistency-vs-availability">Consistency vs. Availability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutable.html#the-prime-coordination-directive-don-t-do-that">The Prime Coordination Directive: “Don’t Do That”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutable.html#small-distributed-mutable-files">Small Distributed Mutable Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutable.html#medium-distributed-mutable-files">Medium Distributed Mutable Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutable.html#large-distributed-mutable-files">Large Distributed Mutable Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutable.html#todo">TODO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dirnodes.html">Tahoe-LAFS Directory Nodes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dirnodes.html#key-value-store-primitives">Key-value Store Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dirnodes.html#file-store-goals">File Store Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dirnodes.html#dirnode-goals">Dirnode Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dirnodes.html#dirnode-secret-values">Dirnode secret values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dirnodes.html#dirnode-storage-format">Dirnode storage format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dirnodes.html#dirnode-sizes-mutable-file-initial-read-sizes">Dirnode sizes, mutable-file initial read sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dirnodes.html#design-goals-redux">Design Goals, redux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dirnodes.html#starting-points-root-dirnodes">Starting Points: root dirnodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dirnodes.html#mounting-and-sharing-directories">Mounting and Sharing Directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dirnodes.html#revocation">Revocation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lease.html">Share Leases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lease.html#renewal-secrets">Renewal Secrets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lease.html#cancel-secrets">Cancel Secrets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="servers-of-happiness.html">Servers of Happiness</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="servers-of-happiness.html#measuring-servers-of-happiness">Measuring Servers of Happiness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="servers-of-happiness.html#issues">Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="servers-of-happiness.html#upload-strategy-of-happiness">Upload Strategy of Happiness</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="servers-of-happiness.html#calculating-share-placements">Calculating Share Placements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="servers-of-happiness.html#properties-of-upload-strategy-of-happiness">Properties of Upload Strategy of Happiness</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="backends/raic.html">Redundant Array of Independent Clouds: Share To Cloud Mapping</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="backends/raic.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backends/raic.html#terminology">Terminology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backends/raic.html#functional-requirements">Functional Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backends/raic.html#mapping">Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backends/raic.html#costs">Costs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backends/raic.html#structure-of-implementation">Structure of Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backends/raic.html#known-issues">Known Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backends/raic.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http-storage-node-protocol.html">Storage Node Protocol (“Great Black Swamp”, “GBS”)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http-storage-node-protocol.html#glossary">Glossary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http-storage-node-protocol.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http-storage-node-protocol.html#design-requirements">Design Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http-storage-node-protocol.html#functionality">Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http-storage-node-protocol.html#solutions">Solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http-storage-node-protocol.html#server-details">Server Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http-storage-node-protocol.html#immutable">Immutable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http-storage-node-protocol.html#mutable">Mutable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http-storage-node-protocol.html#sample-interactions">Sample Interactions</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 
         </article>
@@ -283,9 +366,9 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=16df9e97"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+</div><script src="../../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
     </body>
 </html>

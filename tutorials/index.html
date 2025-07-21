@@ -1,15 +1,15 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="./">
+<html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+<link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
-        <title>The Private Facts Project</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=25af2a20" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+        <title>Tahoe-lafs Tutorials - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
 
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">The Private Facts Project</div></a>
+      <a href="../index.html"><div class="brand">The Private Facts Project</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -187,11 +187,11 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   <span class="sidebar-brand-text">The Private Facts Project</span>
   
-</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
@@ -216,7 +216,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/index.rst.txt" title="View this page">
+  <a class="muted-link" href="../_sources/tutorials/index.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -230,26 +230,114 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="private-facts">
-<h1>Private Facts<a class="headerlink" href="#private-facts" title="Link to this heading">¶</a></h1>
-<div class="toctree-wrapper compound">
+          <section id="tahoe-lafs-tutorials">
+<h1>Tahoe-lafs Tutorials<a class="headerlink" href="#tahoe-lafs-tutorials" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><ul class="simple">
+<li><p>Why Tahoe-lafs?</p></li>
+<li><p>What is/not Tahoe-lafs?</p></li>
+<li><p>How to use Tahoe-lafs?</p></li>
+<li><p>How does Tahoe-lafs work?</p></li>
+</ul>
+</div></blockquote>
+<p>To start from the simplest possible step and incrementally build to a web application, the exercises follow this progression.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Upload and retrieve a single string</p></li>
+<li><p>Upload/retrieve a block of text</p></li>
+<li><p>Upload and retrieve a local text file</p></li>
+<li><p>Upload and retrieve a local binary file</p></li>
+<li><p>Upload and retrieve multiple local files</p></li>
+<li><p>Add capabilities to a Tahoe object</p></li>
+<li><p>Encode capabilities in Tahoe fURLs and discuss security concerns</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These exercises will not emphasize using Tahoe-lafs to mimic a file system directory struture.</p>
 </div>
-<blockquote class="pull-quote">
-<div><dl class="simple">
-<dt>The three rules of storing data for other people:</dt><dd><ul class="simple">
-<li><p>Never lose the data</p></li>
-<li><p>Never let the wrong people see it.</p></li>
-<li><p>Never forget the first two rules.</p></li>
+<section id="private-facts-an-example-app">
+<h2>Private facts: an example app<a class="headerlink" href="#private-facts-an-example-app" title="Link to this heading">¶</a></h2>
+<p>Why private facts?
+What is/not private facts?
+How to use it?
+How does it work?</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="howto-cli.html">Using the Sample App Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto-cli.html#upload-a-longer-string">Upload a longer string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto-cli.html#upload-a-simple-text-file">Upload a simple text file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto-cli.html#upload-an-image-binary-file">Upload an image (binary) file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto-cli.html#web-api-using-python">Web API using python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto-cli.html#storing-the-furl-treat-furls-as-secret">Storing the fURL: treat fURLs as secret</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto-cli.html#store-the-furl-to-persist-within-the-same-session">Store the fURL to persist within the SAME session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto-cli.html#store-the-url-with-your-code-to-persist-across-sessions">Store the URL with your code to persist across sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto-grid.html">Joining a storage Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto-setup.html">Setup local tahoe dev services</a></li>
+</ul>
+</div>
+</section>
+<section id="basic-use-the-test-grid">
+<h2>Basic:Use the test grid<a class="headerlink" href="#basic-use-the-test-grid" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Using the (batteries included) public test grid client</p></li>
+<li><p>Upload and retrieve a single string (hello_grid.py)</p></li>
+<li><p>Upload and retrieve a local text file</p></li>
+<li><p>Upload and retrieve a local binary file</p></li>
+<li><p>Upload and retrieve multiple local files</p></li>
+<li><p>Add capabilities to a Tahoe object</p></li>
+<li><p>Encode capabilities in Tahoe fURLs and discuss security concerns</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="intermediate-using-a-local-client">
+<h2>Intermediate: using a local client<a class="headerlink" href="#intermediate-using-a-local-client" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Using the local client</p></li>
+<li><p>Upload and retrieve a single string (hello_local.py)</p></li>
+<li><p>Upload/retrieve a block of text</p></li>
+<li><p>Upload and retrieve a local text file</p></li>
+<li><p>Upload and retrieve a local binary file</p></li>
+<li><p>Upload and retrieve multiple local files</p></li>
+<li><p>Add capabilities to a Tahoe object</p></li>
+<li><p>Encode capabilities in Tahoe fURLs and discuss security concerns</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="advanced-create-your-own-grid">
+<h2>Advanced: create your own grid<a class="headerlink" href="#advanced-create-your-own-grid" title="Link to this heading">¶</a></h2>
+</section>
+<section id="configuring-a-local-client">
+<h2>Configuring a local client<a class="headerlink" href="#configuring-a-local-client" title="Link to this heading">¶</a></h2>
+<dl class="simple">
+<dt>Explain and describe the sample local client</dt><dd><ul class="simple">
+<li><p>the local config files</p></li>
+<li><p>which parts change when you create your own</p></li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
+</section>
+<section id="about-the-public-test-grid">
+<h2>About the public test grid<a class="headerlink" href="#about-the-public-test-grid" title="Link to this heading">¶</a></h2>
+<p>Explain and describe the sample test grid client</p>
+</section>
+<section id="about-private-grids">
+<h2>About private grids<a class="headerlink" href="#about-private-grids" title="Link to this heading">¶</a></h2>
+<section id="pros-vs-cons">
+<h3>Pros vs Cons<a class="headerlink" href="#pros-vs-cons" title="Link to this heading">¶</a></h3>
+</section>
+<section id="requrements">
+<h3>Requrements<a class="headerlink" href="#requrements" title="Link to this heading">¶</a></h3>
+</section>
+</section>
 </section>
 
         </article>
@@ -277,15 +365,44 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Tahoe-lafs Tutorials</a><ul>
+<li><a class="reference internal" href="#private-facts-an-example-app">Private facts: an example app</a></li>
+<li><a class="reference internal" href="#basic-use-the-test-grid">Basic:Use the test grid</a></li>
+<li><a class="reference internal" href="#intermediate-using-a-local-client">Intermediate: using a local client</a></li>
+<li><a class="reference internal" href="#advanced-create-your-own-grid">Advanced: create your own grid</a></li>
+<li><a class="reference internal" href="#configuring-a-local-client">Configuring a local client</a></li>
+<li><a class="reference internal" href="#about-the-public-test-grid">About the public test grid</a></li>
+<li><a class="reference internal" href="#about-private-grids">About private grids</a><ul>
+<li><a class="reference internal" href="#pros-vs-cons">Pros vs Cons</a></li>
+<li><a class="reference internal" href="#requrements">Requrements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=16df9e97"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+</div><script src="../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
     </body>
 </html>

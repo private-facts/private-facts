@@ -1,0 +1,709 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>Using Tahoe-LAFS with an anonymizing network: Tor, I2P - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">The Private Facts Project</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">The Private Facts Project</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/reference/Tahoe-LAFS/anonymity-configuration.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="using-tahoe-lafs-with-an-anonymizing-network-tor-i2p">
+<h1>Using Tahoe-LAFS with an anonymizing network: Tor, I2P<a class="headerlink" href="#using-tahoe-lafs-with-an-anonymizing-network-tor-i2p" title="Link to this heading">¶</a></h1>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#overview">Overview</a></p></li>
+<li><p><a class="reference internal" href="#use-cases">Use cases</a></p></li>
+<li><p><a class="reference internal" href="#software-dependencies">Software Dependencies</a></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#tor">Tor</a></p></li>
+<li><p><a class="reference internal" href="#i2p">I2P</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference internal" href="#connection-configuration">Connection configuration</a></p></li>
+<li><p><a class="reference internal" href="#anonymity-configuration">Anonymity configuration</a></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#client-anonymity">Client anonymity</a></p></li>
+<li><p><a class="reference internal" href="#server-anonymity-manual-configuration">Server anonymity, manual configuration</a></p></li>
+<li><p><a class="reference internal" href="#server-anonymity-automatic-configuration">Server anonymity, automatic configuration</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference internal" href="#performance-and-security-issues">Performance and security issues</a></p></li>
+</ol>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>Tor is an anonymizing network used to help hide the identity of internet
+clients and servers. Please see the Tor Project’s website for more information:
+<a class="reference external" href="https://www.torproject.org/">https://www.torproject.org/</a></p>
+<p>I2P is a decentralized anonymizing network that focuses on end-to-end anonymity
+between clients and servers. Please see the I2P website for more information:
+<a class="reference external" href="https://geti2p.net/">https://geti2p.net/</a></p>
+</section>
+<section id="use-cases">
+<h2>Use cases<a class="headerlink" href="#use-cases" title="Link to this heading">¶</a></h2>
+<p>There are three potential use-cases for Tahoe-LAFS on the client side:</p>
+<ol class="arabic simple">
+<li><p>User wishes to always use an anonymizing network (Tor, I2P) to protect
+their anonymity when connecting to Tahoe-LAFS storage grids (whether or
+not the storage servers are anonymous).</p></li>
+<li><p>User does not care to protect their anonymity but they wish to connect to
+Tahoe-LAFS storage servers which are accessible only via Tor Hidden Services or I2P.</p>
+<ul class="simple">
+<li><p>Tor is only used if a server connection hint uses <code class="docutils literal notranslate"><span class="pre">tor:</span></code>. These hints
+generally have a <code class="docutils literal notranslate"><span class="pre">.onion</span></code> address.</p></li>
+<li><p>I2P is only used if a server connection hint uses <code class="docutils literal notranslate"><span class="pre">i2p:</span></code>. These hints
+generally have a <code class="docutils literal notranslate"><span class="pre">.i2p</span></code> address.</p></li>
+</ul>
+</li>
+<li><p>User does not care to protect their anonymity or to connect to anonymous
+storage servers. This document is not useful to you… so stop reading.</p></li>
+</ol>
+<p>For Tahoe-LAFS storage servers there are three use-cases:</p>
+<ol class="arabic">
+<li><p>The operator wishes to protect their anonymity by making their Tahoe
+server accessible only over I2P, via Tor Hidden Services, or both.</p></li>
+<li><p>The operator does not <em>require</em> anonymity for the storage server, but they
+want it to be available over both publicly routed TCP/IP and through an
+anonymizing network (I2P, Tor Hidden Services). One possible reason to do
+this is because being reachable through an anonymizing network is a
+convenient way to bypass NAT or firewall that prevents publicly routed
+TCP/IP connections to your server (for clients capable of connecting to
+such servers). Another is that making your storage server reachable
+through an anonymizing network can provide better protection for your
+clients who themselves use that anonymizing network to protect their
+anonymity.</p></li>
+<li><p>Storage server operator does not care to protect their own anonymity nor
+to help the clients protect theirs. Stop reading this document and run
+your Tahoe-LAFS storage server using publicly routed TCP/IP.</p>
+<p>See this Tor Project page for more information about Tor Hidden Services:
+<a class="reference external" href="https://www.torproject.org/docs/hidden-services.html.en">https://www.torproject.org/docs/hidden-services.html.en</a></p>
+<p>See this I2P Project page for more information about I2P:
+<a class="reference external" href="https://geti2p.net/en/about/intro">https://geti2p.net/en/about/intro</a></p>
+</li>
+</ol>
+</section>
+<section id="software-dependencies">
+<h2>Software Dependencies<a class="headerlink" href="#software-dependencies" title="Link to this heading">¶</a></h2>
+<section id="tor">
+<h3>Tor<a class="headerlink" href="#tor" title="Link to this heading">¶</a></h3>
+<p>Clients who wish to connect to Tor-based servers must install the following.</p>
+<ul>
+<li><p>Tor (tor) must be installed. See here:
+<a class="reference external" href="https://www.torproject.org/docs/installguide.html.en">https://www.torproject.org/docs/installguide.html.en</a> . On Debian/Ubuntu,
+use <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">tor</span></code>. You can also install and run the Tor Browser
+Bundle.</p></li>
+<li><p>Tahoe-LAFS must be installed with the <code class="docutils literal notranslate"><span class="pre">[tor]</span></code> “extra” enabled. This will
+install <code class="docutils literal notranslate"><span class="pre">txtorcon</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">tahoe</span><span class="o">-</span><span class="n">lafs</span><span class="p">[</span><span class="n">tor</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Manually-configured Tor-based servers must install Tor, but do not need
+<code class="docutils literal notranslate"><span class="pre">txtorcon</span></code> or the <code class="docutils literal notranslate"><span class="pre">[tor]</span></code> extra. Automatic configuration, when
+implemented, will need these, just like clients.</p>
+</section>
+<section id="i2p">
+<h3>I2P<a class="headerlink" href="#i2p" title="Link to this heading">¶</a></h3>
+<p>Clients who wish to connect to I2P-based servers must install the following.
+As with Tor, manually-configured I2P-based servers need the I2P daemon, but
+no special Tahoe-side supporting libraries.</p>
+<ul>
+<li><p>I2P must be installed. See here:
+<a class="reference external" href="https://geti2p.net/en/download">https://geti2p.net/en/download</a></p></li>
+<li><p>The SAM API must be enabled.</p>
+<ul class="simple">
+<li><p>Start I2P.</p></li>
+<li><p>Visit <a class="reference external" href="http://127.0.0.1:7657/configclients">http://127.0.0.1:7657/configclients</a> in your browser.</p></li>
+<li><p>Under “Client Configuration”, check the “Run at Startup?” box for “SAM
+application bridge”.</p></li>
+<li><p>Click “Save Client Configuration”.</p></li>
+<li><p>Click the “Start” control for “SAM application bridge”, or restart I2P.</p></li>
+</ul>
+</li>
+<li><p>Tahoe-LAFS must be installed with the <code class="docutils literal notranslate"><span class="pre">[i2p]</span></code> extra enabled, to get
+<code class="docutils literal notranslate"><span class="pre">txi2p</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">tahoe</span><span class="o">-</span><span class="n">lafs</span><span class="p">[</span><span class="n">i2p</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="both-tor-and-i2p">
+<h3>Both Tor and I2P<a class="headerlink" href="#both-tor-and-i2p" title="Link to this heading">¶</a></h3>
+<p>Clients who wish to connect to both Tor- and I2P-based servers must install
+all of the above. In particular, Tahoe-LAFS must be installed with both
+extras enabled:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">tahoe</span><span class="o">-</span><span class="n">lafs</span><span class="p">[</span><span class="n">tor</span><span class="p">,</span><span class="n">i2p</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="connection-configuration">
+<h2>Connection configuration<a class="headerlink" href="#connection-configuration" title="Link to this heading">¶</a></h2>
+<p>See <a class="reference internal" href="configuration.html#connection-management"><span class="std std-ref">Connection Management</span></a> for a description of the <code class="docutils literal notranslate"><span class="pre">[tor]</span></code> and
+<code class="docutils literal notranslate"><span class="pre">[i2p]</span></code> sections of <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code>. These control how the Tahoe client will
+connect to a Tor/I2P daemon, and thus make connections to Tor/I2P -based
+servers.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">[tor]</span></code> and <code class="docutils literal notranslate"><span class="pre">[i2p]</span></code> sections only need to be modified to use unusual
+configurations, or to enable automatic server setup.</p>
+<p>The default configuration will attempt to contact a local Tor/I2P daemon
+listening on the usual ports (9050/9150 for Tor, 7656 for I2P). As long as
+there is a daemon running on the local host, and the necessary support
+libraries were installed, clients will be able to use Tor-based servers
+without any special configuration.</p>
+<p>However note that this default configuration does not improve the client’s
+anonymity: normal TCP connections will still be made to any server that
+offers a regular address (it fulfills the second client use case above, not
+the third). To protect their anonymity, users must configure the
+<code class="docutils literal notranslate"><span class="pre">[connections]</span></code> section as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">connections</span><span class="p">]</span>
+<span class="n">tcp</span> <span class="o">=</span> <span class="n">tor</span>
+</pre></div>
+</div>
+<p>With this in place, the client will use Tor (instead of an
+IP-address -revealing direct connection) to reach TCP-based servers.</p>
+</section>
+<section id="anonymity-configuration">
+<h2>Anonymity configuration<a class="headerlink" href="#anonymity-configuration" title="Link to this heading">¶</a></h2>
+<p>Tahoe-LAFS provides a configuration “safety flag” for explicitly stating
+whether or not IP-address privacy is required for a node:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+<span class="n">reveal</span><span class="o">-</span><span class="n">IP</span><span class="o">-</span><span class="n">address</span> <span class="o">=</span> <span class="p">(</span><span class="n">boolean</span><span class="p">,</span> <span class="n">optional</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">reveal-IP-address</span> <span class="pre">=</span> <span class="pre">False</span></code>, Tahoe-LAFS will refuse to start if any of
+the configuration options in <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code> would reveal the node’s network
+location:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[connections]</span> <span class="pre">tcp</span> <span class="pre">=</span> <span class="pre">tor</span></code> is required: otherwise the client would make
+direct connections to the Introducer, or any TCP-based servers it learns
+from the Introducer, revealing its IP address to those servers and a
+network eavesdropper. With this in place, Tahoe-LAFS will only make
+outgoing connections through a supported anonymizing network.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tub.location</span></code> must either be disabled, or contain safe values. This
+value is advertised to other nodes via the Introducer: it is how a server
+advertises it’s location so clients can connect to it. In private mode, it
+is an error to include a <code class="docutils literal notranslate"><span class="pre">tcp:</span></code> hint in <code class="docutils literal notranslate"><span class="pre">tub.location</span></code>. Private mode
+rejects the default value of <code class="docutils literal notranslate"><span class="pre">tub.location</span></code> (when the key is missing
+entirely), which is <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>, which uses <code class="docutils literal notranslate"><span class="pre">ifconfig</span></code> to guess the node’s
+external IP address, which would reveal it to the server and other clients.</p></li>
+</ul>
+<p>This option is <strong>critical</strong> to preserving the client’s anonymity (client
+use-case 3 from <a class="reference internal" href="#use-cases">Use cases</a>, above). It is also necessary to preserve a
+server’s anonymity (server use-case 3).</p>
+<p>This flag can be set (to False) by providing the <code class="docutils literal notranslate"><span class="pre">--hide-ip</span></code> argument to
+the <code class="docutils literal notranslate"><span class="pre">create-node</span></code>, <code class="docutils literal notranslate"><span class="pre">create-client</span></code>, or <code class="docutils literal notranslate"><span class="pre">create-introducer</span></code> commands.</p>
+<p>Note that the default value of <code class="docutils literal notranslate"><span class="pre">reveal-IP-address</span></code> is True, because
+unfortunately hiding the node’s IP address requires additional software to be
+installed (as described above), and reduces performance.</p>
+<section id="client-anonymity">
+<h3>Client anonymity<a class="headerlink" href="#client-anonymity" title="Link to this heading">¶</a></h3>
+<p>To configure a client node for anonymity, <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code> <strong>must</strong> contain the
+following configuration flags:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+<span class="n">reveal</span><span class="o">-</span><span class="n">IP</span><span class="o">-</span><span class="n">address</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">tub</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">disabled</span>
+<span class="n">tub</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">disabled</span>
+</pre></div>
+</div>
+<p>Once the Tahoe-LAFS node has been restarted, it can be used anonymously (client
+use-case 3).</p>
+</section>
+<section id="server-anonymity-manual-configuration">
+<h3>Server anonymity, manual configuration<a class="headerlink" href="#server-anonymity-manual-configuration" title="Link to this heading">¶</a></h3>
+<p>To configure a server node to listen on an anonymizing network, we must first
+configure Tor to run an “Onion Service”, and route inbound connections to the
+local Tahoe port. Then we configure Tahoe to advertise the <code class="docutils literal notranslate"><span class="pre">.onion</span></code> address
+to clients. We also configure Tahoe to not make direct TCP connections.</p>
+<ul class="simple">
+<li><p>Decide on a local listening port number, named PORT. This can be any unused
+port from about 1024 up to 65535 (depending upon the host’s kernel/network
+config). We will tell Tahoe to listen on this port, and we’ll tell Tor to
+route inbound connections to it.</p></li>
+<li><p>Decide on an external port number, named VIRTPORT. This will be used in the
+advertised location, and revealed to clients. It can be any number from 1
+to 65535. It can be the same as PORT, if you like.</p></li>
+<li><p>Decide on a “hidden service directory”, usually in <code class="docutils literal notranslate"><span class="pre">/var/lib/tor/NAME</span></code>.
+We’ll be asking Tor to save the onion-service state here, and Tor will
+write the <code class="docutils literal notranslate"><span class="pre">.onion</span></code> address here after it is generated.</p></li>
+</ul>
+<p>Then, do the following:</p>
+<ul>
+<li><p>Create the Tahoe server node (with <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-node</span></code>), but do <strong>not</strong>
+launch it yet.</p></li>
+<li><p>Edit the Tor config file (typically in <code class="docutils literal notranslate"><span class="pre">/etc/tor/torrc</span></code>). We need to add
+a section to define the hidden service. If our PORT is 2000, VIRTPORT is
+3000, and we’re using <code class="docutils literal notranslate"><span class="pre">/var/lib/tor/tahoe</span></code> as the hidden service
+directory, the section should look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HiddenServiceDir</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">tor</span><span class="o">/</span><span class="n">tahoe</span>
+<span class="n">HiddenServicePort</span> <span class="mi">3000</span> <span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">2000</span>
+</pre></div>
+</div>
+</li>
+<li><p>Restart Tor, with <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">tor</span></code>. Wait a few seconds.</p></li>
+<li><p>Read the <code class="docutils literal notranslate"><span class="pre">hostname</span></code> file in the hidden service directory (e.g.
+<code class="docutils literal notranslate"><span class="pre">/var/lib/tor/tahoe/hostname</span></code>). This will be a <code class="docutils literal notranslate"><span class="pre">.onion</span></code> address, like
+<code class="docutils literal notranslate"><span class="pre">u33m4y7klhz3b.onion</span></code>. Call this ONION.</p></li>
+<li><p>Edit <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code> to set <code class="docutils literal notranslate"><span class="pre">tub.port</span></code> to use
+<code class="docutils literal notranslate"><span class="pre">tcp:PORT:interface=127.0.0.1</span></code>, and <code class="docutils literal notranslate"><span class="pre">tub.location</span></code> to use
+<code class="docutils literal notranslate"><span class="pre">tor:ONION.onion:VIRTPORT</span></code>. Using the examples above, this would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+<span class="n">reveal</span><span class="o">-</span><span class="n">IP</span><span class="o">-</span><span class="n">address</span> <span class="o">=</span> <span class="n">false</span>
+<span class="n">tub</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">tcp</span><span class="p">:</span><span class="mi">2000</span><span class="p">:</span><span class="n">interface</span><span class="o">=</span><span class="mf">127.0.0.1</span>
+<span class="n">tub</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">tor</span><span class="p">:</span><span class="n">u33m4y7klhz3b</span><span class="o">.</span><span class="n">onion</span><span class="p">:</span><span class="mi">3000</span>
+<span class="p">[</span><span class="n">connections</span><span class="p">]</span>
+<span class="n">tcp</span> <span class="o">=</span> <span class="n">tor</span>
+</pre></div>
+</div>
+</li>
+<li><p>Launch the Tahoe server with <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">run</span> <span class="pre">$NODEDIR</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">tub.port</span></code> section will cause the Tahoe server to listen on PORT, but
+bind the listening socket to the loopback interface, which is not reachable
+from the outside world (but <em>is</em> reachable by the local Tor daemon). Then the
+<code class="docutils literal notranslate"><span class="pre">tcp</span> <span class="pre">=</span> <span class="pre">tor</span></code> section causes Tahoe to use Tor when connecting to the
+Introducer, hiding it’s IP address. The node will then announce itself to all
+clients using <code class="docutils literal notranslate"><span class="pre">tub.location</span></code>, so clients will know that they must use Tor
+to reach this server (and not revealing it’s IP address through the
+announcement). When clients connect to the onion address, their packets will
+flow through the anonymizing network and eventually land on the local Tor
+daemon, which will then make a connection to PORT on localhost, which is
+where Tahoe is listening for connections.</p>
+<p>Follow a similar process to build a Tahoe server that listens on I2P. The
+same process can be used to listen on both Tor and I2P (<code class="docutils literal notranslate"><span class="pre">tub.location</span> <span class="pre">=</span>
+<span class="pre">tor:ONION.onion:VIRTPORT,i2p:ADDR.i2p</span></code>). It can also listen on both Tor and
+plain TCP (use-case 2), with <code class="docutils literal notranslate"><span class="pre">tub.port</span> <span class="pre">=</span> <span class="pre">tcp:PORT</span></code>, <code class="docutils literal notranslate"><span class="pre">tub.location</span> <span class="pre">=</span>
+<span class="pre">tcp:HOST:PORT,tor:ONION.onion:VIRTPORT</span></code>, and <code class="docutils literal notranslate"><span class="pre">anonymous</span> <span class="pre">=</span> <span class="pre">false</span></code> (and omit
+the <code class="docutils literal notranslate"><span class="pre">tcp</span> <span class="pre">=</span> <span class="pre">tor</span></code> setting, as the address is already being broadcast through
+the location announcement).</p>
+</section>
+<section id="server-anonymity-automatic-configuration">
+<h3>Server anonymity, automatic configuration<a class="headerlink" href="#server-anonymity-automatic-configuration" title="Link to this heading">¶</a></h3>
+<p>To configure a server node to listen on an anonymizing network, create the
+node with the <code class="docutils literal notranslate"><span class="pre">--listen=tor</span></code> option. This requires a Tor configuration that
+either launches a new Tor daemon, or has access to the Tor control port (and
+enough authority to create a new onion service). On Debian/Ubuntu systems, do
+<code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">install</span> <span class="pre">tor</span></code>, add yourself to the control group with <code class="docutils literal notranslate"><span class="pre">adduser</span>
+<span class="pre">YOURUSERNAME</span> <span class="pre">debian-tor</span></code>, and then logout and log back in: if the <code class="docutils literal notranslate"><span class="pre">groups</span></code>
+command includes <code class="docutils literal notranslate"><span class="pre">debian-tor</span></code> in the output, you should have permission to
+use the unix-domain control port at <code class="docutils literal notranslate"><span class="pre">/var/run/tor/control</span></code>.</p>
+<p>This option will set <code class="docutils literal notranslate"><span class="pre">reveal-IP-address</span> <span class="pre">=</span> <span class="pre">False</span></code> and <code class="docutils literal notranslate"><span class="pre">[connections]</span> <span class="pre">tcp</span> <span class="pre">=</span>
+<span class="pre">tor</span></code>. It will allocate the necessary ports, instruct Tor to create the onion
+service (saving the private key somewhere inside NODEDIR/private/), obtain
+the <code class="docutils literal notranslate"><span class="pre">.onion</span></code> address, and populate <code class="docutils literal notranslate"><span class="pre">tub.port</span></code> and <code class="docutils literal notranslate"><span class="pre">tub.location</span></code>
+correctly.</p>
+</section>
+</section>
+<section id="performance-and-security-issues">
+<h2>Performance and security issues<a class="headerlink" href="#performance-and-security-issues" title="Link to this heading">¶</a></h2>
+<p>If you are running a server which does not itself need to be
+anonymous, should you make it reachable via an anonymizing network or
+not? Or should you make it reachable <em>both</em> via an anonymizing network
+and as a publicly traceable TCP/IP server?</p>
+<p>There are several trade-offs effected by this decision.</p>
+<section id="nat-firewall-penetration">
+<h3>NAT/Firewall penetration<a class="headerlink" href="#nat-firewall-penetration" title="Link to this heading">¶</a></h3>
+<p>Making a server be reachable via Tor or I2P makes it reachable (by
+Tor/I2P-capable clients) even if there are NATs or firewalls preventing
+direct TCP/IP connections to the server.</p>
+</section>
+<section id="anonymity">
+<h3>Anonymity<a class="headerlink" href="#anonymity" title="Link to this heading">¶</a></h3>
+<p>Making a Tahoe-LAFS server accessible <em>only</em> via Tor or I2P can be used to
+guarantee that the Tahoe-LAFS clients use Tor or I2P to connect
+(specifically, the server should only advertise Tor/I2P addresses in the
+<code class="docutils literal notranslate"><span class="pre">tub.location</span></code> config key). This prevents misconfigured clients from
+accidentally de-anonymizing themselves by connecting to your server through
+the traceable Internet.</p>
+<p>Clearly, a server which is available as both a Tor/I2P service <em>and</em> a
+regular TCP address is not itself anonymous: the .onion address and the real
+IP address of the server are easily linkable.</p>
+<p>Also, interaction, through Tor, with a Tor Hidden Service may be more
+protected from network traffic analysis than interaction, through Tor,
+with a publicly traceable TCP/IP server.</p>
+<p><strong>XXX is there a document maintained by Tor developers which substantiates or refutes this belief?
+If so we need to link to it. If not, then maybe we should explain more here why we think this?</strong></p>
+</section>
+<section id="linkability">
+<h3>Linkability<a class="headerlink" href="#linkability" title="Link to this heading">¶</a></h3>
+<p>As of 1.12.0, the node uses a single persistent Tub key for outbound
+connections to the Introducer, and inbound connections to the Storage Server
+(and Helper). For clients, a new Tub key is created for each storage server
+we learn about, and these keys are <em>not</em> persisted (so they will change each
+time the client reboots).</p>
+<p>Clients traversing directories (from rootcap to subdirectory to filecap) are
+likely to request the same storage-indices (SIs) in the same order each time.
+A client connected to multiple servers will ask them all for the same SI at
+about the same time. And two clients which are sharing files or directories
+will visit the same SIs (at various times).</p>
+<p>As a result, the following things are linkable, even with <code class="docutils literal notranslate"><span class="pre">reveal-IP-address</span>
+<span class="pre">=</span> <span class="pre">false</span></code>:</p>
+<ul class="simple">
+<li><p>Storage servers can link recognize multiple connections from the same
+not-yet-rebooted client. (Note that the upcoming Accounting feature may
+cause clients to present a persistent client-side public key when
+connecting, which will be a much stronger linkage).</p></li>
+<li><p>Storage servers can probably deduce which client is accessing data, by
+looking at the SIs being requested. Multiple servers can collude to
+determine that the same client is talking to all of them, even though the
+TubIDs are different for each connection.</p></li>
+<li><p>Storage servers can deduce when two different clients are sharing data.</p></li>
+<li><p>The Introducer could deliver different server information to each
+subscribed client, to partition clients into distinct sets according to
+which server connections they eventually make. For client+server nodes, it
+can also correlate the server announcement with the deduced client
+identity.</p></li>
+</ul>
+</section>
+<section id="performance">
+<h3>Performance<a class="headerlink" href="#performance" title="Link to this heading">¶</a></h3>
+<p>A client connecting to a publicly traceable Tahoe-LAFS server through Tor
+incurs substantially higher latency and sometimes worse throughput than the
+same client connecting to the same server over a normal traceable TCP/IP
+connection. When the server is on a Tor Hidden Service, it incurs even more
+latency, and possibly even worse throughput.</p>
+<p>Connecting to Tahoe-LAFS servers which are I2P servers incurs higher latency
+and worse throughput too.</p>
+</section>
+<section id="positive-and-negative-effects-on-other-tor-users">
+<h3>Positive and negative effects on other Tor users<a class="headerlink" href="#positive-and-negative-effects-on-other-tor-users" title="Link to this heading">¶</a></h3>
+<p>Sending your Tahoe-LAFS traffic over Tor adds cover traffic for other
+Tor users who are also transmitting bulk data. So that is good for
+them – increasing their anonymity.</p>
+<p>However, it makes the performance of other Tor users’ interactive
+sessions – e.g. ssh sessions – much worse. This is because Tor
+doesn’t currently have any prioritization or quality-of-service
+features, so someone else’s ssh keystrokes may have to wait in line
+while your bulk file contents get transmitted. The added delay might
+make other people’s interactive sessions unusable.</p>
+<p>Both of these effects are doubled if you upload or download files to a
+Tor Hidden Service, as compared to if you upload or download files
+over Tor to a publicly traceable TCP/IP server.</p>
+</section>
+<section id="positive-and-negative-effects-on-other-i2p-users">
+<h3>Positive and negative effects on other I2P users<a class="headerlink" href="#positive-and-negative-effects-on-other-i2p-users" title="Link to this heading">¶</a></h3>
+<p>Sending your Tahoe-LAFS traffic over I2P adds cover traffic for other I2P users
+who are also transmitting data. So that is good for them – increasing their
+anonymity. It will not directly impair the performance of other I2P users’
+interactive sessions, because the I2P network has several congestion control and
+quality-of-service features, such as prioritizing smaller packets.</p>
+<p>However, if many users are sending Tahoe-LAFS traffic over I2P, and do not have
+their I2P routers configured to participate in much traffic, then the I2P
+network as a whole will suffer degradation. Each Tahoe-LAFS router using I2P has
+their own anonymizing tunnels that their data is sent through. On average, one
+Tahoe-LAFS node requires 12 other I2P routers to participate in their tunnels.</p>
+<p>It is therefore important that your I2P router is sharing bandwidth with other
+routers, so that you can give back as you use I2P. This will never impair the
+performance of your Tahoe-LAFS node, because your I2P router will always
+prioritize your own traffic.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, The Tahoe-LAFS Developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Using Tahoe-LAFS with an anonymizing network: Tor, I2P</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#use-cases">Use cases</a></li>
+<li><a class="reference internal" href="#software-dependencies">Software Dependencies</a><ul>
+<li><a class="reference internal" href="#tor">Tor</a></li>
+<li><a class="reference internal" href="#i2p">I2P</a></li>
+<li><a class="reference internal" href="#both-tor-and-i2p">Both Tor and I2P</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#connection-configuration">Connection configuration</a></li>
+<li><a class="reference internal" href="#anonymity-configuration">Anonymity configuration</a><ul>
+<li><a class="reference internal" href="#client-anonymity">Client anonymity</a></li>
+<li><a class="reference internal" href="#server-anonymity-manual-configuration">Server anonymity, manual configuration</a></li>
+<li><a class="reference internal" href="#server-anonymity-automatic-configuration">Server anonymity, automatic configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance-and-security-issues">Performance and security issues</a><ul>
+<li><a class="reference internal" href="#nat-firewall-penetration">NAT/Firewall penetration</a></li>
+<li><a class="reference internal" href="#anonymity">Anonymity</a></li>
+<li><a class="reference internal" href="#linkability">Linkability</a></li>
+<li><a class="reference internal" href="#performance">Performance</a></li>
+<li><a class="reference internal" href="#positive-and-negative-effects-on-other-tor-users">Positive and negative effects on other Tor users</a></li>
+<li><a class="reference internal" href="#positive-and-negative-effects-on-other-i2p-users">Positive and negative effects on other I2P users</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

@@ -1,15 +1,15 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="./">
+<html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+<link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
-        <title>The Private Facts Project</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=25af2a20" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+        <title>Debian and Ubuntu Support - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
 
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">The Private Facts Project</div></a>
+      <a href="../../index.html"><div class="brand">The Private Facts Project</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -187,11 +187,11 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   <span class="sidebar-brand-text">The Private Facts Project</span>
   
-</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
@@ -216,7 +216,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/index.rst.txt" title="View this page">
+  <a class="muted-link" href="../../_sources/reference/Tahoe-LAFS/debian.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -230,26 +230,64 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="private-facts">
-<h1>Private Facts<a class="headerlink" href="#private-facts" title="Link to this heading">¶</a></h1>
-<div class="toctree-wrapper compound">
-</div>
-<blockquote class="pull-quote">
-<div><dl class="simple">
-<dt>The three rules of storing data for other people:</dt><dd><ul class="simple">
-<li><p>Never lose the data</p></li>
-<li><p>Never let the wrong people see it.</p></li>
-<li><p>Never forget the first two rules.</p></li>
+          <section id="debian-and-ubuntu-support">
+<h1>Debian and Ubuntu Support<a class="headerlink" href="#debian-and-ubuntu-support" title="Link to this heading">¶</a></h1>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#overview">Overview</a></p></li>
+<li><p><a class="reference internal" href="#dependency-packages">Dependency Packages</a></p></li>
+</ol>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>Tahoe-LAFS is provided as a <code class="docutils literal notranslate"><span class="pre">.deb</span></code> package in current Debian (&gt;= <a class="reference external" href="https://packages.debian.org/source/stretch/tahoe-lafs">stretch</a>) and Ubuntu (&gt;= lucid) releases. Before official packages were added, the Tahoe
+source tree provided support for building unofficial packages for a variety
+of popular Debian/Ubuntu versions. The project also ran buildbots to create
+<code class="docutils literal notranslate"><span class="pre">.debs</span></code> of current trunk for ease of testing.</p>
+<p>As of version 1.9, the source tree no longer provides these tools. To
+construct a <code class="docutils literal notranslate"><span class="pre">.deb</span></code> from current trunk, your best bet is to apply the current
+Debian diff from the latest upstream package and invoke the <code class="docutils literal notranslate"><span class="pre">debian/rules</span></code>
+as usual. Debian’s standard <code class="docutils literal notranslate"><span class="pre">apt-get</span></code> tool can be used to fetch the current
+source package (including the Debian-specific diff): run
+“<code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">source</span> <span class="pre">tahoe-lafs</span></code>”. That will fetch three files: the <code class="docutils literal notranslate"><span class="pre">.dsc</span></code>
+control file, the main Tahoe tarball, and the Debian-specific
+<code class="docutils literal notranslate"><span class="pre">.debian.tar.gz</span></code> file. Just unpack the <code class="docutils literal notranslate"><span class="pre">.debian.tar.gz</span></code> file inside
+your Tahoe source tree, modify the version number in <code class="docutils literal notranslate"><span class="pre">debian/changelog</span></code>,
+then run “<code class="docutils literal notranslate"><span class="pre">fakeroot</span> <span class="pre">./debian/rules</span> <span class="pre">binary</span></code>”, and a new <code class="docutils literal notranslate"><span class="pre">.deb</span></code> will be
+placed in the parent directory.</p>
+</section>
+<section id="dependency-packages">
+<h2>Dependency Packages<a class="headerlink" href="#dependency-packages" title="Link to this heading">¶</a></h2>
+<p>Tahoe depends upon a number of additional libraries. When building Tahoe from
+source, any dependencies that are not already present in the environment will
+be downloaded (via <code class="docutils literal notranslate"><span class="pre">pip</span></code> and <code class="docutils literal notranslate"><span class="pre">easy_install</span></code>) and installed in the
+virtualenv.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.deb</span></code> packages, of course, rely solely upon other <code class="docutils literal notranslate"><span class="pre">.deb</span></code> packages.
+For reference, here is a list of the debian package names that provide Tahoe’s
+dependencies as of the 1.14.0 release:</p>
+<ul class="simple">
+<li><p>python</p></li>
+<li><p>python-zfec</p></li>
+<li><p>python-foolscap</p></li>
+<li><p>python-openssl (needed by foolscap)</p></li>
+<li><p>python-twisted</p></li>
+<li><p>python-nevow</p></li>
+<li><p>python-mock</p></li>
+<li><p>python-cryptography</p></li>
+<li><p>python-simplejson</p></li>
+<li><p>python-setuptools</p></li>
+<li><p>python-support (for Debian-specific install-time tools)</p></li>
 </ul>
-</dd>
-</dl>
-</div></blockquote>
+<p>When building your own Debian packages, a convenient way to get all these
+dependencies installed is to first install the official “tahoe-lafs” package,
+then uninstall it, leaving the dependencies behind. You may also find it
+useful to run “<code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">build-dep</span> <span class="pre">tahoe-lafs</span></code>” to make sure all the usual
+build-essential tools are installed.</p>
+</section>
 </section>
 
         </article>
@@ -277,15 +315,35 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Debian and Ubuntu Support</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#dependency-packages">Dependency Packages</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=16df9e97"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+</div><script src="../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
     </body>
 </html>

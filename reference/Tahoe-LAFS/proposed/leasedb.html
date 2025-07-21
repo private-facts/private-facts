@@ -1,0 +1,552 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>Lease database design - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">The Private Facts Project</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <span class="sidebar-brand-text">The Private Facts Project</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../_sources/reference/Tahoe-LAFS/proposed/leasedb.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="lease-database-design">
+<h1>Lease database design<a class="headerlink" href="#lease-database-design" title="Link to this heading">¶</a></h1>
+<p>The target audience for this document is developers who wish to understand
+the new lease database (leasedb) planned to be added in Tahoe-LAFS v1.11.0.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>A “lease” is a request by an account that a share not be deleted before a
+specified time. Each storage server stores leases in order to know which
+shares to spare from garbage collection.</p>
+</section>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">¶</a></h2>
+<p>The leasedb will replace the current design in which leases are stored in
+the storage server’s share container files. That design has several
+disadvantages:</p>
+<ul class="simple">
+<li><p>Updating a lease requires modifying a share container file (even for
+immutable shares). This complicates the implementation of share classes.
+The mixing of share contents and lease data in share files also led to a
+security bug (ticket <a class="reference external" href="https://tahoe-lafs.org/trac/tahoe-lafs/ticket/1528">#1528</a>).</p></li>
+<li><p>When only the disk backend is supported, it is possible to read and
+update leases synchronously because the share files are stored locally
+to the storage server. For the cloud backend, accessing share files
+requires an HTTP request, and so must be asynchronous. Accepting this
+asynchrony for lease queries would be both inefficient and complex.
+Moving lease information out of shares and into a local database allows
+lease queries to stay synchronous.</p></li>
+</ul>
+<p>Also, the current cryptographic protocol for renewing and cancelling leases
+(based on shared secrets derived from secure hash functions) is complex,
+and the cancellation part was never used.</p>
+<p>The leasedb solves the first two problems by storing the lease information in
+a local database instead of in the share container files. The share data
+itself is still held in the share container file.</p>
+<p>At the same time as implementing leasedb, we devised a simpler protocol for
+allocating and cancelling leases: a client can use a public key digital
+signature to authenticate access to a foolscap object representing the
+authority of an account. This protocol is not yet implemented; at the time
+of writing, only an “anonymous” account is supported.</p>
+<p>The leasedb also provides an efficient way to get summarized information,
+such as total space usage of shares leased by an account, for accounting
+purposes.</p>
+</section>
+<section id="design-constraints">
+<h2>Design constraints<a class="headerlink" href="#design-constraints" title="Link to this heading">¶</a></h2>
+<p>A share is stored as a collection of objects. The persistent storage may be
+remote from the server (for example, cloud storage).</p>
+<p>Writing to the persistent store objects is in general not an atomic
+operation. So the leasedb also keeps track of which shares are in an
+inconsistent state because they have been partly written. (This may
+change in future when we implement a protocol to improve atomicity of
+updates to mutable shares.)</p>
+<p>Leases are no longer stored in shares. The same share format is used as
+before, but the lease slots are ignored, and are cleared when rewriting a
+mutable share. The new design also does not use lease renewal or cancel
+secrets. (They are accepted as parameters in the storage protocol interfaces
+for backward compatibility, but are ignored. Cancel secrets were already
+ignored due to the fix for <a class="reference external" href="https://tahoe-lafs.org/trac/tahoe-lafs/ticket/1528">#1528</a>.)</p>
+<p>The new design needs to be fail-safe in the sense that if the lease database
+is lost or corruption is detected, no share data will be lost (even though
+the metadata about leases held by particular accounts has been lost).</p>
+</section>
+<section id="accounting-crawler">
+<h2>Accounting crawler<a class="headerlink" href="#accounting-crawler" title="Link to this heading">¶</a></h2>
+<p>A “crawler” is a long-running process that visits share container files at a
+slow rate, so as not to overload the server by trying to visit all share
+container files one after another immediately.</p>
+<p>The accounting crawler replaces the previous “lease crawler”. It examines
+each share container file and compares it with the state of the leasedb, and
+may update the state of the share and/or the leasedb.</p>
+<p>The accounting crawler may perform the following functions (but see ticket
+#1834 for a proposal to reduce the scope of its responsibility):</p>
+<ul class="simple">
+<li><p>Remove leases that are past their expiration time. (Currently, this is
+done automatically before deleting shares, but we plan to allow expiration
+to be performed separately for individual accounts in future.)</p></li>
+<li><p>Delete the objects containing unleased shares — that is, shares that have
+stable entries in the leasedb but no current leases (see below for the
+definition of “stable” entries).</p></li>
+<li><p>Discover shares that have been manually added to storage, via <code class="docutils literal notranslate"><span class="pre">scp</span></code> or
+some other out-of-band means.</p></li>
+<li><p>Discover shares that are present when a storage server is upgraded to
+a leasedb-supporting version from a previous version, and give them
+“starter leases”.</p></li>
+<li><p>Recover from a situation where the leasedb is lost or detectably
+corrupted. This is handled in the same way as upgrading from a previous
+version.</p></li>
+<li><p>Detect shares that have unexpectedly disappeared from storage.  The
+disappearance of a share is logged, and its entry and leases are removed
+from the leasedb.</p></li>
+</ul>
+</section>
+<section id="accounts">
+<h2>Accounts<a class="headerlink" href="#accounts" title="Link to this heading">¶</a></h2>
+<p>An account holds leases for some subset of shares stored by a server. The
+leasedb schema can handle many distinct accounts, but for the time being we
+create only two accounts: an anonymous account and a starter account. The
+starter account is used for leases on shares discovered by the accounting
+crawler; the anonymous account is used for all other leases.</p>
+<p>The leasedb has at most one lease entry per account per (storage_index,
+shnum) pair. This entry stores the times when the lease was last renewed and
+when it is set to expire (if the expiration policy does not force it to
+expire earlier), represented as Unix UTC-seconds-since-epoch timestamps.</p>
+<p>For more on expiration policy, see <a class="reference internal" href="../garbage-collection.html"><span class="doc">Garbage Collection in Tahoe</span></a>.</p>
+</section>
+<section id="share-states">
+<h2>Share states<a class="headerlink" href="#share-states" title="Link to this heading">¶</a></h2>
+<p>The leasedb holds an explicit indicator of the state of each share.</p>
+<p>The diagram and descriptions below give the possible values of the “state”
+indicator, what that value means, and transitions between states, for any
+(storage_index, shnum) pair on each server:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#        STATE_STABLE -------.</span>
+<span class="c1">#         ^   |   ^ |         |</span>
+<span class="c1">#         |   v   | |         v</span>
+<span class="c1">#    STATE_COMING | |    STATE_GOING</span>
+<span class="c1">#         ^       | |         |</span>
+<span class="c1">#         |       | v         |</span>
+<span class="c1">#         &#39;----- NONE &lt;------&#39;</span>
+</pre></div>
+</div>
+<p><strong>NONE</strong>: There is no entry in the <code class="docutils literal notranslate"><span class="pre">shares</span></code> table for this (storage_index,
+shnum) in this server’s leasedb. This is the initial state.</p>
+<p><strong>STATE_COMING</strong>: The share is being created or (if a mutable share)
+updated. The store objects may have been at least partially written, but
+the storage server doesn’t have confirmation that they have all been
+completely written.</p>
+<p><strong>STATE_STABLE</strong>: The store objects have been completely written and are
+not in the process of being modified or deleted by the storage server. (It
+could have been modified or deleted behind the back of the storage server,
+but if it has, the server has not noticed that yet.) The share may or may not
+be leased.</p>
+<p><strong>STATE_GOING</strong>: The share is being deleted.</p>
+</section>
+<section id="state-transitions">
+<h2>State transitions<a class="headerlink" href="#state-transitions" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p><strong>STATE_GOING</strong> → <strong>NONE</strong></p>
+<blockquote>
+<div><p>trigger: The storage server gains confidence that all store objects for
+the share have been removed.</p>
+<p>implementation:</p>
+<ol class="arabic simple">
+<li><p>Remove the entry in the leasedb.</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p><strong>STATE_STABLE</strong> → <strong>NONE</strong></p>
+<blockquote>
+<div><p>trigger: The accounting crawler noticed that all the store objects for
+this share are gone.</p>
+<p>implementation:</p>
+<ol class="arabic simple">
+<li><p>Remove the entry in the leasedb.</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p><strong>NONE</strong> → <strong>STATE_COMING</strong></p>
+<blockquote>
+<div><p>triggers: A new share is being created, as explicitly signalled by a
+client invoking a creation command, <em>or</em> the accounting crawler discovers
+an incomplete share.</p>
+<p>implementation:</p>
+<ol class="arabic simple">
+<li><p>Add an entry to the leasedb with <strong>STATE_COMING</strong>.</p></li>
+<li><p>(In case of explicit creation) begin writing the store objects to hold
+the share.</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p><strong>STATE_STABLE</strong> → <strong>STATE_COMING</strong></p>
+<blockquote>
+<div><p>trigger: A mutable share is being modified, as explicitly signalled by a
+client invoking a modification command.</p>
+<p>implementation:</p>
+<ol class="arabic simple">
+<li><p>Add an entry to the leasedb with <strong>STATE_COMING</strong>.</p></li>
+<li><p>Begin updating the store objects.</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p><strong>STATE_COMING</strong> → <strong>STATE_STABLE</strong></p>
+<blockquote>
+<div><p>trigger: All store objects have been written.</p>
+<p>implementation:</p>
+<ol class="arabic simple">
+<li><p>Change the state value of this entry in the leasedb from
+<strong>STATE_COMING</strong> to <strong>STATE_STABLE</strong>.</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p><strong>NONE</strong> → <strong>STATE_STABLE</strong></p>
+<blockquote>
+<div><p>trigger: The accounting crawler discovers a complete share.</p>
+<p>implementation:</p>
+<ol class="arabic simple">
+<li><p>Add an entry to the leasedb with <strong>STATE_STABLE</strong>.</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p><strong>STATE_STABLE</strong> → <strong>STATE_GOING</strong></p>
+<blockquote>
+<div><p>trigger: The share should be deleted because it is unleased.</p>
+<p>implementation:</p>
+<ol class="arabic simple">
+<li><p>Change the state value of this entry in the leasedb from
+<strong>STATE_STABLE</strong> to <strong>STATE_GOING</strong>.</p></li>
+<li><p>Initiate removal of the store objects.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+<p>The following constraints are needed to avoid race conditions:</p>
+<ul class="simple">
+<li><p>While a share is being deleted (entry in <strong>STATE_GOING</strong>), we do not accept
+any requests to recreate it. That would result in add and delete requests
+for store objects being sent concurrently, with undefined results.</p></li>
+<li><p>While a share is being added or modified (entry in <strong>STATE_COMING</strong>), we
+treat it as leased.</p></li>
+<li><p>Creation or modification requests for a given mutable share are serialized.</p></li>
+</ul>
+</section>
+<section id="unresolved-design-issues">
+<h2>Unresolved design issues<a class="headerlink" href="#unresolved-design-issues" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>What happens if a write to store objects for a new share fails
+permanently?  If we delete the share entry, then the accounting crawler
+will eventually get to those store objects and see that their lengths
+are inconsistent with the length in the container header. This will cause
+the share to be treated as corrupted. Should we instead attempt to
+delete those objects immediately? If so, do we need a direct
+<strong>STATE_COMING</strong> → <strong>STATE_GOING</strong> transition to handle this case?</p></li>
+<li><p>What happens if only some store objects for a share disappear
+unexpectedly?  This case is similar to only some objects having been
+written when we get an unrecoverable error during creation of a share, but
+perhaps we want to treat it differently in order to preserve information
+about the storage service having lost data.</p></li>
+<li><p>Does the leasedb need to track corrupted shares?</p></li>
+</ul>
+</section>
+<section id="future-directions">
+<h2>Future directions<a class="headerlink" href="#future-directions" title="Link to this heading">¶</a></h2>
+<p>Clients will have key pairs identifying accounts, and will be able to add
+leases for a specific account. Various space usage policies can be defined.</p>
+<p>Better migration tools (‘tahoe storage export’?) will create export files
+that include both the share data and the lease data, and then an import tool
+will both put the share in the right place and update the recipient node’s
+leasedb.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, The Tahoe-LAFS Developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Lease database design</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#motivation">Motivation</a></li>
+<li><a class="reference internal" href="#design-constraints">Design constraints</a></li>
+<li><a class="reference internal" href="#accounting-crawler">Accounting crawler</a></li>
+<li><a class="reference internal" href="#accounts">Accounts</a></li>
+<li><a class="reference internal" href="#share-states">Share states</a></li>
+<li><a class="reference internal" href="#state-transitions">State transitions</a></li>
+<li><a class="reference internal" href="#unresolved-design-issues">Unresolved design issues</a></li>
+<li><a class="reference internal" href="#future-directions">Future directions</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

@@ -1,0 +1,658 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../../../about.html" /><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>Redundant Array of Independent Clouds: Share To Cloud Mapping - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">The Private Facts Project</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../index.html">
+  
+  <span class="sidebar-brand-text">The Private Facts Project</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../../_sources/reference/Tahoe-LAFS/specifications/backends/raic.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="redundant-array-of-independent-clouds-share-to-cloud-mapping">
+<h1>Redundant Array of Independent Clouds: Share To Cloud Mapping<a class="headerlink" href="#redundant-array-of-independent-clouds-share-to-cloud-mapping" title="Link to this heading">¶</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>This document describes a proposed design for the mapping of LAFS shares to
+objects in a cloud storage service. It also analyzes the costs for each of the
+functional requirements, including network, disk, storage and API usage costs.</p>
+</section>
+<section id="terminology">
+<h2>Terminology<a class="headerlink" href="#terminology" title="Link to this heading">¶</a></h2>
+<dl class="simple">
+<dt><em>LAFS share</em></dt><dd><p>A Tahoe-LAFS share representing part of a file after encryption and
+erasure encoding.</p>
+</dd>
+<dt><em>LAFS shareset</em></dt><dd><p>The set of shares stored by a LAFS storage server for a given storage index.
+The shares within a shareset are numbered by a small integer.</p>
+</dd>
+<dt><em>Cloud storage service</em></dt><dd><p>A service such as Amazon S3 <a class="reference internal" href="#id1">²</a>, Rackspace Cloud Files <a class="reference internal" href="#id2">³</a>,
+Google Cloud Storage <a class="reference internal" href="#id3">⁴</a>, or Windows Azure <a class="reference internal" href="#id4">⁵</a>, that provides cloud storage.</p>
+</dd>
+<dt><em>Cloud storage interface</em></dt><dd><p>A protocol interface supported by a cloud storage service, such as the
+S3 interface <a class="reference internal" href="#id5">⁶</a>, the OpenStack Object Storage interface <a class="reference internal" href="#id6">⁷</a>, the
+Google Cloud Storage interface <a class="reference internal" href="#id7">⁸</a>, or the Azure interface <a class="reference internal" href="#id8">⁹</a>. There may be
+multiple services implementing a given cloud storage interface. In this design,
+only REST-based APIs <a class="reference internal" href="#id9">¹⁰</a> over HTTP will be used as interfaces.</p>
+</dd>
+<dt><em>Store object</em></dt><dd><p>A file-like abstraction provided by a cloud storage service, storing a
+sequence of bytes. Store objects are mutable in the sense that the contents
+and metadata of the store object with a given name in a given backend store
+can be replaced. Store objects are called “blobs” in the Azure interface,
+and “objects” in the other interfaces.</p>
+</dd>
+<dt><em>Cloud backend store</em></dt><dd><p>A container for store objects provided by a cloud service. Cloud backend
+stores are called “buckets” in the S3 and Google Cloud Storage interfaces,
+and “containers” in the Azure and OpenStack Storage interfaces.</p>
+</dd>
+</dl>
+</section>
+<section id="functional-requirements">
+<h2>Functional Requirements<a class="headerlink" href="#functional-requirements" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><em>Upload</em>: a LAFS share can be uploaded to an appropriately configured
+Tahoe-LAFS storage server and the data is stored to the cloud
+storage service.</p></li>
+</ul>
+<blockquote>
+<div><ul>
+<li><p><em>Scalable shares</em>: there is no hard limit on the size of LAFS share
+that can be uploaded.</p>
+<p>If the cloud storage interface offers scalable files, then this could be
+implemented by using that feature of the specific cloud storage
+interface. Alternately, it could be implemented by mapping from the LAFS
+abstraction of an unlimited-size immutable share to a set of size-limited
+store objects.</p>
+</li>
+<li><p><em>Streaming upload</em>: the size of the LAFS share that is uploaded
+can exceed the amount of RAM and even the amount of direct attached
+storage on the storage server. I.e., the storage server is required to
+stream the data directly to the ultimate cloud storage service while
+processing it, instead of to buffer the data until the client is finished
+uploading and then transfer the data to the cloud storage service.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p><em>Download</em>: a LAFS share can be downloaded from an appropriately
+configured Tahoe-LAFS storage server, and the data is loaded from the
+cloud storage service.</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Streaming download</em>: the size of the LAFS share that is
+downloaded can exceed the amount of RAM and even the amount of direct
+attached storage on the storage server. I.e. the storage server is
+required to stream the data directly to the client while processing it,
+instead of to buffer the data until the cloud storage service is finished
+serving and then transfer the data to the client.</p></li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p><em>Modify</em>: a LAFS share can have part of its contents modified.</p>
+<p>If the cloud storage interface offers scalable mutable files, then this
+could be implemented by using that feature of the specific cloud storage
+interface. Alternately, it could be implemented by mapping from the LAFS
+abstraction of an unlimited-size mutable share to a set of size-limited
+store objects.</p>
+</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Efficient modify</em>: the size of the LAFS share being
+modified can exceed the amount of RAM and even the amount of direct
+attached storage on the storage server. I.e. the storage server is
+required to download, patch, and upload only the segment(s) of the share
+that are being modified, instead of to download, patch, and upload the
+entire share.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p><em>Tracking leases</em>: The Tahoe-LAFS storage server is required to track when
+each share has its lease renewed so that unused shares (shares whose lease
+has not been renewed within a time limit, e.g. 30 days) can be garbage
+collected. This does not necessarily require code specific to each cloud
+storage interface, because the lease tracking can be performed in the
+storage server’s generic component rather than in the component supporting
+each interface.</p></li>
+</ul>
+</section>
+<section id="mapping">
+<h2>Mapping<a class="headerlink" href="#mapping" title="Link to this heading">¶</a></h2>
+<p>This section describes the mapping between LAFS shares and store objects.</p>
+<p>A LAFS share will be split into one or more “chunks” that are each stored in a
+store object. A LAFS share of size <cite>C</cite> bytes will be stored as <cite>ceiling(C / chunksize)</cite>
+chunks. The last chunk has a size between 1 and <cite>chunksize</cite> bytes inclusive.
+(It is not possible for <cite>C</cite> to be zero, because valid shares always have a header,
+so, there is at least one chunk for each share.)</p>
+<p>For an existing share, the chunk size is determined by the size of the first
+chunk. For a new share, it is a parameter that may depend on the storage
+interface. It is an error for any chunk to be larger than the first chunk, or
+for any chunk other than the last to be smaller than the first chunk.
+If a mutable share with total size less than the default chunk size for the
+storage interface is being modified, the new contents are split using the
+default chunk size.</p>
+<blockquote>
+<div><p><em>Rationale</em>: this design allows the <cite>chunksize</cite> parameter to be changed for
+new shares written via a particular storage interface, without breaking
+compatibility with existing stored shares. All cloud storage interfaces
+return the sizes of store objects with requests to list objects, and so
+the size of the first chunk can be determined without an additional request.</p>
+</div></blockquote>
+<p>The name of the store object for chunk <cite>i</cite> &gt; 0 of a LAFS share with storage index
+<cite>STORAGEINDEX</cite> and share number <cite>SHNUM</cite>, will be</p>
+<blockquote>
+<div><p>shares/<cite>ST</cite>/<cite>STORAGEINDEX</cite>/<cite>SHNUM.i</cite></p>
+</div></blockquote>
+<p>where <cite>ST</cite> is the first two characters of <cite>STORAGEINDEX</cite>. When <cite>i</cite> is 0, the
+<cite>.0</cite> is omitted.</p>
+<blockquote>
+<div><p><em>Rationale</em>: this layout maintains compatibility with data stored by the
+prototype S3 backend, for which Least Authority Enterprises has existing
+customers. This prototype always used a single store object to store each
+share, with name</p>
+<blockquote>
+<div><p>shares/<cite>ST</cite>/<cite>STORAGEINDEX</cite>/<cite>SHNUM</cite></p>
+</div></blockquote>
+<p>By using the same prefix “shares/<cite>ST</cite>/<cite>STORAGEINDEX</cite>/” for old and new layouts,
+the storage server can obtain a list of store objects associated with a given
+shareset without having to know the layout in advance, and without having to
+make multiple API requests. This also simplifies sharing of test code between the
+disk and cloud backends.</p>
+</div></blockquote>
+<p>Mutable and immutable shares will be “chunked” in the same way.</p>
+<section id="rationale-for-chunking">
+<h3>Rationale for Chunking<a class="headerlink" href="#rationale-for-chunking" title="Link to this heading">¶</a></h3>
+<p>Limiting the amount of data received or sent in a single request has the
+following advantages:</p>
+<ul class="simple">
+<li><p>It is unnecessary to write separate code to take advantage of the
+“large object” features of each cloud storage interface, which differ
+significantly in their design.</p></li>
+<li><p>Data needed for each PUT request can be discarded after it completes.
+If a PUT request fails, it can be retried while only holding the data
+for that request in memory.</p></li>
+</ul>
+</section>
+</section>
+<section id="costs">
+<h2>Costs<a class="headerlink" href="#costs" title="Link to this heading">¶</a></h2>
+<p>In this section we analyze the costs of the proposed design in terms of network,
+disk, memory, cloud storage, and API usage.</p>
+<section id="network-usagebandwidth-and-number-of-round-trips">
+<h3>Network usage—bandwidth and number-of-round-trips<a class="headerlink" href="#network-usagebandwidth-and-number-of-round-trips" title="Link to this heading">¶</a></h3>
+<p>When a Tahoe-LAFS storage client allocates a new share on a storage server,
+the backend will request a list of the existing store objects with the
+appropriate prefix. This takes one HTTP request in the common case, but may
+take more for the S3 interface, which has a limit of 1000 objects returned in
+a single “GET Bucket” request.</p>
+<p>If the share is to be read, the client will make a number of calls each
+specifying the offset and length of the required span of bytes. On the first
+request that overlaps a given chunk of the share, the server will make an
+HTTP GET request for that store object. The server may also speculatively
+make GET requests for store objects that are likely to be needed soon (which
+can be predicted since reads are normally sequential), in order to reduce
+latency.</p>
+<p>Each read will be satisfied as soon as the corresponding data is available,
+without waiting for the rest of the chunk, in order to minimize read latency.</p>
+<p>All four cloud storage interfaces support GET requests using the
+Range HTTP header. This could be used to optimize reads where the
+Tahoe-LAFS storage client requires only part of a share.</p>
+<p>If the share is to be written, the server will make an HTTP PUT request for
+each chunk that has been completed. Tahoe-LAFS clients only write immutable
+shares sequentially, and so we can rely on that property to simplify the
+implementation.</p>
+<p>When modifying shares of an existing mutable file, the storage server will
+be able to make PUT requests only for chunks that have changed.
+(Current Tahoe-LAFS v1.9 clients will not take advantage of this ability, but
+future versions will probably do so for MDMF files.)</p>
+<p>In some cases, it may be necessary to retry a request (see the <a class="reference internal" href="#structure-of-implementation">Structure of
+Implementation</a> section below). In the case of a PUT request, at the point
+at which a retry is needed, the new chunk contents to be stored will still be
+in memory and so this is not problematic.</p>
+<p>In the absence of retries, the maximum number of GET requests that will be made
+when downloading a file, or the maximum number of PUT requests when uploading
+or modifying a file, will be equal to the number of chunks in the file.</p>
+<p>If the new mutable share content has fewer chunks than the old content,
+then the remaining store objects for old chunks must be deleted (using one
+HTTP request each). When reading a share, the backend must tolerate the case
+where these store objects have not been deleted successfully.</p>
+<p>The last write to a share will be reported as successful only when all
+corresponding HTTP PUTs and DELETEs have completed successfully.</p>
+</section>
+<section id="disk-usage-local-to-the-storage-server">
+<h3>Disk usage (local to the storage server)<a class="headerlink" href="#disk-usage-local-to-the-storage-server" title="Link to this heading">¶</a></h3>
+<p>It is never necessary for the storage server to write the content of share
+chunks to local disk, either when they are read or when they are written. Each
+chunk is held only in memory.</p>
+<p>A proposed change to the Tahoe-LAFS storage server implementation uses a sqlite
+database to store metadata about shares. In that case the same database would
+be used for the cloud backend. This would enable lease tracking to be implemented
+in the same way for disk and cloud backends.</p>
+</section>
+<section id="memory-usage">
+<h3>Memory usage<a class="headerlink" href="#memory-usage" title="Link to this heading">¶</a></h3>
+<p>The use of chunking simplifies bounding the memory usage of the storage server
+when handling files that may be larger than memory. However, this depends on
+limiting the number of chunks that are simultaneously held in memory.
+Multiple chunks can be held in memory either because of pipelining of requests
+for a single share, or because multiple shares are being read or written
+(possibly by multiple clients).</p>
+<p>For immutable shares, the Tahoe-LAFS storage protocol requires the client to
+specify in advance the maximum amount of data it will write. Also, a cooperative
+client (including all existing released versions of the Tahoe-LAFS code) will
+limit the amount of data that is pipelined, currently to 50 KiB. Since the chunk
+size will be greater than that, it is possible to ensure that for each allocation,
+the maximum chunk data memory usage is the lesser of two chunks, and the allocation
+size. (There is some additional overhead but it is small compared to the chunk
+data.) If the maximum memory usage of a new allocation would exceed the memory
+available, the allocation can be delayed or possibly denied, so that the total
+memory usage is bounded.</p>
+<p>It is not clear that the existing protocol allows allocations for mutable
+shares to be bounded in general; this may be addressed in a future protocol change.</p>
+<p>The above discussion assumes that clients do not maliciously send large
+messages as a denial-of-service attack. Foolscap (the protocol layer underlying
+the Tahoe-LAFS storage protocol) does not attempt to resist denial of service.</p>
+</section>
+<section id="storage">
+<h3>Storage<a class="headerlink" href="#storage" title="Link to this heading">¶</a></h3>
+<p>The storage requirements, including not-yet-collected garbage shares, are
+the same as for the Tahoe-LAFS disk backend. That is, the total size of cloud
+objects stored is equal to the total size of shares that the disk backend
+would store.</p>
+<p>Erasure coding causes the size of shares for each file to be a
+factor <cite>shares.total</cite> / <cite>shares.needed</cite> times the file size, plus overhead
+that is logarithmic in the file size <a class="reference internal" href="#id10">¹¹</a>.</p>
+</section>
+<section id="api-usage">
+<h3>API usage<a class="headerlink" href="#api-usage" title="Link to this heading">¶</a></h3>
+<p>Cloud storage backends typically charge a small fee per API request. The number of
+requests to the cloud storage service for various operations is discussed under
+“network usage” above.</p>
+</section>
+</section>
+<section id="structure-of-implementation">
+<h2>Structure of Implementation<a class="headerlink" href="#structure-of-implementation" title="Link to this heading">¶</a></h2>
+<p>A generic “cloud backend”, based on the prototype S3 backend but with support
+for chunking as described above, will be written.</p>
+<p>An instance of the cloud backend can be attached to one of several
+“cloud interface adapters”, one for each cloud storage interface. These
+adapters will operate only on chunks, and need not distinguish between
+mutable and immutable shares. They will be a relatively “thin” abstraction
+layer over the HTTP APIs of each cloud storage interface, similar to the
+S3Bucket abstraction in the prototype.</p>
+<p>For some cloud storage services it may be necessary to transparently retry
+requests in order to recover from transient failures. (Although the erasure
+coding may enable a file to be retrieved even when shares are not stored by or
+not readable from all cloud storage services used in a Tahoe-LAFS grid, it may
+be desirable to retry cloud storage service requests in order to improve overall
+reliability.) Support for this will be implemented in the generic cloud backend,
+and used whenever a cloud storage adaptor reports a transient failure. Our
+experience with the prototype suggests that it is necessary to retry on transient
+failures for Amazon’s S3 service.</p>
+<p>There will also be a “mock” cloud interface adaptor, based on the prototype’s
+MockS3Bucket. This allows tests of the generic cloud backend to be run without
+a connection to a real cloud service. The mock adaptor will be able to simulate
+transient and non-transient failures.</p>
+</section>
+<section id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Link to this heading">¶</a></h2>
+<p>This design worsens a known “write hole” issue in Tahoe-LAFS when updating
+the contents of mutable files. An update to a mutable file can require
+changing the contents of multiple chunks, and if the client fails or is
+disconnected during the operation the resulting state of the store objects
+for that share may be inconsistent—no longer containing all of the old version,
+but not yet containing all of the new version. A mutable share can be left in
+an inconsistent state even by the existing Tahoe-LAFS disk backend if it fails
+during a write, but that has a smaller chance of occurrence because the current
+client behavior leads to mutable shares being written to disk in a single
+system call.</p>
+<p>The best fix for this issue probably requires changing the Tahoe-LAFS storage
+protocol, perhaps by extending it to use a two-phase or three-phase commit
+(ticket #1755).</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<p>¹ omitted</p>
+<p id="id1">² “Amazon S3” Amazon (2012)</p>
+<blockquote>
+<div><p><a class="reference external" href="https://aws.amazon.com/s3/">https://aws.amazon.com/s3/</a></p>
+</div></blockquote>
+<p id="id2">³ “Rackspace Cloud Files” Rackspace (2012)</p>
+<blockquote>
+<div><p><a class="reference external" href="https://www.rackspace.com/cloud/cloud_hosting_products/files/">https://www.rackspace.com/cloud/cloud_hosting_products/files/</a></p>
+</div></blockquote>
+<p id="id3">⁴ “Google Cloud Storage” Google (2012)</p>
+<blockquote>
+<div><p><a class="reference external" href="https://developers.google.com/storage/">https://developers.google.com/storage/</a></p>
+</div></blockquote>
+<p id="id4">⁵ “Windows Azure Storage” Microsoft (2012)</p>
+<blockquote>
+<div><p><a class="reference external" href="https://www.windowsazure.com/en-us/develop/net/fundamentals/cloud-storage/">https://www.windowsazure.com/en-us/develop/net/fundamentals/cloud-storage/</a></p>
+</div></blockquote>
+<p id="id5">⁶ “Amazon Simple Storage Service (Amazon S3) API Reference: REST API” Amazon (2012)</p>
+<blockquote>
+<div><p><a class="reference external" href="http://docs.amazonwebservices.com/AmazonS3/latest/API/APIRest.html">http://docs.amazonwebservices.com/AmazonS3/latest/API/APIRest.html</a></p>
+</div></blockquote>
+<p id="id6">⁷ “OpenStack Object Storage” openstack.org (2012)</p>
+<blockquote>
+<div><p><a class="reference external" href="http://openstack.org/projects/storage/">http://openstack.org/projects/storage/</a></p>
+</div></blockquote>
+<p id="id7">⁸ “Google Cloud Storage Reference Guide” Google (2012)</p>
+<blockquote>
+<div><p><a class="reference external" href="https://developers.google.com/storage/docs/reference-guide">https://developers.google.com/storage/docs/reference-guide</a></p>
+</div></blockquote>
+<p id="id8">⁹ “Windows Azure Storage Services REST API Reference” Microsoft (2012)</p>
+<blockquote>
+<div><p><a class="reference external" href="http://msdn.microsoft.com/en-us/library/windowsazure/dd179355.aspx">http://msdn.microsoft.com/en-us/library/windowsazure/dd179355.aspx</a></p>
+</div></blockquote>
+<p id="id9">¹⁰ “Representational state transfer” English Wikipedia (2012)</p>
+<blockquote>
+<div><p><a class="reference external" href="https://en.wikipedia.org/wiki/Representational_state_transfer">https://en.wikipedia.org/wiki/Representational_state_transfer</a></p>
+</div></blockquote>
+<p id="id10">¹¹ “Performance costs for some common operations” tahoe-lafs.org (2012)</p>
+<blockquote>
+<div><p><a class="reference internal" href="../../performance.html"><span class="doc">Performance costs for some common operations</span></a></p>
+</div></blockquote>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, The Tahoe-LAFS Developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Redundant Array of Independent Clouds: Share To Cloud Mapping</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#terminology">Terminology</a></li>
+<li><a class="reference internal" href="#functional-requirements">Functional Requirements</a></li>
+<li><a class="reference internal" href="#mapping">Mapping</a><ul>
+<li><a class="reference internal" href="#rationale-for-chunking">Rationale for Chunking</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#costs">Costs</a><ul>
+<li><a class="reference internal" href="#network-usagebandwidth-and-number-of-round-trips">Network usage—bandwidth and number-of-round-trips</a></li>
+<li><a class="reference internal" href="#disk-usage-local-to-the-storage-server">Disk usage (local to the storage server)</a></li>
+<li><a class="reference internal" href="#memory-usage">Memory usage</a></li>
+<li><a class="reference internal" href="#storage">Storage</a></li>
+<li><a class="reference internal" href="#api-usage">API usage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#structure-of-implementation">Structure of Implementation</a></li>
+<li><a class="reference internal" href="#known-issues">Known Issues</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

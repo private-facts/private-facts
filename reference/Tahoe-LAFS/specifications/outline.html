@@ -1,0 +1,490 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>Specification Document Outline - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">The Private Facts Project</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <span class="sidebar-brand-text">The Private Facts Project</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../_sources/reference/Tahoe-LAFS/specifications/outline.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="specification-document-outline">
+<h1>Specification Document Outline<a class="headerlink" href="#specification-document-outline" title="Link to this heading">¶</a></h1>
+<p>While we do not yet have a clear set of specification documents for Tahoe
+(explaining the file formats, so that others can write interoperable
+implementations), this document is intended to lay out an outline for what
+these specs ought to contain. Think of this as the ISO 7-Layer Model for
+Tahoe.</p>
+<p>We currently imagine 4 documents.</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#share-format-encoding-algorithm">#1: Share Format, Encoding Algorithm</a></p></li>
+<li><p><a class="reference internal" href="#share-exchange-protocol">#2: Share Exchange Protocol</a></p></li>
+<li><p><a class="reference internal" href="#server-selection-algorithm-filecap-format">#3: Server Selection Algorithm, filecap format</a></p></li>
+<li><p><a class="reference internal" href="#directory-format">#4: Directory Format</a></p></li>
+</ol>
+<section id="share-format-encoding-algorithm">
+<h2>#1: Share Format, Encoding Algorithm<a class="headerlink" href="#share-format-encoding-algorithm" title="Link to this heading">¶</a></h2>
+<p>This document will describe the way that files are encrypted and encoded into
+shares. It will include a specification of the share format, and explain both
+the encoding and decoding algorithms. It will cover both mutable and
+immutable files.</p>
+<p>The immutable encoding algorithm, as described by this document, will start
+with a plaintext series of bytes, encoding parameters “k” and “N”, and either
+an encryption key or a mechanism for deterministically deriving the key from
+the plaintext (the CHK specification). The algorithm will end with a set of N
+shares, and a set of values that must be included in the filecap to provide
+confidentiality (the encryption key) and integrity (the UEB hash).</p>
+<p>The immutable decoding algorithm will start with the filecap values (key and
+UEB hash) and “k” shares. It will explain how to validate the shares against
+the integrity information, how to reverse the erasure-coding, and how to
+decrypt the resulting ciphertext. It will result in the original plaintext
+bytes (or some subrange thereof).</p>
+<p>The sections on mutable files will contain similar information.</p>
+<p>This document is <em>not</em> responsible for explaining the filecap format, since
+full filecaps may need to contain additional information as described in
+document #3. Likewise it it not responsible for explaining where to put the
+generated shares or where to find them again later.</p>
+<p>It is also not responsible for explaining the access control mechanisms
+surrounding share upload, download, or modification (“Accounting” is the
+business of controlling share upload to conserve space, and mutable file
+shares require some sort of access control to prevent non-writecap holders
+from destroying shares). We don’t yet have a document dedicated to explaining
+these, but let’s call it “Access Control” for now.</p>
+</section>
+<section id="share-exchange-protocol">
+<h2>#2: Share Exchange Protocol<a class="headerlink" href="#share-exchange-protocol" title="Link to this heading">¶</a></h2>
+<p>This document explains the wire-protocol used to upload, download, and modify
+shares on the various storage servers.</p>
+<p>Given the N shares created by the algorithm described in document #1, and a
+set of servers who are willing to accept those shares, the protocols in this
+document will be sufficient to get the shares onto the servers. Likewise,
+given a set of servers who hold at least k shares, these protocols will be
+enough to retrieve the shares necessary to begin the decoding process
+described in document #1. The notion of a “storage index” is used to
+reference a particular share: the storage index is generated by the encoding
+process described in document #1.</p>
+<p>This document does <em>not</em> describe how to identify or choose those servers,
+rather it explains what to do once they have been selected (by the mechanisms
+in document #3).</p>
+<p>This document also explains the protocols that a client uses to ask a server
+whether or not it is willing to accept an uploaded share, and whether it has
+a share available for download. These protocols will be used by the
+mechanisms in document #3 to help decide where the shares should be placed.</p>
+<p>Where cryptographic mechanisms are necessary to implement access-control
+policy, this document will explain those mechanisms.</p>
+<p>In the future, Tahoe will be able to use multiple protocols to speak to
+storage servers. There will be alternative forms of this document, one for
+each protocol. The first one to be written will describe the Foolscap-based
+protocol that tahoe currently uses, but we anticipate a subsequent one to
+describe a more HTTP-based protocol.</p>
+</section>
+<section id="server-selection-algorithm-filecap-format">
+<h2>#3: Server Selection Algorithm, filecap format<a class="headerlink" href="#server-selection-algorithm-filecap-format" title="Link to this heading">¶</a></h2>
+<p>This document has two interrelated purposes. With a deeper understanding of
+the issues, we may be able to separate these more cleanly in the future.</p>
+<p>The first purpose is to explain the server selection algorithm. Given a set
+of N shares, where should those shares be uploaded? Given some information
+stored about a previously-uploaded file, how should a downloader locate and
+recover at least k shares? Given a previously-uploaded mutable file, how
+should a modifier locate all (or most of) the shares with a reasonable amount
+of work?</p>
+<p>This question implies many things, all of which should be explained in this
+document:</p>
+<ul class="simple">
+<li><p>the notion of a “grid”, nominally a set of servers who could potentially
+hold shares, which might change over time</p></li>
+<li><p>a way to configure which grid should be used</p></li>
+<li><p>a way to discover which servers are a part of that grid</p></li>
+<li><p>a way to decide which servers are reliable enough to be worth sending
+shares</p></li>
+<li><p>an algorithm to handle servers which refuse shares</p></li>
+<li><p>a way for a downloader to locate which servers have shares</p></li>
+<li><p>a way to choose which shares should be used for download</p></li>
+</ul>
+<p>The server-selection algorithm has several obviously competing goals:</p>
+<ul class="simple">
+<li><p>minimize the amount of work that must be done during upload</p></li>
+<li><p>minimize the total storage resources used</p></li>
+<li><p>avoid “hot spots”, balance load among multiple servers</p></li>
+<li><p>maximize the chance that enough shares will be downloadable later, by
+uploading lots of shares, and by placing them on reliable servers</p></li>
+<li><p>minimize the work that the future downloader must do</p></li>
+<li><p>tolerate temporary server failures, permanent server departure, and new
+server insertions</p></li>
+<li><p>minimize the amount of information that must be added to the filecap</p></li>
+</ul>
+<p>The server-selection algorithm is defined in some context: some set of
+expectations about the servers or grid with which it is expected to operate.
+Different algorithms are appropriate for different situtations, so there will
+be multiple alternatives of this document.</p>
+<p>The first version of this document will describe the algorithm that the
+current (1.3.0) release uses, which is heavily weighted towards the two main
+use case scenarios for which Tahoe has been designed: the small, stable
+friendnet, and the allmydata.com managed grid. In both cases, we assume that
+the storage servers are online most of the time, they are uniformly highly
+reliable, and that the set of servers does not change very rapidly. The
+server-selection algorithm for this environment uses a permuted server list
+to achieve load-balancing, uses all servers identically, and derives the
+permutation key from the storage index to avoid adding a new field to the
+filecap.</p>
+<p>An alternative algorithm could give clients more precise control over share
+placement, for example by a user who wished to make sure that k+1 shares are
+located in each datacenter (to allow downloads to take place using only local
+bandwidth). This algorithm could skip the permuted list and use other
+mechanisms to accomplish load-balancing (or ignore the issue altogether). It
+could add additional information to the filecap (like a list of which servers
+received the shares) in lieu of performing a search at download time, perhaps
+at the expense of allowing a repairer to move shares to a new server after
+the initial upload. It might make up for this by storing “location hints”
+next to each share, to indicate where other shares are likely to be found,
+and obligating the repairer to update these hints.</p>
+<p>The second purpose of this document is to explain the format of the file
+capability string (or “filecap” for short). There are multiple kinds of
+capabilties (read-write, read-only, verify-only, repaircap, lease-renewal
+cap, traverse-only, etc). There are multiple ways to represent the filecap
+(compressed binary, human-readable, clickable-HTTP-URL, “tahoe:” URL, etc),
+but they must all contain enough information to reliably retrieve a file
+(given some context, of course). It must at least contain the confidentiality
+and integrity information from document #1 (i.e. the encryption key and the
+UEB hash). It must also contain whatever additional information the
+upload-time server-selection algorithm generated that will be required by the
+downloader.</p>
+<p>For some server-selection algorithms, the additional information will be
+minimal. For example, the 1.3.0 release uses the hash of the encryption key
+as a storage index, and uses the storage index to permute the server list,
+and uses an Introducer to learn the current list of servers. This allows a
+“close-enough” list of servers to be compressed into a filecap field that is
+already required anyways (the encryption key). It also adds k and N to the
+filecap, to speed up the downloader’s search (the downloader knows how many
+shares it needs, so it can send out multiple queries in parallel).</p>
+<p>But other server-selection algorithms might require more information. Each
+variant of this document will explain how to encode that additional
+information into the filecap, and how to extract and use that information at
+download time.</p>
+<p>These two purposes are interrelated. A filecap that is interpreted in the
+context of the allmydata.com commercial grid, which uses tahoe-1.3.0, implies
+a specific peer-selection algorithm, a specific Introducer, and therefore a
+fairly-specific set of servers to query for shares. A filecap which is meant
+to be interpreted on a different sort of grid would need different
+information.</p>
+<p>Some filecap formats can be designed to contain more information (and depend
+less upon context), such as the way an HTTP URL implies the existence of a
+single global DNS system. Ideally a tahoe filecap should be able to specify
+which “grid” it lives in, with enough information to allow a compatible
+implementation of Tahoe to locate that grid and retrieve the file (regardless
+of which server-selection algorithm was used for upload).</p>
+<p>This more-universal format might come at the expense of reliability, however.
+Tahoe-1.3.0 filecaps do not contain hostnames, because the failure of DNS or
+an individual host might then impact file availability (however the
+Introducer contains DNS names or IP addresses).</p>
+</section>
+<section id="directory-format">
+<h2>#4: Directory Format<a class="headerlink" href="#directory-format" title="Link to this heading">¶</a></h2>
+<p>Tahoe directories are a special way of interpreting and managing the contents
+of a file (either mutable or immutable). These “dirnode” files are basically
+serialized tables that map child name to filecap/dircap. This document
+describes the format of these files.</p>
+<p>Tahoe-1.3.0 directories are “transitively readonly”, which is accomplished by
+applying an additional layer of encryption to the list of child writecaps.
+The key for this encryption is derived from the containing file’s writecap.
+This document must explain how to derive this key and apply it to the
+appropriate portion of the table.</p>
+<p>Future versions of the directory format are expected to contain
+“deep-traversal caps”, which allow verification/repair of files without
+exposing their plaintext to the repair agent. This document wil be
+responsible for explaining traversal caps too.</p>
+<p>Future versions of the directory format will probably contain an index and
+more advanced data structures (for efficiency and fast lookups), instead of a
+simple flat list of (childname, childcap). This document will also need to
+describe metadata formats, including what access-control policies are defined
+for the metadata.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, The Tahoe-LAFS Developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Specification Document Outline</a><ul>
+<li><a class="reference internal" href="#share-format-encoding-algorithm">#1: Share Format, Encoding Algorithm</a></li>
+<li><a class="reference internal" href="#share-exchange-protocol">#2: Share Exchange Protocol</a></li>
+<li><a class="reference internal" href="#server-selection-algorithm-filecap-format">#3: Server Selection Algorithm, filecap format</a></li>
+<li><a class="reference internal" href="#directory-format">#4: Directory Format</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

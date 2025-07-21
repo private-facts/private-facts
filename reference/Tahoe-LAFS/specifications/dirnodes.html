@@ -1,0 +1,732 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>Tahoe-LAFS Directory Nodes - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">The Private Facts Project</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <span class="sidebar-brand-text">The Private Facts Project</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../_sources/reference/Tahoe-LAFS/specifications/dirnodes.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="tahoe-lafs-directory-nodes">
+<h1>Tahoe-LAFS Directory Nodes<a class="headerlink" href="#tahoe-lafs-directory-nodes" title="Link to this heading">¶</a></h1>
+<p>As explained in the architecture docs, Tahoe-LAFS can be roughly viewed as
+a collection of three layers. The lowest layer is the key-value store: it
+provides operations that accept files and upload them to the grid, creating
+a URI in the process which securely references the file’s contents.
+The middle layer is the file store, creating a structure of directories and
+filenames resembling the traditional Unix or Windows filesystems. The top
+layer is the application layer, which uses the lower layers to provide useful
+services to users, like a backup application, or a way to share files with
+friends.</p>
+<p>This document examines the middle layer, the “file store”.</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#key-value-store-primitives">Key-value Store Primitives</a></p></li>
+<li><p><a class="reference internal" href="#file-store-goals">File Store Goals</a></p></li>
+<li><p><a class="reference internal" href="#dirnode-goals">Dirnode Goals</a></p></li>
+<li><p><a class="reference internal" href="#dirnode-secret-values">Dirnode secret values</a></p></li>
+<li><p><a class="reference internal" href="#dirnode-storage-format">Dirnode storage format</a></p></li>
+<li><p><a class="reference internal" href="#dirnode-sizes-mutable-file-initial-read-sizes">Dirnode sizes, mutable-file initial read sizes</a></p></li>
+<li><p><a class="reference internal" href="#design-goals-redux">Design Goals, redux</a></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#confidentiality-leaks-in-the-storage-servers">Confidentiality leaks in the storage servers</a></p></li>
+<li><p><a class="reference internal" href="#integrity-failures-in-the-storage-servers">Integrity failures in the storage servers</a></p></li>
+<li><p><a class="reference internal" href="#improving-the-efficiency-of-dirnodes">Improving the efficiency of dirnodes</a></p></li>
+<li><p><a class="reference internal" href="#dirnode-expiration-and-leases">Dirnode expiration and leases</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference internal" href="#starting-points-root-dirnodes">Starting Points: root dirnodes</a></p></li>
+<li><p><a class="reference internal" href="#mounting-and-sharing-directories">Mounting and Sharing Directories</a></p></li>
+<li><p><a class="reference internal" href="#revocation">Revocation</a></p></li>
+</ol>
+<section id="key-value-store-primitives">
+<h2>Key-value Store Primitives<a class="headerlink" href="#key-value-store-primitives" title="Link to this heading">¶</a></h2>
+<p>In the lowest layer (key-value store), there are two operations that reference
+immutable data (which we refer to as “CHK URIs” or “CHK read-capabilities” or
+“CHK read-caps”). One puts data into the grid (but only if it doesn’t exist
+already), the other retrieves it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chk_uri</span> <span class="o">=</span> <span class="n">put</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">chk_uri</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We also have three operations which reference mutable data (which we refer to
+as “mutable slots”, or “mutable write-caps and read-caps”, or sometimes “SSK
+slots”). One creates a slot with some initial contents, a second replaces the
+contents of a pre-existing slot, and the third retrieves the contents:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mutable_uri</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="n">initial_data</span><span class="p">)</span>
+<span class="n">replace</span><span class="p">(</span><span class="n">mutable_uri</span><span class="p">,</span> <span class="n">new_data</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">mutable_uri</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="file-store-goals">
+<h2>File Store Goals<a class="headerlink" href="#file-store-goals" title="Link to this heading">¶</a></h2>
+<p>The main goal for the middle (file store) layer is to give users a way to
+organize the data that they have uploaded into the grid. The traditional way
+to do this in computer filesystems is to put this data into files, give those
+files names, and collect these names into directories.</p>
+<p>Each directory is a set of name-entry pairs, each of which maps a “child name”
+to a directory entry pointing to an object of some kind. Those child objects
+might be files, or they might be other directories. Each directory entry also
+contains metadata.</p>
+<p>The directory structure is therefore a directed graph of nodes, in which each
+node might be a directory node or a file node. All file nodes are terminal
+nodes.</p>
+</section>
+<section id="dirnode-goals">
+<h2>Dirnode Goals<a class="headerlink" href="#dirnode-goals" title="Link to this heading">¶</a></h2>
+<p>What properties might be desirable for these directory nodes? In no
+particular order:</p>
+<ol class="arabic simple">
+<li><p>functional. Code which does not work doesn’t count.</p></li>
+<li><p>easy to document, explain, and understand</p></li>
+<li><p>confidential: it should not be possible for others to see the contents of
+a directory</p></li>
+<li><p>integrity: it should not be possible for others to modify the contents
+of a directory</p></li>
+<li><p>available: directories should survive host failure, just like files do</p></li>
+<li><p>efficient: in storage, communication bandwidth, number of round-trips</p></li>
+<li><p>easy to delegate individual directories in a flexible way</p></li>
+<li><p>updateness: everybody looking at a directory should see the same contents</p></li>
+<li><p>monotonicity: everybody looking at a directory should see the same
+sequence of updates</p></li>
+</ol>
+<p>Some of these goals are mutually exclusive. For example, availability and
+consistency are opposing, so it is not possible to achieve #5 and #8 at the
+same time. Moreover, it takes a more complex architecture to get close to the
+available-and-consistent ideal, so #2/#6 is in opposition to #5/#8.</p>
+<p>Tahoe-LAFS v0.7.0 introduced distributed mutable files, which use public-key
+cryptography for integrity, and erasure coding for availability. These
+achieve roughly the same properties as immutable CHK files, but their
+contents can be replaced without changing their identity. Dirnodes are then
+just a special way of interpreting the contents of a specific mutable file.
+Earlier releases used a “vdrive server”: this server was abolished in the
+v0.7.0 release.</p>
+<p>For details of how mutable files work, please see <a class="reference internal" href="mutable.html"><span class="doc">Mutable Files</span></a>.</p>
+<p>For releases since v0.7.0, we achieve most of our desired properties. The
+integrity and availability of dirnodes is equivalent to that of regular
+(immutable) files, with the exception that there are more simultaneous-update
+failure modes for mutable slots. Delegation is quite strong: you can give
+read-write or read-only access to any subtree, and the data format used for
+dirnodes is such that read-only access is transitive: i.e. if you grant Bob
+read-only access to a parent directory, then Bob will get read-only access
+(and <em>not</em> read-write access) to its children.</p>
+<p>Relative to the previous “vdrive server”-based scheme, the current
+distributed dirnode approach gives better availability, but cannot guarantee
+updateness quite as well, and requires far more network traffic for each
+retrieval and update. Mutable files are somewhat less available than
+immutable files, simply because of the increased number of combinations
+(shares of an immutable file are either present or not, whereas there are
+multiple versions of each mutable file, and you might have some shares of
+version 1 and other shares of version 2). In extreme cases of simultaneous
+update, mutable files might suffer from non-monotonicity.</p>
+</section>
+<section id="dirnode-secret-values">
+<h2>Dirnode secret values<a class="headerlink" href="#dirnode-secret-values" title="Link to this heading">¶</a></h2>
+<p>As mentioned before, dirnodes are simply a special way to interpret the
+contents of a mutable file, so the secret keys and capability strings
+described in <a class="reference internal" href="mutable.html"><span class="doc">Mutable Files</span></a> are all the same. Each dirnode contains an RSA
+public/private keypair, and the holder of the “write capability” will be able
+to retrieve the private key (as well as the AES encryption key used for the
+data itself). The holder of the “read capability” will be able to obtain the
+public key and the AES data key, but not the RSA private key needed to modify
+the data.</p>
+<p>The “write capability” for a dirnode grants read-write access to its
+contents. This is expressed on concrete form as the “dirnode write cap”: a
+printable string which contains the necessary secrets to grant this access.
+Likewise, the “read capability” grants read-only access to a dirnode, and can
+be represented by a “dirnode read cap” string.</p>
+<p>For example,
+URI:DIR2:swdi8ge1s7qko45d3ckkyw1aac%3Aar8r5j99a4mezdojejmsfp4fj1zeky9gjigyrid4urxdimego68o
+is a write-capability URI, while
+URI:DIR2-RO:buxjqykt637u61nnmjg7s8zkny:ar8r5j99a4mezdojejmsfp4fj1zeky9gjigyrid4urxdimego68o
+is a read-capability URI, both for the same dirnode.</p>
+</section>
+<section id="dirnode-storage-format">
+<h2>Dirnode storage format<a class="headerlink" href="#dirnode-storage-format" title="Link to this heading">¶</a></h2>
+<p>Each dirnode is stored in a single mutable file, distributed in the Tahoe-LAFS
+grid. The contents of this file are a serialized list of netstrings, one per
+child. Each child is a list of four netstrings: (name, rocap, rwcap,
+metadata). (Remember that the contents of the mutable file are encrypted by
+the read-cap, so this section describes the plaintext contents of the mutable
+file, <em>after</em> it has been decrypted by the read-cap.)</p>
+<p>The name is simple a UTF-8 -encoded child name. The ‘rocap’ is a read-only
+capability URI to that child, either an immutable (CHK) file, a mutable file,
+or a directory. It is also possible to store ‘unknown’ URIs that are not
+recognized by the current version of Tahoe-LAFS. The ‘rwcap’ is a read-write
+capability URI for that child, encrypted with the dirnode’s write-cap: this
+enables the “transitive readonlyness” property, described further below. The
+‘metadata’ is a JSON-encoded dictionary of type,value metadata pairs. Some
+metadata keys are pre-defined, the rest are left up to the application.</p>
+<p>Each rwcap is stored as IV + ciphertext + MAC. The IV is a 16-byte random
+value. The ciphertext is obtained by using AES in CTR mode on the rwcap URI
+string, using a key that is formed from a tagged hash of the IV and the
+dirnode’s writekey. The MAC is written only for compatibility with older
+Tahoe-LAFS versions and is no longer verified.</p>
+<p>If Bob has read-only access to the ‘bar’ directory, and he adds it as a child
+to the ‘foo’ directory, then he will put the read-only cap for ‘bar’ in both
+the rwcap and rocap slots (encrypting the rwcap contents as described above).
+If he has full read-write access to ‘bar’, then he will put the read-write
+cap in the ‘rwcap’ slot, and the read-only cap in the ‘rocap’ slot. Since
+other users who have read-only access to ‘foo’ will be unable to decrypt its
+rwcap slot, this limits those users to read-only access to ‘bar’ as well,
+thus providing the transitive readonlyness that we desire.</p>
+</section>
+<section id="dirnode-sizes-mutable-file-initial-read-sizes">
+<h2>Dirnode sizes, mutable-file initial read sizes<a class="headerlink" href="#dirnode-sizes-mutable-file-initial-read-sizes" title="Link to this heading">¶</a></h2>
+<p>How big are dirnodes? When reading dirnode data out of mutable files, how
+large should our initial read be? If we guess exactly, we can read a dirnode
+in a single round-trip, and update one in two RTT. If we guess too high,
+we’ll waste some amount of bandwidth. If we guess low, we need to make a
+second pass to get the data (or the encrypted privkey, for writes), which
+will cost us at least another RTT.</p>
+<p>Assuming child names are between 10 and 99 characters long, how long are the
+various pieces of a dirnode?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">netstring</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">~=</span> <span class="mi">4</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="n">chk</span><span class="o">-</span><span class="n">cap</span> <span class="o">=</span> <span class="mi">97</span> <span class="p">(</span><span class="k">for</span> <span class="mi">4</span><span class="o">-</span><span class="n">char</span> <span class="n">filesizes</span><span class="p">)</span>
+<span class="nb">dir</span><span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">cap</span> <span class="o">=</span> <span class="mi">88</span>
+<span class="nb">dir</span><span class="o">-</span><span class="n">ro</span><span class="o">-</span><span class="n">cap</span> <span class="o">=</span> <span class="mi">91</span>
+<span class="n">netstring</span><span class="p">(</span><span class="n">cap</span><span class="p">)</span> <span class="o">=</span> <span class="mi">4</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">cap</span><span class="p">)</span>
+<span class="n">encrypted</span><span class="p">(</span><span class="n">cap</span><span class="p">)</span> <span class="o">=</span> <span class="mi">16</span><span class="o">+</span><span class="n">cap</span><span class="o">+</span><span class="mi">32</span>
+<span class="n">JSON</span><span class="p">({})</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">JSON</span><span class="p">({</span><span class="n">ctime</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span><span class="n">mtime</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span><span class="s1">&#39;tahoe&#39;</span><span class="p">:{</span><span class="n">linkcrtime</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span><span class="n">linkmotime</span><span class="o">=</span><span class="nb">float</span><span class="p">}}):</span> <span class="mi">137</span>
+<span class="n">netstring</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span> <span class="o">=</span> <span class="mi">4</span><span class="o">+</span><span class="mi">137</span> <span class="o">=</span> <span class="mi">141</span>
+</pre></div>
+</div>
+<p>so a CHK entry is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span><span class="o">+</span> <span class="mi">4</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span><span class="o">+</span><span class="mi">97</span> <span class="o">+</span> <span class="mi">5</span><span class="o">+</span><span class="mi">16</span><span class="o">+</span><span class="mi">97</span><span class="o">+</span><span class="mi">32</span> <span class="o">+</span> <span class="mi">4</span><span class="o">+</span><span class="mi">137</span>
+</pre></div>
+</div>
+<p>And a 15-byte filename gives a 416-byte entry. When the entry points at a
+subdirectory instead of a file, the entry is a little bit smaller. So an
+empty directory uses 0 bytes, a directory with one child uses about 416
+bytes, a directory with two children uses about 832, etc.</p>
+<p>When the dirnode data is encoding using our default 3-of-10, that means we
+get 139ish bytes of data in each share per child.</p>
+<p>The pubkey, signature, and hashes form the first 935ish bytes of the
+container, then comes our data, then about 1216 bytes of encprivkey. So if we
+read the first:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="n">kB</span><span class="p">:</span> <span class="n">we</span> <span class="n">get</span> <span class="mi">65</span><span class="nb">bytes</span> <span class="n">of</span> <span class="n">dirnode</span> <span class="n">data</span> <span class="p">:</span> <span class="n">only</span> <span class="n">empty</span> <span class="n">directories</span>
+<span class="mi">2</span><span class="n">kB</span><span class="p">:</span> <span class="mi">1065</span><span class="nb">bytes</span><span class="p">:</span> <span class="n">about</span> <span class="mi">8</span>
+<span class="mi">3</span><span class="n">kB</span><span class="p">:</span> <span class="mi">2065</span><span class="nb">bytes</span><span class="p">:</span> <span class="n">about</span> <span class="mi">15</span> <span class="n">entries</span><span class="p">,</span> <span class="ow">or</span> <span class="mi">6</span> <span class="n">entries</span> <span class="n">plus</span> <span class="n">the</span> <span class="n">encprivkey</span>
+<span class="mi">4</span><span class="n">kB</span><span class="p">:</span> <span class="mi">3065</span><span class="nb">bytes</span><span class="p">:</span> <span class="n">about</span> <span class="mi">22</span> <span class="n">entries</span><span class="p">,</span> <span class="ow">or</span> <span class="n">about</span> <span class="mi">13</span> <span class="n">plus</span> <span class="n">the</span> <span class="n">encprivkey</span>
+</pre></div>
+</div>
+<p>So we’ve written the code to do an initial read of 4kB from each share when
+we read the mutable file, which should give good performance (one RTT) for
+small directories.</p>
+</section>
+<section id="design-goals-redux">
+<h2>Design Goals, redux<a class="headerlink" href="#design-goals-redux" title="Link to this heading">¶</a></h2>
+<p>How well does this design meet the goals?</p>
+<ol class="arabic simple">
+<li><p>functional: YES: the code works and has extensive unit tests</p></li>
+<li><p>documentable: YES: this document is the existence proof</p></li>
+<li><p>confidential: YES: see below</p></li>
+<li><p>integrity: MOSTLY: a coalition of storage servers can rollback individual
+mutable files, but not a single one. No server can
+substitute fake data as genuine.</p></li>
+<li><p>availability: YES: as long as ‘k’ storage servers are present and have
+the same version of the mutable file, the dirnode will
+be available.</p></li>
+<li><dl class="simple">
+<dt>efficient: MOSTLY:</dt><dd><dl class="simple">
+<dt>network: single dirnode lookup is very efficient, since clients can</dt><dd><p>fetch specific keys rather than being required to get or set
+the entire dirnode each time. Traversing many directories
+takes a lot of roundtrips, and these can’t be collapsed with
+promise-pipelining because the intermediate values must only
+be visible to the client. Modifying many dirnodes at once
+(e.g. importing a large pre-existing directory tree) is pretty
+slow, since each graph edge must be created independently.</p>
+</dd>
+<dt>storage: each child has a separate IV, which makes them larger than</dt><dd><p>if all children were aggregated into a single encrypted string</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><p>delegation: VERY: each dirnode is a completely independent object,
+to which clients can be granted separate read-write or
+read-only access</p></li>
+<li><p>updateness: VERY: with only a single point of access, and no caching,
+each client operation starts by fetching the current
+value, so there are no opportunities for staleness</p></li>
+<li><p>monotonicity: VERY: the single point of access also protects against
+retrograde motion</p></li>
+</ol>
+<section id="confidentiality-leaks-in-the-storage-servers">
+<h3>Confidentiality leaks in the storage servers<a class="headerlink" href="#confidentiality-leaks-in-the-storage-servers" title="Link to this heading">¶</a></h3>
+<p>Dirnode (and the mutable files upon which they are based) are very private
+against other clients: traffic between the client and the storage servers is
+protected by the Foolscap SSL connection, so they can observe very little.
+Storage index values are hashes of secrets and thus unguessable, and they are
+not made public, so other clients cannot snoop through encrypted dirnodes
+that they have not been told about.</p>
+<p>Storage servers can observe access patterns and see ciphertext, but they
+cannot see the plaintext (of child names, metadata, or URIs). If an attacker
+operates a significant number of storage servers, they can infer the shape of
+the directory structure by assuming that directories are usually accessed
+from root to leaf in rapid succession. Since filenames are usually much
+shorter than read-caps and write-caps, the attacker can use the length of the
+ciphertext to guess the number of children of each node, and might be able to
+guess the length of the child names (or at least their sum). From this, the
+attacker may be able to build up a graph with the same shape as the plaintext
+file store, but with unlabeled edges and unknown file contents.</p>
+</section>
+<section id="integrity-failures-in-the-storage-servers">
+<h3>Integrity failures in the storage servers<a class="headerlink" href="#integrity-failures-in-the-storage-servers" title="Link to this heading">¶</a></h3>
+<p>The mutable file’s integrity mechanism (RSA signature on the hash of the file
+contents) prevents the storage server from modifying the dirnode’s contents
+without detection. Therefore the storage servers can make the dirnode
+unavailable, but not corrupt it.</p>
+<p>A sufficient number of colluding storage servers can perform a rollback
+attack: replace all shares of the whole mutable file with an earlier version.
+To prevent this, when retrieving the contents of a mutable file, the
+client queries more servers than necessary and uses the highest available
+version number. This insures that one or two misbehaving storage servers
+cannot cause this rollback on their own.</p>
+</section>
+<section id="improving-the-efficiency-of-dirnodes">
+<h3>Improving the efficiency of dirnodes<a class="headerlink" href="#improving-the-efficiency-of-dirnodes" title="Link to this heading">¶</a></h3>
+<p>The current mutable-file -based dirnode scheme suffers from certain
+inefficiencies. A very large directory (with thousands or millions of
+children) will take a significant time to extract any single entry, because
+the whole file must be downloaded first, then parsed and searched to find the
+desired child entry. Likewise, modifying a single child will require the
+whole file to be re-uploaded.</p>
+<p>The current design assumes (and in some cases, requires) that dirnodes remain
+small. The mutable files on which dirnodes are based are currently using
+“SDMF” (“Small Distributed Mutable File”) design rules, which state that the
+size of the data shall remain below one megabyte. More advanced forms of
+mutable files (MDMF and LDMF) are in the design phase to allow efficient
+manipulation of larger mutable files. This would reduce the work needed to
+modify a single entry in a large directory.</p>
+<p>Judicious caching may help improve the reading-large-directory case. Some
+form of mutable index at the beginning of the dirnode might help as well. The
+MDMF design rules allow for efficient random-access reads from the middle of
+the file, which would give the index something useful to point at.</p>
+<p>The current SDMF design generates a new RSA public/private keypair for each
+directory. This takes some time and CPU effort (around 100 milliseconds on a
+relatively high-end 2021 laptop) per directory.
+We have designed (but not yet built) a DSA-based
+mutable file scheme which will use shared parameters to reduce the
+directory-creation effort to a bare minimum (picking a random number instead
+of generating two random primes).</p>
+<p>When a backup program is run for the first time, it needs to copy a large
+amount of data from a pre-existing local filesystem into reliable storage.
+This means that a large and complex directory structure needs to be
+duplicated in the dirnode layer. With the one-object-per-dirnode approach
+described here, this requires as many operations as there are edges in the
+imported filesystem graph.</p>
+<p>Another approach would be to aggregate multiple directories into a single
+storage object. This object would contain a serialized graph rather than a
+single name-to-child dictionary. Most directory operations would fetch the
+whole block of data (and presumeably cache it for a while to avoid lots of
+re-fetches), and modification operations would need to replace the whole
+thing at once. This “realm” approach would have the added benefit of
+combining more data into a single encrypted bundle (perhaps hiding the shape
+of the graph from a determined attacker), and would reduce round-trips when
+performing deep directory traversals (assuming the realm was already cached).
+It would also prevent fine-grained rollback attacks from working: a coalition
+of storage servers could change the entire realm to look like an earlier
+state, but it could not independently roll back individual directories.</p>
+<p>The drawbacks of this aggregation would be that small accesses (adding a
+single child, looking up a single child) would require pulling or pushing a
+lot of unrelated data, increasing network overhead (and necessitating
+test-and-set semantics for the modification side, which increases the chances
+that a user operation will fail, making it more challenging to provide
+promises of atomicity to the user).</p>
+<p>It would also make it much more difficult to enable the delegation
+(“sharing”) of specific directories. Since each aggregate “realm” provides
+all-or-nothing access control, the act of delegating any directory from the
+middle of the realm would require the realm first be split into the upper
+piece that isn’t being shared and the lower piece that is. This splitting
+would have to be done in response to what is essentially a read operation,
+which is not traditionally supposed to be a high-effort action. On the other
+hand, it may be possible to aggregate the ciphertext, but use distinct
+encryption keys for each component directory, to get the benefits of both
+schemes at once.</p>
+</section>
+<section id="dirnode-expiration-and-leases">
+<h3>Dirnode expiration and leases<a class="headerlink" href="#dirnode-expiration-and-leases" title="Link to this heading">¶</a></h3>
+<p>Dirnodes are created any time a client wishes to add a new directory. How
+long do they live? What’s to keep them from sticking around forever, taking
+up space that nobody can reach any longer?</p>
+<p>Mutable files are created with limited-time “leases”, which keep the shares
+alive until the last lease has expired or been cancelled. Clients which know
+and care about specific dirnodes can ask to keep them alive for a while, by
+renewing a lease on them (with a typical period of one month). Clients are
+expected to assist in the deletion of dirnodes by canceling their leases as
+soon as they are done with them. This means that when a client unlinks a
+directory, it should also cancel its lease on that directory. When the lease
+count on a given share goes to zero, the storage server can delete the
+related storage. Multiple clients may all have leases on the same dirnode:
+the server may delete the shares only after all of the leases have gone away.</p>
+<p>We expect that clients will periodically create a “manifest”: a list of
+so-called “refresh capabilities” for all of the dirnodes and files that they
+can reach. They will give this manifest to the “repairer”, which is a service
+that keeps files (and dirnodes) alive on behalf of clients who cannot take on
+this responsibility for themselves. These refresh capabilities include the
+storage index, but do <em>not</em> include the readkeys or writekeys, so the
+repairer does not get to read the files or directories that it is helping to
+keep alive.</p>
+<p>After each change to the user’s file store, the client creates a manifest and
+looks for differences from their previous version. Anything which was removed
+prompts the client to send out lease-cancellation messages, allowing the data
+to be deleted.</p>
+</section>
+</section>
+<section id="starting-points-root-dirnodes">
+<h2>Starting Points: root dirnodes<a class="headerlink" href="#starting-points-root-dirnodes" title="Link to this heading">¶</a></h2>
+<p>Any client can record the URI of a directory node in some external form (say,
+in a local file) and use it as the starting point of later traversal. Each
+Tahoe-LAFS user is expected to create a new (unattached) dirnode when they first
+start using the grid, and record its URI for later use.</p>
+</section>
+<section id="mounting-and-sharing-directories">
+<h2>Mounting and Sharing Directories<a class="headerlink" href="#mounting-and-sharing-directories" title="Link to this heading">¶</a></h2>
+<p>The biggest benefit of this dirnode approach is that sharing individual
+directories is almost trivial. Alice creates a subdirectory that she wants
+to use to share files with Bob. This subdirectory is attached to Alice’s
+file store at “alice:shared-with-bob”. She asks her file store for the
+read-only directory URI for that new directory, and emails it to Bob. When
+Bob receives the URI, he attaches the given URI into one of his own
+directories, perhaps at a place named “bob:shared-with-alice”. Every time
+Alice writes a file into this directory, Bob will be able to read it.
+(It is also possible to share read-write URIs between users, but that makes
+it difficult to follow the <a class="reference external" href="../write_coordination.rst">Prime Coordination Directive</a> .) Neither
+Alice nor Bob will get access to any files above the mounted directory:
+there are no ‘parent directory’ pointers. If Alice creates a nested set of
+directories, “alice:shared-with-bob/subdir2”, and gives a read-only URI to
+shared-with-bob to Bob, then Bob will be unable to write to either
+shared-with-bob/ or subdir2/.</p>
+<p>A suitable UI needs to be created to allow users to easily perform this
+sharing action: dragging a folder from their file store to an IM or email
+user icon, for example. The UI will need to give the sending user an
+opportunity to indicate whether they want to grant read-write or read-only
+access to the recipient. The recipient then needs an interface to drag the
+new folder into their file store and give it a home.</p>
+</section>
+<section id="revocation">
+<h2>Revocation<a class="headerlink" href="#revocation" title="Link to this heading">¶</a></h2>
+<p>When Alice decides that she no longer wants Bob to be able to access the
+shared directory, what should she do? Suppose she’s shared this folder with
+both Bob and Carol, and now she wants Carol to retain access to it but Bob to
+be shut out. Ideally Carol should not have to do anything: her access should
+continue unabated.</p>
+<p>The current plan is to have her client create a deep copy of the folder in
+question, delegate access to the new folder to the remaining members of the
+group (Carol), asking the lucky survivors to replace their old reference with
+the new one. Bob may still have access to the old folder, but he is now the
+only one who cares: everyone else has moved on, and he will no longer be able
+to see their new changes. In a strict sense, this is the strongest form of
+revocation that can be accomplished: there is no point trying to force Bob to
+forget about the files that he read a moment before being kicked out. In
+addition it must be noted that anyone who can access the directory can proxy
+for Bob, reading files to him and accepting changes whenever he wants.
+Preventing delegation between communication parties is just as pointless as
+asking Bob to forget previously accessed files. However, there may be value
+to configuring the UI to ask Carol to not share files with Bob, or to
+removing all files from Bob’s view at the same time his access is revoked.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, The Tahoe-LAFS Developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Tahoe-LAFS Directory Nodes</a><ul>
+<li><a class="reference internal" href="#key-value-store-primitives">Key-value Store Primitives</a></li>
+<li><a class="reference internal" href="#file-store-goals">File Store Goals</a></li>
+<li><a class="reference internal" href="#dirnode-goals">Dirnode Goals</a></li>
+<li><a class="reference internal" href="#dirnode-secret-values">Dirnode secret values</a></li>
+<li><a class="reference internal" href="#dirnode-storage-format">Dirnode storage format</a></li>
+<li><a class="reference internal" href="#dirnode-sizes-mutable-file-initial-read-sizes">Dirnode sizes, mutable-file initial read sizes</a></li>
+<li><a class="reference internal" href="#design-goals-redux">Design Goals, redux</a><ul>
+<li><a class="reference internal" href="#confidentiality-leaks-in-the-storage-servers">Confidentiality leaks in the storage servers</a></li>
+<li><a class="reference internal" href="#integrity-failures-in-the-storage-servers">Integrity failures in the storage servers</a></li>
+<li><a class="reference internal" href="#improving-the-efficiency-of-dirnodes">Improving the efficiency of dirnodes</a></li>
+<li><a class="reference internal" href="#dirnode-expiration-and-leases">Dirnode expiration and leases</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#starting-points-root-dirnodes">Starting Points: root dirnodes</a></li>
+<li><a class="reference internal" href="#mounting-and-sharing-directories">Mounting and Sharing Directories</a></li>
+<li><a class="reference internal" href="#revocation">Revocation</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

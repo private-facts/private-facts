@@ -1,0 +1,834 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>The Tahoe-LAFS CLI commands - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">The Private Facts Project</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <span class="sidebar-brand-text">The Private Facts Project</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../_sources/reference/Tahoe-LAFS/frontends/CLI.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="the-tahoe-lafs-cli-commands">
+<h1>The Tahoe-LAFS CLI commands<a class="headerlink" href="#the-tahoe-lafs-cli-commands" title="Link to this heading">¶</a></h1>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#overview">Overview</a></p></li>
+<li><p><a class="reference internal" href="#cli-command-overview">CLI Command Overview</a></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#unicode-support">Unicode Support</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference internal" href="#node-management">Node Management</a></p></li>
+<li><p><a class="reference internal" href="#file-store-manipulation">File Store Manipulation</a></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#starting-directories">Starting Directories</a></p></li>
+<li><p><a class="reference internal" href="#command-syntax-summary">Command Syntax Summary</a></p></li>
+<li><p><a class="reference internal" href="#command-examples">Command Examples</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference internal" href="#storage-grid-maintenance">Storage Grid Maintenance</a></p></li>
+<li><p><a class="reference internal" href="#debugging">Debugging</a></p></li>
+</ol>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>Tahoe-LAFS provides a single executable named “<code class="docutils literal notranslate"><span class="pre">tahoe</span></code>”, which can be used
+to create and manage client/server nodes, manipulate the file store, and
+perform several debugging/maintenance tasks. This executable is installed
+into your virtualenv when you run <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tahoe-lafs</span></code>.</p>
+</section>
+<section id="cli-command-overview">
+<h2>CLI Command Overview<a class="headerlink" href="#cli-command-overview" title="Link to this heading">¶</a></h2>
+<p>The “<code class="docutils literal notranslate"><span class="pre">tahoe</span></code>” tool provides access to three categories of commands.</p>
+<ul class="simple">
+<li><p>node management: create a client/server node, start/stop/restart it</p></li>
+<li><p>file store manipulation: list files, upload, download, unlink, rename</p></li>
+<li><p>debugging: unpack cap-strings, examine share files</p></li>
+</ul>
+<p>To get a list of all commands, just run “<code class="docutils literal notranslate"><span class="pre">tahoe</span></code>” with no additional
+arguments. “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">--help</span></code>” might also provide something useful.</p>
+<p>Running “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">--version</span></code>” will display a list of version strings, starting
+with the “allmydata” module (which contains the majority of the Tahoe-LAFS
+functionality) and including versions for a number of dependent libraries,
+like Twisted, Foolscap, cryptography, and zfec. “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">--version-and-path</span></code>”
+will also show the path from which each library was imported.</p>
+<p>On Unix systems, the shell expands filename wildcards (<code class="docutils literal notranslate"><span class="pre">'*'</span></code> and <code class="docutils literal notranslate"><span class="pre">'?'</span></code>)
+before the program is able to read them, which may produce unexpected results
+for many <code class="docutils literal notranslate"><span class="pre">tahoe</span></code> comands. We recommend, if you use wildcards, to start the
+path with “<code class="docutils literal notranslate"><span class="pre">./</span></code>”, for example “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span> <span class="pre">-r</span> <span class="pre">./*</span> <span class="pre">somewhere:</span></code>”. This
+prevents the expanded filename from being interpreted as an option or as an
+alias, allowing filenames that start with a dash or contain colons to be
+handled correctly.</p>
+<p>On Windows, a single letter followed by a colon is treated as a drive
+specification rather than an alias (and is invalid unless a local path is
+allowed in that context). Wildcards cannot be used to specify multiple
+filenames to <code class="docutils literal notranslate"><span class="pre">tahoe</span></code> on Windows.</p>
+<section id="unicode-support">
+<h3>Unicode Support<a class="headerlink" href="#unicode-support" title="Link to this heading">¶</a></h3>
+<p>As of Tahoe-LAFS v1.7.0 (v1.8.0 on Windows), the <code class="docutils literal notranslate"><span class="pre">tahoe</span></code> tool supports
+non-ASCII characters in command lines and output. On Unix, the command-line
+arguments are assumed to use the character encoding specified by the
+current locale (usually given by the <code class="docutils literal notranslate"><span class="pre">LANG</span></code> environment variable).</p>
+<p>If a name to be output contains control characters or characters that
+cannot be represented in the encoding used on your terminal, it will be
+quoted. The quoting scheme used is similar to <a class="reference external" href="http://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html">POSIX shell quoting</a>: in
+a “double-quoted” string, backslashes introduce escape sequences (like
+those in Python strings), but in a ‘single-quoted’ string all characters
+stand for themselves. This quoting is only used for output, on all
+operating systems. Your shell interprets any quoting or escapes used on
+the command line.</p>
+</section>
+</section>
+<section id="node-management">
+<h2>Node Management<a class="headerlink" href="#node-management" title="Link to this heading">¶</a></h2>
+<p>“<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-node</span> <span class="pre">[NODEDIR]</span></code>” is the basic make-a-new-node
+command. It creates a new directory and populates it with files that
+will allow the “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">run</span></code>” and related commands to use it later
+on. <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-node</span></code> creates nodes that have client functionality
+(upload/download files), web API services (controlled by the
+‘[node]web.port’ configuration), and storage services (unless
+<code class="docutils literal notranslate"><span class="pre">--no-storage</span></code> is specified).</p>
+<p>NODEDIR defaults to <code class="docutils literal notranslate"><span class="pre">~/.tahoe/</span></code> , and newly-created nodes default to
+publishing a web server on port 3456 (limited to the loopback interface, at
+127.0.0.1, to restrict access to other programs on the same host). All of the
+other “<code class="docutils literal notranslate"><span class="pre">tahoe</span></code>” subcommands use corresponding defaults.</p>
+<p>“<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-client</span> <span class="pre">[NODEDIR]</span></code>” creates a node with no storage service.
+That is, it behaves like “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-node</span> <span class="pre">--no-storage</span> <span class="pre">[NODEDIR]</span></code>”.
+(This is a change from versions prior to v1.6.0.)</p>
+<p>“<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-introducer</span> <span class="pre">[NODEDIR]</span></code>” is used to create the Introducer node.
+This node provides introduction services and nothing else. When started, this
+node will produce a <code class="docutils literal notranslate"><span class="pre">private/introducer.furl</span></code> file, which should be
+published to all clients.</p>
+<section id="running-nodes">
+<h3>Running Nodes<a class="headerlink" href="#running-nodes" title="Link to this heading">¶</a></h3>
+<p>No matter what kind of node you created, the correct way to run it is
+to use the <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">run</span></code> command. “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">run</span> <span class="pre">[NODEDIR]</span></code>” will start
+a previously-created node in the foreground. This command functions
+the same way on all platforms and logs to stdout. If you want to run
+the process as a daemon, it is recommended that you use your favourite
+daemonization tool.</p>
+</section>
+</section>
+<section id="file-store-manipulation">
+<h2>File Store Manipulation<a class="headerlink" href="#file-store-manipulation" title="Link to this heading">¶</a></h2>
+<p>These commands let you exmaine a Tahoe-LAFS file store, providing basic
+list/upload/download/unlink/rename/mkdir functionality. They can be used as
+primitives by other scripts. Most of these commands are fairly thin wrappers
+around web-API calls, which are described in <a class="reference internal" href="webapi.html"><span class="doc">The Tahoe REST-ful Web API</span></a>.</p>
+<p>By default, all file store manipulation commands look in <code class="docutils literal notranslate"><span class="pre">~/.tahoe/</span></code> to
+figure out which Tahoe-LAFS node they should use. When the CLI command makes
+web-API calls, it will use <code class="docutils literal notranslate"><span class="pre">~/.tahoe/node.url</span></code> for this purpose: a running
+Tahoe-LAFS node that provides a web-API port will write its URL into this
+file. If you want to use a node on some other host, just create <code class="docutils literal notranslate"><span class="pre">~/.tahoe/</span></code>
+and copy that node’s web-API URL into this file, and the CLI commands will
+contact that node instead of a local one.</p>
+<p>These commands also use a table of “aliases” to figure out which directory
+they ought to use a starting point. This is explained in more detail below.</p>
+<section id="starting-directories">
+<h3>Starting Directories<a class="headerlink" href="#starting-directories" title="Link to this heading">¶</a></h3>
+<p>As described in <a class="reference internal" href="../architecture.html"><span class="doc">Tahoe-LAFS Architecture</span></a>, the Tahoe-LAFS distributed file store
+consists of a collection of directories and files, each of which has a
+“read-cap” or a “write-cap” (also known as a URI). Each directory is simply a
+table that maps a name to a child file or directory, and this table is turned
+into a string and stored in a mutable file. The whole set of directory and
+file “nodes” are connected together into a directed graph.</p>
+<p>To use this collection of files and directories, you need to choose a
+starting point: some specific directory that we will refer to as a
+“starting directory”.  For a given starting directory, the
+“<code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">[STARTING_DIR]</span></code>” command would list the contents of this directory,
+the “<code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">[STARTING_DIR]/dir1</span></code>” command would look inside this directory
+for a child named “<code class="docutils literal notranslate"><span class="pre">dir1</span></code>” and list its contents,
+“<code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">[STARTING_DIR]/dir1/subdir2</span></code>” would look two levels deep, etc.</p>
+<p>Note that there is no real global “root” directory, but instead each
+starting directory provides a different, possibly overlapping
+perspective on the graph of files and directories.</p>
+<p>Each Tahoe-LAFS node remembers a list of starting points, called “aliases”,
+which are short Unicode strings that stand in for a directory read- or
+write- cap. They are stored (encoded as UTF-8) in the file
+<code class="docutils literal notranslate"><span class="pre">NODEDIR/private/aliases</span></code> .  If you use the command line “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">ls</span></code>”
+without any “[STARTING_DIR]” argument, then it will use the default alias,
+which is <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code>, therefore “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">ls</span></code>” has the same effect as
+“<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">ls</span> <span class="pre">tahoe:</span></code>”.  The same goes for the other commands that can
+reasonably use a default alias: <code class="docutils literal notranslate"><span class="pre">get</span></code>, <code class="docutils literal notranslate"><span class="pre">put</span></code>, <code class="docutils literal notranslate"><span class="pre">mkdir</span></code>, <code class="docutils literal notranslate"><span class="pre">mv</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">rm</span></code>.</p>
+<p>For backwards compatibility with Tahoe-LAFS v1.0, if the <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> alias
+is not found in <code class="docutils literal notranslate"><span class="pre">~/.tahoe/private/aliases</span></code>, the CLI will use the contents
+of <code class="docutils literal notranslate"><span class="pre">~/.tahoe/private/root_dir.cap</span></code> instead. Tahoe-LAFS v1.0 had only a
+single starting point, and stored it in this <code class="docutils literal notranslate"><span class="pre">root_dir.cap</span></code> file, so v1.1
+and later will use it if necessary. However, once you’ve set a <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code>
+alias with “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">set-alias</span></code>”, that will override anything in the old
+<code class="docutils literal notranslate"><span class="pre">root_dir.cap</span></code> file.</p>
+<p>The Tahoe-LAFS CLI commands use a similar path syntax to <code class="docutils literal notranslate"><span class="pre">scp</span></code> and
+<code class="docutils literal notranslate"><span class="pre">rsync</span></code> – an optional <code class="docutils literal notranslate"><span class="pre">ALIAS:</span></code> prefix, followed by the pathname or
+filename. Some commands (like “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span></code>”) use the lack of an alias to
+mean that you want to refer to a local file, instead of something from the
+Tahoe-LAFS file store. Another way to indicate this is to start the
+pathname with “./”, “~/”, “~username/”, or “/”. On Windows, aliases
+cannot be a single character, so that it is possible to distinguish a
+path relative to an alias from a path starting with a local drive specifier.</p>
+<p>When you’re dealing a single starting directory, the <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> alias is
+all you need. But when you want to refer to something that isn’t yet
+attached to the graph rooted at that starting directory, you need to
+refer to it by its capability. The way to do that is either to use its
+capability directory as an argument on the command line, or to add an
+alias to it, with the “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">add-alias</span></code>” command. Once you’ve added an
+alias, you can use that alias as an argument to commands.</p>
+<p>The best way to get started with Tahoe-LAFS is to create a node, start it,
+then use the following command to create a new directory and set it as your
+<code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> alias:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tahoe</span> <span class="n">create</span><span class="o">-</span><span class="n">alias</span> <span class="n">tahoe</span>
+</pre></div>
+</div>
+<p>After that you can use “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">ls</span> <span class="pre">tahoe:</span></code>” and
+“<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span> <span class="pre">local.txt</span> <span class="pre">tahoe:</span></code>”, and both will refer to the directory that
+you’ve just created.</p>
+<section id="security-note-for-users-of-shared-systems">
+<h4>SECURITY NOTE: For users of shared systems<a class="headerlink" href="#security-note-for-users-of-shared-systems" title="Link to this heading">¶</a></h4>
+<p>Another way to achieve the same effect as the above “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-alias</span></code>”
+command is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>tahoe add-alias tahoe `tahoe mkdir`
+</pre></div>
+</div>
+<p>However, command-line arguments are visible to other users (through the
+<code class="docutils literal notranslate"><span class="pre">ps</span></code> command or <code class="docutils literal notranslate"><span class="pre">/proc</span></code> filesystem, or the Windows Process Explorer tool),
+so if you are using a Tahoe-LAFS node on a shared host, your login neighbors
+will be able to see (and capture) any directory caps that you set up with the
+“<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">add-alias</span></code>” command.</p>
+<p>The “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-alias</span></code>” command avoids this problem by creating a new
+directory and putting the cap into your aliases file for you. Alternatively,
+you can edit the <code class="docutils literal notranslate"><span class="pre">NODEDIR/private/aliases</span></code> file directly, by adding a line
+like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fun</span><span class="p">:</span> <span class="n">URI</span><span class="p">:</span><span class="n">DIR2</span><span class="p">:</span><span class="n">ovjy4yhylqlfoqg2vcze36dhde</span><span class="p">:</span><span class="mi">4</span><span class="n">d4f47qko2xm5g7osgo2yyidi5m4muyo2vjjy53q4vjju2u55mfa</span>
+</pre></div>
+</div>
+<p>By entering the dircap through the editor, the command-line arguments are
+bypassed, and other users will not be able to see them. Once you’ve added the
+alias, no other secrets are passed through the command line, so this
+vulnerability becomes less significant: they can still see your filenames and
+other arguments you type there, but not the caps that Tahoe-LAFS uses to permit
+access to your files and directories.</p>
+</section>
+</section>
+<section id="command-syntax-summary">
+<h3>Command Syntax Summary<a class="headerlink" href="#command-syntax-summary" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">add-alias</span> <span class="pre">ALIAS[:]</span> <span class="pre">DIRCAP</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-alias</span> <span class="pre">ALIAS[:]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">list-aliases</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">mkdir</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">mkdir</span> <span class="pre">PATH</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">ls</span> <span class="pre">[PATH]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">webopen</span> <span class="pre">[PATH]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">[--mutable]</span> <span class="pre">[FROMLOCAL|-]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">[--mutable]</span> <span class="pre">FROMLOCAL|-</span> <span class="pre">TOPATH</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">[FROMLOCAL|-]</span> <span class="pre">mutable-file-writecap</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">get</span> <span class="pre">FROMPATH</span> <span class="pre">[TOLOCAL|-]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span> <span class="pre">[-r]</span> <span class="pre">FROMPATH</span> <span class="pre">TOPATH</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">rm</span> <span class="pre">PATH</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">mv</span> <span class="pre">FROMPATH</span> <span class="pre">TOPATH</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">ln</span> <span class="pre">FROMPATH</span> <span class="pre">TOPATH</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">backup</span> <span class="pre">FROMLOCAL</span> <span class="pre">TOPATH</span></code></p>
+<p>In these summaries, <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, <code class="docutils literal notranslate"><span class="pre">TOPATH</span></code> or <code class="docutils literal notranslate"><span class="pre">FROMPATH</span></code> can be one of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[SUBDIRS/]FILENAME</span></code> for a path relative to the default <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> alias;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ALIAS:[SUBDIRS/]FILENAME</span></code> for a path relative to another alias;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DIRCAP/[SUBDIRS/]FILENAME</span></code> or <code class="docutils literal notranslate"><span class="pre">DIRCAP:./[SUBDIRS/]FILENAME</span></code> for a path
+relative to a directory cap.</p></li>
+</ul>
+<p>See <a class="reference internal" href="#cli-command-overview">CLI Command Overview</a> above for information on using wildcards with
+local paths, and different treatment of colons between Unix and Windows.</p>
+<p><code class="docutils literal notranslate"><span class="pre">FROMLOCAL</span></code> or <code class="docutils literal notranslate"><span class="pre">TOLOCAL</span></code> is a path in the local filesystem.</p>
+</section>
+<section id="command-examples">
+<h3>Command Examples<a class="headerlink" href="#command-examples" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">add-alias</span> <span class="pre">ALIAS[:]</span> <span class="pre">DIRCAP</span></code></p>
+<blockquote>
+<div><p>An example would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tahoe</span> <span class="n">add</span><span class="o">-</span><span class="n">alias</span> <span class="n">fun</span> <span class="n">URI</span><span class="p">:</span><span class="n">DIR2</span><span class="p">:</span><span class="n">ovjy4yhylqlfoqg2vcze36dhde</span><span class="p">:</span><span class="mi">4</span><span class="n">d4f47qko2xm5g7osgo2yyidi5m4muyo2vjjy53q4vjju2u55mfa</span>
+</pre></div>
+</div>
+<p>This creates an alias <code class="docutils literal notranslate"><span class="pre">fun:</span></code> and configures it to use the given directory
+cap. Once this is done, “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">ls</span> <span class="pre">fun:</span></code>” will list the contents of this
+directory. Use “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">add-alias</span> <span class="pre">tahoe</span> <span class="pre">DIRCAP</span></code>” to set the contents of the
+default <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> alias.</p>
+<p>Since Tahoe-LAFS v1.8.2, the alias name can be given with or without the
+trailing colon.</p>
+<p>On Windows, the alias should not be a single character, because it would be
+confused with the drive letter of a local path.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-alias</span> <span class="pre">fun</span></code></p>
+<blockquote>
+<div><p>This combines “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">mkdir</span></code>” and “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">add-alias</span></code>” into a single step.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">list-aliases</span></code></p>
+<blockquote>
+<div><p>This displays a table of all configured aliases.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">mkdir</span></code></p>
+<blockquote>
+<div><p>This creates a new empty unlinked directory, and prints its write-cap to
+stdout. The new directory is not attached to anything else.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">mkdir</span> <span class="pre">subdir</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">mkdir</span> <span class="pre">/subdir</span></code></p>
+<blockquote>
+<div><p>This creates a new empty directory and attaches it below the root directory
+of the default <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> alias with the name “<code class="docutils literal notranslate"><span class="pre">subdir</span></code>”.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">ls</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">ls</span> <span class="pre">/</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">ls</span> <span class="pre">tahoe:</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">ls</span> <span class="pre">tahoe:/</span></code></p>
+<blockquote>
+<div><p>All four list the root directory of the default <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> alias.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">ls</span> <span class="pre">subdir</span></code></p>
+<blockquote>
+<div><p>This lists a subdirectory of your file store.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">webopen</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">webopen</span> <span class="pre">tahoe:</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">webopen</span> <span class="pre">tahoe:subdir/</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">webopen</span> <span class="pre">subdir/</span></code></p>
+<blockquote>
+<div><p>This uses the python ‘webbrowser’ module to cause a local web browser to
+open to the web page for the given directory. This page offers interfaces to
+add, download, rename, and unlink files and subdirectories in that directory.
+If no alias or path is given, this command opens the root directory of the
+default <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> alias.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">file.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">./file.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">/tmp/file.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">~/file.txt</span></code></p>
+<blockquote>
+<div><p>These upload the local file into the grid, and prints the new read-cap to
+stdout. The uploaded file is not attached to any directory. All one-argument
+forms of “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span></code>” perform an unlinked upload.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">-</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span></code></p>
+<blockquote>
+<div><p>These also perform an unlinked upload, but the data to be uploaded is taken
+from stdin.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">file.txt</span> <span class="pre">uploaded.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">file.txt</span> <span class="pre">tahoe:uploaded.txt</span></code></p>
+<blockquote>
+<div><p>These upload the local file and add it to your <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> root with the name
+“<code class="docutils literal notranslate"><span class="pre">uploaded.txt</span></code>”.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">file.txt</span> <span class="pre">subdir/foo.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">-</span> <span class="pre">subdir/foo.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">file.txt</span> <span class="pre">tahoe:subdir/foo.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">file.txt</span> <span class="pre">DIRCAP/foo.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">file.txt</span> <span class="pre">DIRCAP/subdir/foo.txt</span></code></p>
+<blockquote>
+<div><p>These upload the named file and attach them to a subdirectory of the given
+root directory, under the name “<code class="docutils literal notranslate"><span class="pre">foo.txt</span></code>”. When a directory write-cap is
+given, you can use either <code class="docutils literal notranslate"><span class="pre">/</span></code> (as shown above) or <code class="docutils literal notranslate"><span class="pre">:./</span></code> to separate it
+from the following path. When the source file is named “<code class="docutils literal notranslate"><span class="pre">-</span></code>”, the contents
+are taken from stdin.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">file.txt</span> <span class="pre">--mutable</span></code></p>
+<blockquote>
+<div><p>Create a new (SDMF) mutable file, fill it with the contents of <code class="docutils literal notranslate"><span class="pre">file.txt</span></code>,
+and print the new write-cap to stdout.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span> <span class="pre">file.txt</span> <span class="pre">MUTABLE-FILE-WRITECAP</span></code></p>
+<blockquote>
+<div><p>Replace the contents of the given mutable file with the contents of
+<code class="docutils literal notranslate"><span class="pre">file.txt</span></code> and print the same write-cap to stdout.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span> <span class="pre">file.txt</span> <span class="pre">tahoe:uploaded.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span> <span class="pre">file.txt</span> <span class="pre">tahoe:</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span> <span class="pre">file.txt</span> <span class="pre">tahoe:/</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span> <span class="pre">./file.txt</span> <span class="pre">tahoe:</span></code></p>
+<blockquote>
+<div><p>These upload the local file and add it to your <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> root with the name
+“<code class="docutils literal notranslate"><span class="pre">uploaded.txt</span></code>”.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span> <span class="pre">tahoe:uploaded.txt</span> <span class="pre">downloaded.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span> <span class="pre">tahoe:uploaded.txt</span> <span class="pre">./downloaded.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span> <span class="pre">tahoe:uploaded.txt</span> <span class="pre">/tmp/downloaded.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span> <span class="pre">tahoe:uploaded.txt</span> <span class="pre">~/downloaded.txt</span></code></p>
+<blockquote>
+<div><p>This downloads the named file from your <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> root, and puts the result on
+your local filesystem.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span> <span class="pre">tahoe:uploaded.txt</span> <span class="pre">fun:stuff.txt</span></code></p>
+<blockquote>
+<div><p>This copies a file from your <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> root to a different directory, set up
+earlier with “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">add-alias</span> <span class="pre">fun</span> <span class="pre">DIRCAP</span></code>” or “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-alias</span> <span class="pre">fun</span></code>”.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span> <span class="pre">-r</span> <span class="pre">~/my_dir/</span> <span class="pre">tahoe:</span></code></p>
+<p>This copies the folder <code class="docutils literal notranslate"><span class="pre">~/my_dir/</span></code> and all its children to the grid, creating
+the new folder <code class="docutils literal notranslate"><span class="pre">tahoe:my_dir</span></code>. Note that the trailing slash is not required:
+all source arguments which are directories will be copied into new
+subdirectories of the target.</p>
+<p>The behavior of <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span></code>, like the regular UNIX <code class="docutils literal notranslate"><span class="pre">/bin/cp</span></code>, is subtly
+different depending upon the exact form of the arguments. In particular:</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Trailing slashes indicate directories, but are not required.</p></li>
+<li><p>If the target object does not already exist:
+* and if the source is a single file, it will be copied into the target;
+* otherwise, the target will be created as a directory.</p></li>
+<li><p>If there are multiple sources, the target must be a directory.</p></li>
+<li><p>If the target is a pre-existing file, the source must be a single file.</p></li>
+<li><p>If the target is a directory, each source must be a named file, a named
+directory, or an unnamed directory. It is not possible to copy an unnamed
+file (e.g. a raw filecap) into a directory, as there is no way to know what
+the new file should be named.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">unlink</span> <span class="pre">uploaded.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">unlink</span> <span class="pre">tahoe:uploaded.txt</span></code></p>
+<blockquote>
+<div><p>This unlinks a file from your <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> root (that is, causes there to no
+longer be an entry <code class="docutils literal notranslate"><span class="pre">uploaded.txt</span></code> in the root directory that points to it).
+Note that this does not delete the file from the grid.
+For backward compatibility, <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">rm</span></code> is accepted as a synonym for
+<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">unlink</span></code>.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">mv</span> <span class="pre">uploaded.txt</span> <span class="pre">renamed.txt</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">mv</span> <span class="pre">tahoe:uploaded.txt</span> <span class="pre">tahoe:renamed.txt</span></code></p>
+<blockquote>
+<div><p>These rename a file within your <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> root directory.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">mv</span> <span class="pre">uploaded.txt</span> <span class="pre">fun:</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">mv</span> <span class="pre">tahoe:uploaded.txt</span> <span class="pre">fun:</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">mv</span> <span class="pre">tahoe:uploaded.txt</span> <span class="pre">fun:uploaded.txt</span></code></p>
+<blockquote>
+<div><p>These move a file from your <code class="docutils literal notranslate"><span class="pre">tahoe:</span></code> root directory to the directory
+set up earlier with “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">add-alias</span> <span class="pre">fun</span> <span class="pre">DIRCAP</span></code>” or
+“<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-alias</span> <span class="pre">fun</span></code>”.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">backup</span> <span class="pre">~</span> <span class="pre">work:backups</span></code></p>
+<blockquote>
+<div><p>This command performs a versioned backup of every file and directory
+underneath your “<code class="docutils literal notranslate"><span class="pre">~</span></code>” home directory, placing an immutable timestamped
+snapshot in e.g. <code class="docutils literal notranslate"><span class="pre">work:backups/Archives/2009-02-06_04:00:05Z/</span></code> (note that
+the timestamp is in UTC, hence the “Z” suffix), and a link to the latest
+snapshot in work:backups/Latest/ . This command uses a small SQLite database
+known as the “backupdb”, stored in <code class="docutils literal notranslate"><span class="pre">~/.tahoe/private/backupdb.sqlite</span></code>, to
+remember which local files have been backed up already, and will avoid
+uploading files that have already been backed up (except occasionally that
+will randomly upload them again if it has been awhile since had last been
+uploaded, just to make sure that the copy of it on the server is still good).
+It compares timestamps and filesizes when making this comparison. It also
+re-uses existing directories which have identical contents. This lets it
+run faster and reduces the number of directories created.</p>
+<p>If you reconfigure your client node to switch to a different grid, you
+should delete the stale backupdb.sqlite file, to force “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">backup</span></code>”
+to upload all files to the new grid.</p>
+<p>The fact that “tahoe backup” checks timestamps on your local files and
+skips ones that don’t appear to have been changed is one of the major
+differences between “tahoe backup” and “tahoe cp -r”. The other major
+difference is that “tahoe backup” keeps links to all of the versions that
+have been uploaded to the grid, so you can navigate among old versions
+stored in the grid. In contrast, “tahoe cp -r” unlinks the previous
+version from the grid directory and links the new version into place,
+so unless you have a link to the older version stored somewhere else,
+you’ll never be able to get back to it.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">backup</span> <span class="pre">--exclude=*~</span> <span class="pre">~</span> <span class="pre">work:backups</span></code></p>
+<blockquote>
+<div><p>Same as above, but this time the backup process will ignore any
+filename that will end with ‘~’. <code class="docutils literal notranslate"><span class="pre">--exclude</span></code> will accept any standard
+Unix shell-style wildcards, as implemented by the
+<a class="reference external" href="http://docs.python.org/library/fnmatch.html">Python fnmatch module</a>.
+You may give multiple <code class="docutils literal notranslate"><span class="pre">--exclude</span></code> options.  Please pay attention that
+the pattern will be matched against any level of the directory tree;
+it’s still impossible to specify absolute path exclusions.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">backup</span> <span class="pre">--exclude-from-utf-8=/path/to/filename</span> <span class="pre">~</span> <span class="pre">work:backups</span></code></p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">--exclude-from-utf-8</span></code> is similar to <code class="docutils literal notranslate"><span class="pre">--exclude</span></code>, but reads exclusion
+patterns from a UTF-8-encoded <code class="docutils literal notranslate"><span class="pre">/path/to/filename</span></code>, one per line.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">backup</span> <span class="pre">--exclude-vcs</span> <span class="pre">~</span> <span class="pre">work:backups</span></code></p>
+<blockquote>
+<div><p>This command will ignore any file or directory name known to be used by
+version control systems to store metadata. The excluded names are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>CVS</p></li>
+<li><p>RCS</p></li>
+<li><p>SCCS</p></li>
+<li><p>.git</p></li>
+<li><p>.gitignore</p></li>
+<li><p>.cvsignore</p></li>
+<li><p>.svn</p></li>
+<li><p>.arch-ids</p></li>
+<li><p>{arch}</p></li>
+<li><p>=RELEASE-ID</p></li>
+<li><p>=meta-update</p></li>
+<li><p>=update</p></li>
+<li><p>.bzr</p></li>
+<li><p>.bzrignore</p></li>
+<li><p>.bzrtags</p></li>
+<li><p>.hg</p></li>
+<li><p>.hgignore</p></li>
+<li><p>_darcs</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</section>
+</section>
+<section id="storage-grid-maintenance">
+<h2>Storage Grid Maintenance<a class="headerlink" href="#storage-grid-maintenance" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">manifest</span> <span class="pre">tahoe:</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">manifest</span> <span class="pre">--storage-index</span> <span class="pre">tahoe:</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">manifest</span> <span class="pre">--verify-cap</span> <span class="pre">tahoe:</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">manifest</span> <span class="pre">--repair-cap</span> <span class="pre">tahoe:</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">manifest</span> <span class="pre">--raw</span> <span class="pre">tahoe:</span></code></p>
+<blockquote>
+<div><p>This performs a recursive walk of the given directory, visiting every file
+and directory that can be reached from that point. It then emits one line to
+stdout for each object it encounters.</p>
+<p>The default behavior is to print the access cap string (like <code class="docutils literal notranslate"><span class="pre">URI:CHK:..</span></code>
+or <code class="docutils literal notranslate"><span class="pre">URI:DIR2:..</span></code>), followed by a space, followed by the full path name.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">--storage-index</span></code> is added, each line will instead contain the object’s
+storage index. This (string) value is useful to determine which share files
+(on the server) are associated with this directory tree. The <code class="docutils literal notranslate"><span class="pre">--verify-cap</span></code>
+and <code class="docutils literal notranslate"><span class="pre">--repair-cap</span></code> options are similar, but emit a verify-cap and repair-cap,
+respectively. If <code class="docutils literal notranslate"><span class="pre">--raw</span></code> is provided instead, the output will be a
+JSON-encoded dictionary that includes keys for pathnames, storage index
+strings, and cap strings. The last line of the <code class="docutils literal notranslate"><span class="pre">--raw</span></code> output will be a JSON
+encoded deep-stats dictionary.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">stats</span> <span class="pre">tahoe:</span></code></p>
+<blockquote>
+<div><p>This performs a recursive walk of the given directory, visiting every file
+and directory that can be reached from that point. It gathers statistics on
+the sizes of the objects it encounters, and prints a summary to stdout.</p>
+</div></blockquote>
+</section>
+<section id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Link to this heading">¶</a></h2>
+<p>For a list of all debugging commands, use “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">debug</span></code>”. For more detailed
+help on any of these commands, use “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">debug</span> <span class="pre">COMMAND</span> <span class="pre">--help</span></code>”.</p>
+<p>“<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">debug</span> <span class="pre">find-shares</span> <span class="pre">STORAGEINDEX</span> <span class="pre">NODEDIRS..</span></code>” will look through one or
+more storage nodes for the share files that are providing storage for the
+given storage index.</p>
+<p>“<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">debug</span> <span class="pre">catalog-shares</span> <span class="pre">NODEDIRS..</span></code>” will look through one or more
+storage nodes and locate every single share they contain. It produces a report
+on stdout with one line per share, describing what kind of share it is, the
+storage index, the size of the file is used for, etc. It may be useful to
+concatenate these reports from all storage hosts and use it to look for
+anomalies.</p>
+<p>“<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">debug</span> <span class="pre">dump-share</span> <span class="pre">SHAREFILE</span></code>” will take the name of a single share file
+(as found by “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">find-shares</span></code>”) and print a summary of its contents to
+stdout. This includes a list of leases, summaries of the hash tree, and
+information from the UEB (URI Extension Block). For mutable file shares, it
+will describe which version (seqnum and root-hash) is being stored in this
+share.</p>
+<p>“<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">debug</span> <span class="pre">dump-cap</span> <span class="pre">CAP</span></code>” will take any Tahoe-LAFS URI and unpack it
+into separate pieces. The most useful aspect of this command is to reveal the
+storage index for any given URI. This can be used to locate the share files
+that are holding the encoded+encrypted data for this file.</p>
+<p>“<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">debug</span> <span class="pre">corrupt-share</span> <span class="pre">SHAREFILE</span></code>” will flip a bit in the given
+sharefile. This can be used to test the client-side verification/repair code.
+Obviously, this command should not be used during normal operation.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, The Tahoe-LAFS Developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">The Tahoe-LAFS CLI commands</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#cli-command-overview">CLI Command Overview</a><ul>
+<li><a class="reference internal" href="#unicode-support">Unicode Support</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#node-management">Node Management</a><ul>
+<li><a class="reference internal" href="#running-nodes">Running Nodes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#file-store-manipulation">File Store Manipulation</a><ul>
+<li><a class="reference internal" href="#starting-directories">Starting Directories</a><ul>
+<li><a class="reference internal" href="#security-note-for-users-of-shared-systems">SECURITY NOTE: For users of shared systems</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#command-syntax-summary">Command Syntax Summary</a></li>
+<li><a class="reference internal" href="#command-examples">Command Examples</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#storage-grid-maintenance">Storage Grid Maintenance</a></li>
+<li><a class="reference internal" href="#debugging">Debugging</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

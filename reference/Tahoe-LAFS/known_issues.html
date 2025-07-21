@@ -1,0 +1,642 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>Known Issues - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">The Private Facts Project</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">The Private Facts Project</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/reference/Tahoe-LAFS/known_issues.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <p>See also <a class="reference internal" href="cautions.html"><span class="doc">cautions.rst</span></a>.</p>
+<section id="known-issues">
+<h1>Known Issues<a class="headerlink" href="#known-issues" title="Link to this heading">¶</a></h1>
+<p>Below is a list of known issues in recent releases of Tahoe-LAFS, and how to
+manage them.  The current version of this file can be found at
+<a class="reference external" href="https://github.com/tahoe-lafs/tahoe-lafs/blob/master/docs/known_issues.rst">https://github.com/tahoe-lafs/tahoe-lafs/blob/master/docs/known_issues.rst</a> .</p>
+<p>If you’ve been using Tahoe-LAFS since v1.1 (released 2008-06-11) or if you’re
+just curious about what sort of mistakes we’ve made in the past, then you
+might want to read the “historical known issues” document in
+<code class="docutils literal notranslate"><span class="pre">docs/historical/historical_known_issues.txt</span></code>.</p>
+<section id="known-issues-in-tahoe-lafs-v1-10-3-released-30-mar-2016">
+<h2>Known Issues in Tahoe-LAFS v1.10.3, released 30-Mar-2016<a class="headerlink" href="#known-issues-in-tahoe-lafs-v1-10-3-released-30-mar-2016" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#unauthorized-access-by-javascript-in-unrelated-files">Unauthorized access by JavaScript in unrelated files</a></p></li>
+<li><p><a class="reference internal" href="#disclosure-of-file-through-embedded-hyperlinks-or-javascript-in-that-file">Disclosure of file through embedded hyperlinks or JavaScript in that file</a></p></li>
+<li><p><a class="reference internal" href="#command-line-arguments-are-leaked-to-other-local-users">Command-line arguments are leaked to other local users</a></p></li>
+<li><p><a class="reference internal" href="#capabilities-may-be-leaked-to-web-browser-phishing-filter-safe-browsing-servers">Capabilities may be leaked to web browser phishing filter / “safe browsing” servers</a></p></li>
+<li><p><a class="reference internal" href="#known-issues-in-the-sftp-frontend">Known issues in the SFTP frontend</a></p></li>
+<li><p><a class="reference internal" href="#traffic-analysis-based-on-sizes-of-files-directories-storage-indices-and-timing">Traffic analysis based on sizes of files/directories, storage indices, and timing</a></p></li>
+<li><p><a class="reference internal" href="#privacy-leak-via-google-chart-api-link-in-map-update-timing-web-page">Privacy leak via Google Chart API link in map-update timing web page</a></p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<section id="unauthorized-access-by-javascript-in-unrelated-files">
+<h3>Unauthorized access by JavaScript in unrelated files<a class="headerlink" href="#unauthorized-access-by-javascript-in-unrelated-files" title="Link to this heading">¶</a></h3>
+<p>If you view a file stored in Tahoe-LAFS through a web user interface,
+JavaScript embedded in that file can, in some circumstances, access other
+files or directories stored in Tahoe-LAFS that you view through the same
+web user interface.  Such a script would be able to send the contents of
+those other files or directories to the author of the script, and if you
+have the ability to modify the contents of those files or directories,
+then that script could modify or delete those files or directories.</p>
+<p>This attack is known to be possible when an attacking tab or window could
+reach a tab or window containing a Tahoe URI by navigating back or forward
+in the history, either from itself or from any frame with a known name (as
+specified by the “target” attribute of an HTML link). It might be possible
+in other cases depending on the browser.</p>
+<p><em>how to manage it</em></p>
+<p>For future versions of Tahoe-LAFS, we are considering ways to close off
+this leakage of authority while preserving ease of use – the discussion
+of this issue is ticket <a class="reference external" href="https://tahoe-lafs.org/trac/tahoe-lafs/ticket/615">#615</a>.</p>
+<p>For the present, either do not view files stored in Tahoe-LAFS through a
+web user interface, or turn off JavaScript in your web browser before
+doing so, or limit your viewing to files which you know don’t contain
+malicious JavaScript.</p>
+</section>
+<hr class="docutils" />
+<section id="disclosure-of-file-through-embedded-hyperlinks-or-javascript-in-that-file">
+<h3>Disclosure of file through embedded hyperlinks or JavaScript in that file<a class="headerlink" href="#disclosure-of-file-through-embedded-hyperlinks-or-javascript-in-that-file" title="Link to this heading">¶</a></h3>
+<p>If there is a file stored on a Tahoe-LAFS storage grid, and that file
+gets downloaded and displayed in a web browser, then JavaScript or
+hyperlinks within that file can leak the capability to that file to a
+third party, which means that third party gets access to the file.</p>
+<p>If there is JavaScript in the file, then it could deliberately leak
+the capability to the file out to some remote listener.</p>
+<p>If there are hyperlinks in the file, and they get followed, then
+whichever server they point to receives the capability to the
+file. Note that IMG tags are typically followed automatically by web
+browsers, so being careful which hyperlinks you click on is not
+sufficient to prevent this from happening.</p>
+<p><em>how to manage it</em></p>
+<p>For future versions of Tahoe-LAFS, we are considering ways to close off
+this leakage of authority while preserving ease of use – the discussion
+of this issue is ticket <a class="reference external" href="https://tahoe-lafs.org/trac/tahoe-lafs/ticket/127">#127</a>.</p>
+<p>For the present, a good work-around is that if you want to store and
+view a file on Tahoe-LAFS and you want that file to remain private, then
+remove from that file any hyperlinks pointing to other people’s servers
+and remove any JavaScript unless you are sure that the JavaScript is not
+written to maliciously leak access.</p>
+</section>
+<hr class="docutils" />
+<section id="command-line-arguments-are-leaked-to-other-local-users">
+<h3>Command-line arguments are leaked to other local users<a class="headerlink" href="#command-line-arguments-are-leaked-to-other-local-users" title="Link to this heading">¶</a></h3>
+<p>Remember that command-line arguments are visible to other users (through
+the ‘ps’ command, or the windows Process Explorer tool), so if you are
+using a Tahoe-LAFS node on a shared host, other users on that host will
+be able to see (and copy) any caps that you pass as command-line
+arguments.  This includes directory caps that you set up with the “tahoe
+add-alias” command.</p>
+<p><em>how to manage it</em></p>
+<p>As of Tahoe-LAFS v1.3.0 there is a “tahoe create-alias” command that does
+the following technique for you.</p>
+<p>Bypass add-alias and edit the NODEDIR/private/aliases file directly, by
+adding a line like this:</p>
+<blockquote>
+<div><p>fun: URI:DIR2:ovjy4yhylqlfoqg2vcze36dhde:4d4f47qko2xm5g7osgo2yyidi5m4muyo2vjjy53q4vjju2u55mfa</p>
+</div></blockquote>
+<p>By entering the dircap through the editor, the command-line arguments
+are bypassed, and other users will not be able to see them. Once you’ve
+added the alias, if you use that alias instead of a cap itself on the
+command-line, then no secrets are passed through the command line.  Then
+other processes on the system can still see your filenames and other
+arguments you type there, but not the caps that Tahoe-LAFS uses to permit
+access to your files and directories.</p>
+</section>
+<hr class="docutils" />
+<section id="capabilities-may-be-leaked-to-web-browser-phishing-filter-safe-browsing-servers">
+<h3>Capabilities may be leaked to web browser phishing filter / “safe browsing” servers<a class="headerlink" href="#capabilities-may-be-leaked-to-web-browser-phishing-filter-safe-browsing-servers" title="Link to this heading">¶</a></h3>
+<p>Firefox, Internet Explorer, and Chrome include a “phishing filter” or
+“safe browing” component, which is turned on by default, and which sends
+any URLs that it deems suspicious to a central server.</p>
+<p>Microsoft gives <a class="reference external" href="https://blogs.msdn.com/ie/archive/2005/09/09/463204.aspx">a brief description of their filter’s operation</a>. Firefox
+and Chrome both use Google’s <a class="reference external" href="https://code.google.com/apis/safebrowsing/">“safe browsing API”</a> (<a class="reference external" href="https://code.google.com/p/google-safe-browsing/wiki/Protocolv2Spec">specification</a>).</p>
+<p>This of course has implications for the privacy of general web browsing
+(especially in the cases of Firefox and Chrome, which send your main
+personally identifying Google cookie along with these requests without your
+explicit consent, as described in <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=368255">Firefox bugzilla ticket #368255</a>.</p>
+<p>The reason for documenting this issue here, though, is that when using the
+Tahoe-LAFS web user interface, it could also affect confidentiality and integrity
+by leaking capabilities to the filter server.</p>
+<p>Since IE’s filter sends URLs by SSL/TLS, the exposure of caps is limited to
+the filter server operators (or anyone able to hack the filter server) rather
+than to network eavesdroppers. The “safe browsing API” protocol used by
+Firefox and Chrome, on the other hand, is <em>not</em> encrypted, although the
+URL components are normally hashed.</p>
+<p>Opera also has a similar facility that is disabled by default. A previous
+version of this file stated that Firefox had abandoned their phishing
+filter; this was incorrect.</p>
+<p><em>how to manage it</em></p>
+<p>If you use any phishing filter or “safe browsing” feature, consider either
+disabling it, or not using the WUI via that browser. Phishing filters have
+<a class="reference external" href="http://lorrie.cranor.org/pubs/ndss-phish-tools-final.pdf">very limited effectiveness</a> , and phishing or malware attackers have learnt
+how to bypass them.</p>
+<section id="to-disable-the-filter-in-ie7-or-ie8">
+<h4>To disable the filter in IE7 or IE8:<a class="headerlink" href="#to-disable-the-filter-in-ie7-or-ie8" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Click Internet Options from the Tools menu.</p></li>
+<li><p>Click the Advanced tab.</p></li>
+<li><p>If an “Enable SmartScreen Filter” option is present, uncheck it.
+If a “Use Phishing Filter” or “Phishing Filter” option is present,
+set it to Disable.</p></li>
+<li><p>Confirm (click OK or Yes) out of all dialogs.</p></li>
+</ul>
+<p>If you have a version of IE that splits the settings between security
+zones, do this for all zones.</p>
+</section>
+<section id="to-disable-the-filter-in-firefox">
+<h4>To disable the filter in Firefox:<a class="headerlink" href="#to-disable-the-filter-in-firefox" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Click Options from the Tools menu.</p></li>
+<li><p>Click the Security tab.</p></li>
+<li><p>Uncheck both the “Block reported attack sites” and “Block reported
+web forgeries” options.</p></li>
+<li><p>Click OK.</p></li>
+</ul>
+</section>
+<section id="to-disable-the-filter-in-chrome">
+<h4>To disable the filter in Chrome:<a class="headerlink" href="#to-disable-the-filter-in-chrome" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Click Options from the Tools menu.</p></li>
+<li><p>Click the “Under the Hood” tab and find the “Privacy” section.</p></li>
+<li><p>Uncheck the “Enable phishing and malware protection” option.</p></li>
+<li><p>Click Close.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="known-issues-in-the-sftp-frontend">
+<h3>Known issues in the SFTP frontend<a class="headerlink" href="#known-issues-in-the-sftp-frontend" title="Link to this heading">¶</a></h3>
+<p>These are documented in <a class="reference internal" href="frontends/FTP-and-SFTP.html"><span class="doc">Tahoe-LAFS SFTP Frontend</span></a> and on <a class="reference external" href="https://tahoe-lafs.org/trac/tahoe-lafs/wiki/SftpFrontend">the
+SftpFrontend page</a> on the wiki.</p>
+</section>
+<hr class="docutils" />
+<section id="traffic-analysis-based-on-sizes-of-files-directories-storage-indices-and-timing">
+<h3>Traffic analysis based on sizes of files/directories, storage indices, and timing<a class="headerlink" href="#traffic-analysis-based-on-sizes-of-files-directories-storage-indices-and-timing" title="Link to this heading">¶</a></h3>
+<p>Files and directories stored by Tahoe-LAFS are encrypted, but the ciphertext
+reveals the exact size of the original file or directory representation.
+This information is available to passive eavesdroppers and to server operators.</p>
+<p>For example, a large data set with known file sizes could probably be
+identified with a high degree of confidence.</p>
+<p>Uploads and downloads of the same file or directory can be linked by server
+operators, even without making assumptions based on file size. Anyone who
+knows the introducer furl for a grid may be able to act as a server operator.
+This implies that if such an attacker knows which file/directory is being
+accessed in a particular request (by some other form of surveillance, say),
+then they can identify later or earlier accesses of the same file/directory.</p>
+<p>Observing requests during a directory traversal (such as a deep-check
+operation) could reveal information about the directory structure, i.e.
+which files and subdirectories are linked from a given directory.</p>
+<p>Attackers can combine the above information with inferences based on timing
+correlations. For instance, two files that are accessed close together in
+time are likely to be related even if they are not linked in the directory
+structure. Also, users that access the same files may be related to each other.</p>
+</section>
+<hr class="docutils" />
+<section id="privacy-leak-via-google-chart-api-link-in-map-update-timing-web-page">
+<h3>Privacy leak via Google Chart API link in map-update timing web page<a class="headerlink" href="#privacy-leak-via-google-chart-api-link-in-map-update-timing-web-page" title="Link to this heading">¶</a></h3>
+<p>The Tahoe web-based user interface includes a diagnostic page known as the
+“map-update timing page”. It is reached through the “Recent and Active
+Operations” link on the front welcome page, then through the “Status” column
+for “map-update” operations (which occur when mutable files, including
+directories, are read or written). This page contains per-server response
+times, as lines of text, and includes an image which displays the response
+times in graphical form. The image is generated by constructing a URL for
+the <a class="reference external" href="https://developers.google.com/chart/image/">Google Chart API</a>, which is then served by the <cite>chart.apis.google.com</cite>
+internet server.</p>
+<p>When you view this page, several parties may learn information about your
+Tahoe activities. The request will typically include a “Referer” header,
+revealing the URL of the mapupdate status page (which is typically something
+like “<a class="reference external" href="http://127.0.0.1:3456/status/mapupdate-123">http://127.0.0.1:3456/status/mapupdate-123</a>”) to network observers and
+the Google API server. The image returned by this server is typically a PNG
+file, but either the server or a MitM attacker could replace it with
+something malicious that attempts to exploit a browser rendering bug or
+buffer overflow. (Note that browsers do not execute scripts inside IMG tags,
+even for SVG images).</p>
+<p>In addition, if your Tahoe node connects to its grid over Tor or i2p, but the
+web browser you use to access your node does not, then this image link may
+reveal your use of Tahoe (and that grid) to the outside world. It is not
+recommended to use a browser in this way, because other links in Tahoe-stored
+content would reveal even more information (e.g. an attacker could store an
+HTML file with unique CSS references into a shared Tahoe grid, then send your
+pseudonym a message with its URI, then observe your browser loading that CSS
+file, and thus link the source IP address of your web client to that
+pseudonym).</p>
+<p>A future version of Tahoe will probably replace the Google Chart API link
+(which was deprecated by Google in April 2012) with client-side javascript
+using d3.js, removing the information leak but requiring JS to see the chart.
+See ticket <a class="reference external" href="https://tahoe-lafs.org/trac/tahoe-lafs/ticket/1942">#1942</a> for details.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="known-issues-in-tahoe-lafs-v1-9-0-released-31-oct-2011">
+<h2>Known Issues in Tahoe-LAFS v1.9.0, released 31-Oct-2011<a class="headerlink" href="#known-issues-in-tahoe-lafs-v1-9-0-released-31-oct-2011" title="Link to this heading">¶</a></h2>
+<section id="integrity-failure-during-mutable-downloads">
+<h3>Integrity Failure during Mutable Downloads<a class="headerlink" href="#integrity-failure-during-mutable-downloads" title="Link to this heading">¶</a></h3>
+<p>Under certain circumstances, the integrity-verification code of the mutable
+downloader could be bypassed. Clients who receive carefully crafted shares
+(from attackers) will emit incorrect file contents, and the usual
+share-corruption errors would not be raised. This only affects mutable files
+(not immutable), and only affects downloads that use doctored shares. It is
+not persistent: the threat is resolved once you upgrade your client to a
+version without the bug. However, read-modify-write operations (such as
+directory manipulations) performed by vulnerable clients could cause the
+attacker’s modifications to be written back out to the mutable file, making
+the corruption permanent.</p>
+<p>The attacker’s ability to manipulate the file contents is limited. They can
+modify FEC-encoded ciphertext in all but one share. This gives them the
+ability to blindly flip bits in roughly 2/3rds of the file (for the default
+k=3 encoding parameter). Confidentiality remains intact, unless the attacker
+can deduce the file’s contents by observing your reactions to corrupted
+downloads.</p>
+<p>This bug was introduced in 1.9.0, as part of the MDMF-capable downloader, and
+affects both SDMF and MDMF files. It was not present in 1.8.3.</p>
+<p><em>how to manage it</em></p>
+<p>There are three options:</p>
+<ul class="simple">
+<li><p>Upgrade to 1.9.1, which fixes the bug</p></li>
+<li><p>Downgrade to 1.8.3, which does not contain the bug</p></li>
+<li><p>If using 1.9.0, do not trust the contents of mutable files (whether SDMF or
+MDMF) that the 1.9.0 client emits, and do not modify directories (which
+could write the corrupted data back into place, making the damage
+persistent)</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="known-issues-in-tahoe-lafs-v1-8-2-released-30-jan-2011">
+<h2>Known Issues in Tahoe-LAFS v1.8.2, released 30-Jan-2011<a class="headerlink" href="#known-issues-in-tahoe-lafs-v1-8-2-released-30-jan-2011" title="Link to this heading">¶</a></h2>
+<section id="unauthorized-deletion-of-an-immutable-file-by-its-storage-index">
+<h3>Unauthorized deletion of an immutable file by its storage index<a class="headerlink" href="#unauthorized-deletion-of-an-immutable-file-by-its-storage-index" title="Link to this heading">¶</a></h3>
+<p>Due to a flaw in the Tahoe-LAFS storage server software in v1.3.0 through
+v1.8.2, a person who knows the “storage index” that identifies an immutable
+file can cause the server to delete its shares of that file.</p>
+<p>If an attacker can cause enough shares to be deleted from enough storage
+servers, this deletes the file.</p>
+<p>This vulnerability does not enable anyone to read file contents without
+authorization (confidentiality), nor to change the contents of a file
+(integrity).</p>
+<p>A person could learn the storage index of a file in several ways:</p>
+<ol class="arabic simple">
+<li><p>By being granted the authority to read the immutable file: i.e. by being
+granted a read capability to the file. They can determine the file’s
+storage index from its read capability.</p></li>
+<li><p>By being granted a verify capability to the file. They can determine the
+file’s storage index from its verify capability. This case probably
+doesn’t happen often because users typically don’t share verify caps.</p></li>
+<li><p>By operating a storage server, and receiving a request from a client that
+has a read cap or a verify cap. If the client attempts to upload,
+download, or verify the file with their storage server, even if it doesn’t
+actually have the file, then they can learn the storage index of the file.</p></li>
+<li><p>By gaining read access to an existing storage server’s local filesystem,
+and inspecting the directory structure that it stores its shares in. They
+can thus learn the storage indexes of all files that the server is holding
+at least one share of. Normally only the operator of an existing storage
+server would be able to inspect its local filesystem, so this requires
+either being such an operator of an existing storage server, or somehow
+gaining the ability to inspect the local filesystem of an existing storage
+server.</p></li>
+</ol>
+<p><em>how to manage it</em></p>
+<p>Tahoe-LAFS version v1.8.3 or newer (except v1.9a1) no longer has this flaw;
+if you upgrade a storage server to a fixed release then that server is no
+longer vulnerable to this problem.</p>
+<p>Note that the issue is local to each storage server independently of other
+storage servers: when you upgrade a storage server then that particular
+storage server can no longer be tricked into deleting its shares of the
+target file.</p>
+<p>If you can’t immediately upgrade your storage server to a version of
+Tahoe-LAFS that eliminates this vulnerability, then you could temporarily
+shut down your storage server. This would of course negatively impact
+availability – clients would not be able to upload or download shares to
+that particular storage server while it was shut down – but it would protect
+the shares already stored on that server from being deleted as long as the
+server is shut down.</p>
+<p>If the servers that store shares of your file are running a version of
+Tahoe-LAFS with this vulnerability, then you should think about whether
+someone can learn the storage indexes of your files by one of the methods
+described above. A person can not exploit this vulnerability unless they have
+received a read cap or verify cap, or they control a storage server that has
+been queried about this file by a client that has a read cap or a verify cap.</p>
+<p>Tahoe-LAFS does not currently have a mechanism to limit which storage servers
+can connect to your grid, but it does have a way to see which storage servers
+have been connected to the grid. The Introducer’s front page in the Web User
+Interface has a list of all storage servers that the Introducer has ever seen
+and the first time and the most recent time that it saw them. Each Tahoe-LAFS
+gateway maintains a similar list on its front page in its Web User Interface,
+showing all of the storage servers that it learned about from the Introducer,
+when it first connected to that storage server, and when it most recently
+connected to that storage server. These lists are stored in memory and are
+reset to empty when the process is restarted.</p>
+<p>See ticket <a class="reference external" href="https://tahoe-lafs.org/trac/tahoe-lafs/ticket/1528">#1528</a> for technical details.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, The Tahoe-LAFS Developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Known Issues</a><ul>
+<li><a class="reference internal" href="#known-issues-in-tahoe-lafs-v1-10-3-released-30-mar-2016">Known Issues in Tahoe-LAFS v1.10.3, released 30-Mar-2016</a><ul>
+<li><a class="reference internal" href="#unauthorized-access-by-javascript-in-unrelated-files">Unauthorized access by JavaScript in unrelated files</a></li>
+<li><a class="reference internal" href="#disclosure-of-file-through-embedded-hyperlinks-or-javascript-in-that-file">Disclosure of file through embedded hyperlinks or JavaScript in that file</a></li>
+<li><a class="reference internal" href="#command-line-arguments-are-leaked-to-other-local-users">Command-line arguments are leaked to other local users</a></li>
+<li><a class="reference internal" href="#capabilities-may-be-leaked-to-web-browser-phishing-filter-safe-browsing-servers">Capabilities may be leaked to web browser phishing filter / “safe browsing” servers</a><ul>
+<li><a class="reference internal" href="#to-disable-the-filter-in-ie7-or-ie8">To disable the filter in IE7 or IE8:</a></li>
+<li><a class="reference internal" href="#to-disable-the-filter-in-firefox">To disable the filter in Firefox:</a></li>
+<li><a class="reference internal" href="#to-disable-the-filter-in-chrome">To disable the filter in Chrome:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#known-issues-in-the-sftp-frontend">Known issues in the SFTP frontend</a></li>
+<li><a class="reference internal" href="#traffic-analysis-based-on-sizes-of-files-directories-storage-indices-and-timing">Traffic analysis based on sizes of files/directories, storage indices, and timing</a></li>
+<li><a class="reference internal" href="#privacy-leak-via-google-chart-api-link-in-map-update-timing-web-page">Privacy leak via Google Chart API link in map-update timing web page</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#known-issues-in-tahoe-lafs-v1-9-0-released-31-oct-2011">Known Issues in Tahoe-LAFS v1.9.0, released 31-Oct-2011</a><ul>
+<li><a class="reference internal" href="#integrity-failure-during-mutable-downloads">Integrity Failure during Mutable Downloads</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#known-issues-in-tahoe-lafs-v1-8-2-released-30-jan-2011">Known Issues in Tahoe-LAFS v1.8.2, released 30-Jan-2011</a><ul>
+<li><a class="reference internal" href="#unauthorized-deletion-of-an-immutable-file-by-its-storage-index">Unauthorized deletion of an immutable file by its storage index</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

@@ -1,0 +1,567 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>How To Run Tahoe-LAFS - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">The Private Facts Project</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">The Private Facts Project</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/reference/Tahoe-LAFS/running.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="how-to-run-tahoe-lafs">
+<h1>How To Run Tahoe-LAFS<a class="headerlink" href="#how-to-run-tahoe-lafs" title="Link to this heading">¶</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>This is how to run a Tahoe-LAFS client or a complete Tahoe-LAFS grid.
+First you have to install the Tahoe-LAFS software, as documented in
+<span class="xref std std-doc">Installing Tahoe-LAFS</span>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">tahoe</span></code> program in your virtualenv’s <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory is used to
+create, start, and stop nodes. Each node lives in a separate base
+directory, in which there is a configuration file named <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code>.
+Nodes read and write files within this base directory.</p>
+<p>A grid consists of a set of <em>storage nodes</em> and <em>client nodes</em> running
+the Tahoe-LAFS code. There is also an <em>introducer node</em> that is
+responsible for getting the other nodes talking to each other.</p>
+<p>If you’re getting started we recommend you try connecting to the <a class="reference external" href="https://tahoe-lafs.org/trac/tahoe-lafs/wiki/TestGrid">public test
+grid</a> as you only need to create a client node. When you want to create your
+own grid you’ll need to create the introducer and several initial storage
+nodes (see the note about small grids below).</p>
+<section id="being-introduced-to-a-grid">
+<h3>Being Introduced to a Grid<a class="headerlink" href="#being-introduced-to-a-grid" title="Link to this heading">¶</a></h3>
+<p>A collection of Tahoe servers is called a Grid and usually has 1
+Introducer (but sometimes more, and it’s possible to run with zero). The
+Introducer announces which storage servers constitute the Grid and how to
+contact them. There is a secret “fURL” you need to know to talk to the
+Introducer.</p>
+<p>One way to get this secret is using traditional tools such as encrypted
+email, encrypted instant-messaging, etcetera. It is important to transmit
+this fURL secretly as knowing it gives you access to the Grid.</p>
+<p>An additional way to share the fURL securely is via <a class="reference external" href="https://magic-wormhole.io/">magic
+wormhole</a>. This uses a weak one-time password and a server on the
+internet (at <cite>wormhole.tahoe-lafs.org</cite>) to open a secure channel between
+two computers. In Tahoe-LAFS this functions via the commands <cite>tahoe
+invite</cite> and <cite>tahoe create-client –join</cite>. A person who already has access
+to a Grid can use <cite>tahoe invite</cite> to create one end of the <a class="reference external" href="https://magic-wormhole.io/">magic
+wormhole</a> and then transmits some JSON (including the Introducer’s
+secret fURL) to the other end. <cite>tahoe invite</cite> will print a one-time
+secret code; you must then communicate this code to the person who will
+join the Grid.</p>
+<p>The other end of the <a class="reference external" href="https://magic-wormhole.io/">magic wormhole</a> in this case is <cite>tahoe
+create-client –join &lt;one-time code&gt;</cite>, where the person being invited
+types in the code they were given. Ideally, this code would be
+transmitted securely. It is, however, only useful exactly once. Also, it
+is much easier to transcribe by a human. Codes look like
+<cite>7-surrender-tunnel</cite> (a short number and two words).</p>
+</section>
+<section id="running-a-client">
+<h3>Running a Client<a class="headerlink" href="#running-a-client" title="Link to this heading">¶</a></h3>
+<p>To construct a client node, run “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-client</span></code>”, which will create
+<code class="docutils literal notranslate"><span class="pre">~/.tahoe</span></code> to be the node’s base directory. Acquire the <code class="docutils literal notranslate"><span class="pre">introducer.furl</span></code>
+(see below if you are running your own introducer, or use the one from the
+<a class="reference external" href="https://tahoe-lafs.org/trac/tahoe-lafs/wiki/TestGrid">TestGrid page</a>), and write it to <code class="docutils literal notranslate"><span class="pre">~/.tahoe/private/introducers.yaml</span></code>
+(see <a class="reference internal" href="configuration.html#introducer-definitions"><span class="std std-ref">Introducer Definitions</span></a>). Then use “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">run</span> <span class="pre">~/.tahoe</span></code>”.
+After that, the node should be off and running. The first thing
+it will do is connect to the introducer and get itself connected to all other
+nodes on the grid.</p>
+<p>Some Grids use “magic wormhole” one-time codes to configure the basic
+options. In such a case you use <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-client</span> <span class="pre">--join</span>
+<span class="pre">&lt;one-time-code&gt;</span></code> and do not have to do any of the <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code> editing
+mentioned above.</p>
+<p>By default, “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-client</span></code>” creates a client-only node, that
+does not offer its disk space to other nodes. To configure other behavior,
+use “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-node</span></code>” or see <a class="reference internal" href="configuration.html"><span class="doc">Configuring a Tahoe-LAFS node</span></a>.</p>
+<p>The “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">run</span></code>” command above will run the node in the foreground.
+<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">--help</span></code> gives a summary of all commands.</p>
+</section>
+<section id="running-a-server-or-introducer">
+<h3>Running a Server or Introducer<a class="headerlink" href="#running-a-server-or-introducer" title="Link to this heading">¶</a></h3>
+<p>To build either a storage server node, or an introducer node, you’ll need
+a way for clients to connect to it. The simplest case is when the
+computer is on the public internet (e.g. a “VPS” virtual private server,
+with a public IP address and a DNS hostname like <code class="docutils literal notranslate"><span class="pre">example.net</span></code>). See
+<a class="reference internal" href="servers.html"><span class="doc">How To Configure A Server</span></a> for help with more complex scenarios, using the <code class="docutils literal notranslate"><span class="pre">--port</span></code>
+and <code class="docutils literal notranslate"><span class="pre">--location</span></code> arguments.</p>
+<p>To construct an introducer, create a new base directory for it (the name
+of the directory is up to you), <code class="docutils literal notranslate"><span class="pre">cd</span></code> into it, and run “<code class="docutils literal notranslate"><span class="pre">tahoe</span>
+<span class="pre">create-introducer</span> <span class="pre">--hostname=example.net</span> <span class="pre">.</span></code>” (but using the hostname of
+your VPS). Now run the introducer using “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">run</span> <span class="pre">.</span></code>”. After it
+starts, it will write a file named <code class="docutils literal notranslate"><span class="pre">introducer.furl</span></code> into the
+<code class="docutils literal notranslate"><span class="pre">private/</span></code> subdirectory of that base directory. This file contains the
+URL the other nodes must use in order to connect to this introducer.</p>
+<p>You can distribute your Introducer fURL securely to new clients by using
+the <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">invite</span></code> command. This will prepare some JSON to send to the
+other side, request a <a class="reference external" href="https://magic-wormhole.io/">magic wormhole</a> code from
+<code class="docutils literal notranslate"><span class="pre">wormhole.tahoe-lafs.org</span></code> and print it out to the terminal. This
+one-time code should be transmitted to the user of the client, who can
+then run <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-client</span> <span class="pre">--join</span> <span class="pre">&lt;one-time-code&gt;</span></code>.</p>
+<p>Storage servers are created the same way: <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-node</span>
+<span class="pre">--hostname=HOSTNAME</span> <span class="pre">.</span></code> from a new directory. You’ll need to provide the
+introducer FURL (either as a <code class="docutils literal notranslate"><span class="pre">--introducer=</span></code> argument, or by editing
+the <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code> configuration file afterwards) to connect to the
+introducer of your choice.</p>
+<p>See <a class="reference internal" href="configuration.html"><span class="doc">Configuring a Tahoe-LAFS node</span></a> for more details about how to configure
+Tahoe-LAFS.</p>
+</section>
+<section id="multiple-instances">
+<h3>Multiple Instances<a class="headerlink" href="#multiple-instances" title="Link to this heading">¶</a></h3>
+<p>Running multiple instances against the same configuration directory isn’t supported.
+This will lead to undefined behavior and could corrupt the configuration or state.</p>
+<p>We attempt to avoid this situation with a “pidfile”-style file in the config directory called <code class="docutils literal notranslate"><span class="pre">running.process</span></code>.
+There may be a parallel file called <code class="docutils literal notranslate"><span class="pre">running.process.lock</span></code> in existence.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.lock</span></code> file exists to make sure only one process modifies <code class="docutils literal notranslate"><span class="pre">running.process</span></code> at once.
+The lock file is managed by the <a class="reference external" href="https://pypi.org/project/lockfile/">lockfile</a> library.
+If you wish to make use of <code class="docutils literal notranslate"><span class="pre">running.process</span></code> for any reason you should also lock it and follow the semantics of lockfile.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">running.process</span></code> exists then it contains the PID and the creation-time of the process.
+When no such file exists, there is no other process running on this configuration.
+If there is a <code class="docutils literal notranslate"><span class="pre">running.process</span></code> file, it may be a leftover file or it may indicate that another process is running against this config.
+To tell the difference, determine if the PID in the file exists currently.
+If it does, check the creation-time of the process versus the one in the file.
+If these match, there is another process currently running and using this config.
+Otherwise, the file is stale – it should be removed before starting Tahoe-LAFS.</p>
+<p>Some example Python code to check the above situations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">psutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">filelock</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">can_spawn_tahoe</span><span class="p">(</span><span class="n">pidfile</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine if we can spawn a Tahoe-LAFS for the given pidfile. That</span>
+<span class="sd">    pidfile may be deleted if it is stale.</span>
+
+<span class="sd">    :param pathlib.Path pidfile: the file to check, that is the Path</span>
+<span class="sd">        to &quot;running.process&quot; in a Tahoe-LAFS configuration directory</span>
+
+<span class="sd">    :returns bool: True if we can spawn `tahoe run` here</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lockpath</span> <span class="o">=</span> <span class="n">pidfile</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="p">(</span><span class="n">pidfile</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.lock&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">filelock</span><span class="o">.</span><span class="n">FileLock</span><span class="p">(</span><span class="n">lockpath</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">pidfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">pid</span><span class="p">,</span> <span class="n">create_time</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="c1"># somewhat interesting: we have a pidfile</span>
+        <span class="n">pid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+        <span class="n">create_time</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">create_time</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">proc</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+            <span class="c1"># most interesting case: there _is_ a process running at the</span>
+            <span class="c1"># recorded PID -- but did it just happen to get that PID, or</span>
+            <span class="c1"># is it the very same one that wrote the file?</span>
+            <span class="k">if</span> <span class="n">create_time</span> <span class="o">==</span> <span class="n">proc</span><span class="o">.</span><span class="n">create_time</span><span class="p">():</span>
+                <span class="c1"># _not_ stale! another intance is still running against</span>
+                <span class="c1"># this configuration</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">except</span> <span class="n">psutil</span><span class="o">.</span><span class="n">NoSuchProcess</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="c1"># the file is stale</span>
+        <span class="n">pidfile</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;can spawn?&quot;</span><span class="p">,</span> <span class="n">can_spawn_tahoe</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;running.process&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</section>
+<section id="a-note-about-small-grids">
+<h3>A note about small grids<a class="headerlink" href="#a-note-about-small-grids" title="Link to this heading">¶</a></h3>
+<p>By default, Tahoe-LAFS ships with the configuration parameter
+<code class="docutils literal notranslate"><span class="pre">shares.happy</span></code> set to 7. If you are using Tahoe-LAFS on a grid with
+fewer than 7 storage nodes, this won’t work well for you — none of your
+uploads will succeed. To fix this, see <a class="reference internal" href="configuration.html"><span class="doc">Configuring a Tahoe-LAFS node</span></a> to learn how
+to set <code class="docutils literal notranslate"><span class="pre">shares.happy</span></code> to a more suitable value for your grid.</p>
+</section>
+<section id="development-with-docker">
+<h3>Development with Docker<a class="headerlink" href="#development-with-docker" title="Link to this heading">¶</a></h3>
+<p>If you want to stand up a small local test environment, you can install
+<a class="reference external" href="https://docs.docker.com/">Docker</a> and <a class="reference external" href="https://docs.docker.com/compose/">Docker Compose</a>. Once you have cloned the repository, run
+<code class="docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">up</span></code> from the project’s root directory. This will start a
+introducer, server, and a client configured to connect to them. After the
+containers start, you can access the WUI by navigating to
+<code class="docutils literal notranslate"><span class="pre">http://localhost:3456</span></code> in your browser.</p>
+</section>
+</section>
+<section id="do-stuff-with-it">
+<h2>Do Stuff With It<a class="headerlink" href="#do-stuff-with-it" title="Link to this heading">¶</a></h2>
+<p>This is how to use your Tahoe-LAFS node.</p>
+<section id="the-wui">
+<h3>The WUI<a class="headerlink" href="#the-wui" title="Link to this heading">¶</a></h3>
+<p>Point your web browser to <a class="reference external" href="http://127.0.0.1:3456">http://127.0.0.1:3456</a> — which is the URL of the
+gateway running on your own local computer — to use your newly created node.</p>
+<p>Create a new directory (with the button labelled “create a directory”).
+Your web browser will load the new directory.  Now if you want to be
+able to come back to this directory later, you have to bookmark it, or
+otherwise save a copy of the URL.  If you lose the URL to this directory,
+then you can never again come back to this directory.</p>
+</section>
+<section id="the-cli">
+<h3>The CLI<a class="headerlink" href="#the-cli" title="Link to this heading">¶</a></h3>
+<p>Prefer the command-line? Run “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">--help</span></code>” (the same command-line
+tool that is used to start and stop nodes serves to navigate and use the
+decentralized file store). To get started, create a new directory and
+mark it as the ‘tahoe:’ alias by running “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">create-alias</span> <span class="pre">tahoe</span></code>”.
+Once you’ve done that, you can do “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">ls</span> <span class="pre">tahoe:</span></code>” and “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">cp</span>
+<span class="pre">LOCALFILE</span> <span class="pre">tahoe:foo.txt</span></code>” to work with your file store. The Tahoe-LAFS
+CLI uses similar syntax to the well-known scp and rsync tools. See
+<a class="reference internal" href="frontends/CLI.html"><span class="doc">The Tahoe-LAFS CLI commands</span></a> for more details.</p>
+<p>To backup a directory full of files and subdirectories, run “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">backup</span>
+<span class="pre">LOCALDIRECTORY</span> <span class="pre">tahoe:</span></code>”. This will create a new LAFS subdirectory inside the
+“tahoe” LAFS directory named “Archive”, and inside “Archive”, it will create
+a new subdirectory whose name is the current date and time. That newly
+created subdirectory will be populated with a snapshot copy of all files and
+directories currently reachable from LOCALDIRECTORY. Then <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">backup</span></code>
+will make a link to that snapshot directory from the “tahoe” LAFS directory,
+and name the link “Latest”.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">backup</span></code> cleverly avoids uploading any files or directories that
+haven’t changed, and it also cleverly deduplicates any files or directories
+that have identical contents to other files or directories that it has
+previously backed-up. This means that running <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">backup</span></code> is a nice
+incremental operation that backs up your files and directories efficiently,
+and if it gets interrupted (for example by a network outage, or by you
+rebooting your computer during the backup, or so on), it will resume right
+where it left off the next time you run <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">backup</span></code>.</p>
+<p>See <a class="reference internal" href="frontends/CLI.html"><span class="doc">The Tahoe-LAFS CLI commands</span></a> for more information about the <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">backup</span></code>
+command, as well as other commands.</p>
+<p>As with the WUI (and with all current interfaces to Tahoe-LAFS), you
+are responsible for remembering directory capabilities yourself. If you
+create a new directory and lose the capability to it, then you cannot
+access that directory ever again.</p>
+</section>
+<section id="the-sftp-frontend">
+<h3>The SFTP frontend<a class="headerlink" href="#the-sftp-frontend" title="Link to this heading">¶</a></h3>
+<p>You can access your Tahoe-LAFS grid via any <a class="reference external" href="https://en.wikipedia.org/wiki/SSH_file_transfer_protocol">SFTP</a> client. See
+<a class="reference internal" href="frontends/FTP-and-SFTP.html"><span class="doc">Tahoe-LAFS SFTP Frontend</span></a> for how to set this up. On most Unix
+platforms, you can also use SFTP to plug Tahoe-LAFS into your computer’s
+local filesystem via <code class="docutils literal notranslate"><span class="pre">sshfs</span></code>, but see the <a class="reference external" href="https://tahoe-lafs.org/trac/tahoe-lafs/wiki/FAQ#Q23_FUSE">FAQ about performance
+problems</a>.</p>
+<p>The <a class="reference external" href="https://tahoe-lafs.org/trac/tahoe-lafs/wiki/SftpFrontend">SftpFrontend</a> page on the wiki has more information about using SFTP with
+Tahoe-LAFS.</p>
+</section>
+<section id="the-wapi">
+<h3>The WAPI<a class="headerlink" href="#the-wapi" title="Link to this heading">¶</a></h3>
+<p>Want to program your Tahoe-LAFS node to do your bidding?  Easy!  See
+<a class="reference internal" href="frontends/webapi.html"><span class="doc">The Tahoe REST-ful Web API</span></a>.</p>
+</section>
+</section>
+<section id="socialize">
+<h2>Socialize<a class="headerlink" href="#socialize" title="Link to this heading">¶</a></h2>
+<p>You can chat with other users of and hackers of this software on the
+#tahoe-lafs IRC channel at <code class="docutils literal notranslate"><span class="pre">irc.libera.chat</span></code>, or on the <a class="reference external" href="https://lists.tahoe-lafs.org/mailman/listinfo/tahoe-dev">tahoe-dev mailing
+list</a>.</p>
+</section>
+<section id="complain">
+<h2>Complain<a class="headerlink" href="#complain" title="Link to this heading">¶</a></h2>
+<p>Bugs can be filed on the Tahoe-LAFS “Trac” instance, at
+<a class="reference external" href="https://tahoe-lafs.org/trac/">https://tahoe-lafs.org/trac/</a> .</p>
+<p>You can also “fork” the repo and submit Pull Requests on Github:
+<a class="reference external" href="https://github.com/tahoe-lafs/tahoe-lafs">https://github.com/tahoe-lafs/tahoe-lafs</a> .</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, The Tahoe-LAFS Developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">How To Run Tahoe-LAFS</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#being-introduced-to-a-grid">Being Introduced to a Grid</a></li>
+<li><a class="reference internal" href="#running-a-client">Running a Client</a></li>
+<li><a class="reference internal" href="#running-a-server-or-introducer">Running a Server or Introducer</a></li>
+<li><a class="reference internal" href="#multiple-instances">Multiple Instances</a></li>
+<li><a class="reference internal" href="#a-note-about-small-grids">A note about small grids</a></li>
+<li><a class="reference internal" href="#development-with-docker">Development with Docker</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#do-stuff-with-it">Do Stuff With It</a><ul>
+<li><a class="reference internal" href="#the-wui">The WUI</a></li>
+<li><a class="reference internal" href="#the-cli">The CLI</a></li>
+<li><a class="reference internal" href="#the-sftp-frontend">The SFTP frontend</a></li>
+<li><a class="reference internal" href="#the-wapi">The WAPI</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#socialize">Socialize</a></li>
+<li><a class="reference internal" href="#complain">Complain</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

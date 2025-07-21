@@ -1,0 +1,456 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>Servers of Happiness - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">The Private Facts Project</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <span class="sidebar-brand-text">The Private Facts Project</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../_sources/reference/Tahoe-LAFS/specifications/servers-of-happiness.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="servers-of-happiness">
+<h1>Servers of Happiness<a class="headerlink" href="#servers-of-happiness" title="Link to this heading">¶</a></h1>
+<p>When you upload a file to a Tahoe-LAFS grid, you expect that it will
+stay there for a while, and that it will do so even if a few of the
+peers on the grid stop working, or if something else goes wrong. An
+upload health metric helps to make sure that this actually happens.
+An upload health metric is a test that looks at a file on a Tahoe-LAFS
+grid and says whether or not that file is healthy; that is, whether it
+is distributed on the grid in such a way as to ensure that it will
+probably survive in good enough shape to be recoverable, even if a few
+things go wrong between the time of the test and the time that it is
+recovered. Our current upload health metric for immutable files is called
+‘servers-of-happiness’; its predecessor was called ‘shares-of-happiness’.</p>
+<p>shares-of-happiness used the number of encoded shares generated by a
+file upload to say whether or not it was healthy. If there were more
+shares than a user-configurable threshold, the file was reported to be
+healthy; otherwise, it was reported to be unhealthy. In normal
+situations, the upload process would distribute shares fairly evenly
+over the peers in the grid, and in that case shares-of-happiness
+worked fine. However, because it only considered the number of shares,
+and not where they were on the grid, it could not detect situations
+where a file was unhealthy because most or all of the shares generated
+from the file were stored on one or two peers.</p>
+<p>servers-of-happiness addresses this by extending the share-focused
+upload health metric to also consider the location of the shares on
+grid. servers-of-happiness looks at the mapping of peers to the shares
+that they hold, and compares the cardinality of the largest happy subset
+of those to a user-configurable threshold. A happy subset of peers has
+the property that any k (where k is as in k-of-n encoding) peers within
+the subset can reconstruct the source file. This definition of file
+health provides a stronger assurance of file availability over time;
+with 3-of-10 encoding, and happy=7, a healthy file is still guaranteed
+to be available even if 4 peers fail.</p>
+<section id="measuring-servers-of-happiness">
+<h2>Measuring Servers of Happiness<a class="headerlink" href="#measuring-servers-of-happiness" title="Link to this heading">¶</a></h2>
+<p>We calculate servers-of-happiness by computing a matching on a
+bipartite graph that is related to the layout of shares on the grid.
+One set of vertices is the peers on the grid, and one set of vertices is
+the shares. An edge connects a peer and a share if the peer will (or
+does, for existing shares) hold the share. The size of the maximum
+matching on this graph is the size of the largest happy peer set that
+exists for the upload.</p>
+<p>First, note that a bipartite matching of size n corresponds to a happy
+subset of size n. This is because a bipartite matching of size n implies
+that there are n peers such that each peer holds a share that no other
+peer holds. Then any k of those peers collectively hold k distinct
+shares, and can restore the file.</p>
+<p>A bipartite matching of size n is not necessary for a happy subset of
+size n, however (so it is not correct to say that the size of the
+maximum matching on this graph is the size of the largest happy subset
+of peers that exists for the upload). For example, consider a file with
+k = 3, and suppose that each peer has all three of those pieces.  Then,
+since any peer from the original upload can restore the file, if there
+are 10 peers holding shares, and the happiness threshold is 7, the
+upload should be declared happy, because there is a happy subset of size
+10, and 10 &gt; 7. However, since a maximum matching on the bipartite graph
+related to this layout has only 3 edges, Tahoe-LAFS declares the upload
+unhealthy. Though it is not unhealthy, a share layout like this example
+is inefficient; for k = 3, and if there are n peers, it corresponds to
+an expansion factor of 10x. Layouts that are declared healthy by the
+bipartite graph matching approach have the property that they correspond
+to uploads that are either already relatively efficient in their
+utilization of space, or can be made to be so by deleting shares; and
+that place all of the shares that they generate, enabling redistribution
+of shares later without having to re-encode the file.  Also, it is
+computationally reasonable to compute a maximum matching in a bipartite
+graph, and there are well-studied algorithms to do that.</p>
+</section>
+<section id="issues">
+<h2>Issues<a class="headerlink" href="#issues" title="Link to this heading">¶</a></h2>
+<p>The uploader is good at detecting unhealthy upload layouts, but it
+doesn’t always know how to make an unhealthy upload into a healthy
+upload if it is possible to do so; it attempts to redistribute shares to
+achieve happiness, but only in certain circumstances. The redistribution
+algorithm isn’t optimal, either, so even in these cases it will not
+always find a happy layout if one can be arrived at through
+redistribution. We are investigating improvements to address these
+issues.</p>
+<p>We don’t use servers-of-happiness for mutable files yet; this fix will
+likely come in Tahoe-LAFS version 1.13.</p>
+</section>
+</section>
+<section id="upload-strategy-of-happiness">
+<h1>Upload Strategy of Happiness<a class="headerlink" href="#upload-strategy-of-happiness" title="Link to this heading">¶</a></h1>
+<p>As mentioned above, the uploader is good at detecting instances which
+do not pass the servers-of-happiness test, but the share distribution algorithm
+is not always successful in instances where happiness can be achieved. A new
+placement algorithm designed to pass the servers-of-happiness test,  titled
+‘Upload Strategy of Happiness’, is meant to fix these instances where the uploader
+is unable to achieve happiness.</p>
+<section id="calculating-share-placements">
+<h2>Calculating Share Placements<a class="headerlink" href="#calculating-share-placements" title="Link to this heading">¶</a></h2>
+<p>We calculate share placement like so:</p>
+<ol class="arabic simple" start="0">
+<li><p>Start with an ordered list of servers. Maybe <em>2N</em> of them.</p></li>
+<li><p>Query all servers for existing shares.</p></li>
+</ol>
+<dl class="simple">
+<dt>1a. Query remaining space from all servers. Every server that has</dt><dd><p>enough free space is considered “readwrite” and every server with too
+little space is “readonly”.</p>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li><p>Construct a bipartite graph G1 of <em>readonly</em> servers to pre-existing
+shares, where an edge exists between an arbitrary readonly server S and an
+arbitrary share T if and only if S currently holds T.</p></li>
+<li><p>Calculate a maximum matching graph of G1 (a set of S-&gt;T edges that has or
+is-tied-for the highest “happiness score”). There is a clever efficient
+algorithm for this, named “Ford-Fulkerson”. There may be more than one
+maximum matching for this graph; we choose one of them arbitrarily, but
+prefer earlier servers. Call this particular placement M1. The placement
+maps shares to servers, where each share appears at most once, and each
+server appears at most once.</p></li>
+<li><p>Construct a bipartite graph G2 of readwrite servers to pre-existing
+shares. Then remove any edge (from G2) that uses a server or a share found
+in M1. Let an edge exist between server S and share T if and only if S
+already holds T.</p></li>
+<li><p>Calculate a maximum matching graph of G2, call this M2, again preferring
+earlier servers.</p></li>
+<li><p>Construct a bipartite graph G3 of (only readwrite) servers to
+shares (some shares may already exist on a server). Then remove
+(from G3) any servers and shares used in M1 or M2 (note that we
+retain servers/shares that were in G1/G2 but <em>not</em> in the M1/M2
+subsets)</p></li>
+<li><p>Calculate a maximum matching graph of G3, call this M3, preferring earlier
+servers. The final placement table is the union of M1+M2+M3.</p></li>
+<li><p>Renew the shares on their respective servers from M1 and M2.</p></li>
+<li><p>Upload share T to server S if an edge exists between S and T in M3.</p></li>
+<li><p>If any placements from step 9 fail, mark the server as read-only. Go back
+to step 2 (since we may discover a server is/has-become read-only, or has
+failed, during step 9).</p></li>
+</ol>
+<p>Rationale (Step 4): when we see pre-existing shares on read-only servers, we
+prefer to rely upon those (rather than the ones on read-write servers), so we
+can maybe use the read-write servers for new shares. If we picked the
+read-write server’s share, then we couldn’t re-use that server for new ones
+(we only rely upon each server for one share, more or less).</p>
+</section>
+<section id="properties-of-upload-strategy-of-happiness">
+<h2>Properties of Upload Strategy of Happiness<a class="headerlink" href="#properties-of-upload-strategy-of-happiness" title="Link to this heading">¶</a></h2>
+<p>The size of the maximum bipartite matching is bounded by the size of the smaller
+set of vertices. Therefore in a situation where the set of servers is smaller
+than the set of shares, placement is not generated for a subset of shares. In
+this case the remaining shares are distributed as evenly as possible across the
+set of writable servers.</p>
+<p>If the servers-of-happiness criteria can be met, the upload strategy of
+happiness guarantees that H shares will be placed on the network. During file
+repair, if the set of servers is larger than N, the algorithm will only attempt
+to spread shares over N distinct servers. For both initial file upload and file
+repair, N should be viewed as the maximum number of distinct servers shares
+can be placed on, and H as the minimum amount. The uploader will fail if
+the number of distinct servers is less than H, and it will never attempt to
+exceed N.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, The Tahoe-LAFS Developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Servers of Happiness</a><ul>
+<li><a class="reference internal" href="#measuring-servers-of-happiness">Measuring Servers of Happiness</a></li>
+<li><a class="reference internal" href="#issues">Issues</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#upload-strategy-of-happiness">Upload Strategy of Happiness</a><ul>
+<li><a class="reference internal" href="#calculating-share-placements">Calculating Share Placements</a></li>
+<li><a class="reference internal" href="#properties-of-upload-strategy-of-happiness">Properties of Upload Strategy of Happiness</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

@@ -1,15 +1,15 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="./">
+<html class="no-js" lang="en" data-content_root="../../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+<link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
-        <title>The Private Facts Project</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=25af2a20" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+        <title>Old Configuration Files - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
 
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">The Private Facts Project</div></a>
+      <a href="../../../index.html"><div class="brand">The Private Facts Project</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -187,11 +187,11 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   <span class="sidebar-brand-text">The Private Facts Project</span>
   
-</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
@@ -216,7 +216,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/index.rst.txt" title="View this page">
+  <a class="muted-link" href="../../../_sources/reference/Tahoe-LAFS/historical/configuration.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -236,20 +236,107 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="private-facts">
-<h1>Private Facts<a class="headerlink" href="#private-facts" title="Link to this heading">¶</a></h1>
-<div class="toctree-wrapper compound">
+          <section id="old-configuration-files">
+<h1>Old Configuration Files<a class="headerlink" href="#old-configuration-files" title="Link to this heading">¶</a></h1>
+<p>Tahoe-LAFS releases before v1.3.0 had no <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code> file, and used
+distinct files for each item listed below. If Tahoe-LAFS v1.9.0 or above
+detects the old configuration files at start up it emits a warning and
+aborts the start up. (This was issue ticket #1385.)</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Config setting</p></th>
+<th class="head"><p>File</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[node]nickname</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/nickname</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[node]web.port</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/webport</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[node]tub.port</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/client.port</span></code></p></td>
+<td><p>(for Clients, not Introducers)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[node]tub.port</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/introducer.port</span></code></p></td>
+<td><p>(for Introducers, not Clients) (note that, unlike other keys, <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code> overrode this file from Tahoe-LAFS v1.3.0 up to and including Tahoe-LAFS v1.8.2)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[node]tub.location</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/advertised_ip_addresses</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[node]log_gatherer.furl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/log_gatherer.furl</span></code></p></td>
+<td><p>(one per line)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[node]timeout.keepalive</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/keepalive_timeout</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[node]timeout.disconnect</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/disconnect_timeout</span></code>
+<code class="docutils literal notranslate"><span class="pre">BASEDIR/introducer.furl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/private/introducers.yaml</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[client]helper.furl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/helper.furl</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[client]key_generator.furl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/key_generator.furl</span></code>
+<code class="docutils literal notranslate"><span class="pre">BASEDIR/stats_gatherer.furl</span></code></p></td>
+<td><p>Stats gatherer has been removed.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[storage]enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/no_storage</span></code></p></td>
+<td><p>(<code class="docutils literal notranslate"><span class="pre">False</span></code> if <code class="docutils literal notranslate"><span class="pre">no_storage</span></code> exists)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[storage]readonly</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/readonly_storage</span></code></p></td>
+<td><p>(<code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">readonly_storage</span></code> exists)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[storage]sizelimit</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/sizelimit</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[storage]debug_discard</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/debug_discard_storage</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[helper]enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASEDIR/run_helper</span></code></p></td>
+<td><p>(<code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">run_helper</span></code> exists)</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-<blockquote class="pull-quote">
-<div><dl class="simple">
-<dt>The three rules of storing data for other people:</dt><dd><ul class="simple">
-<li><p>Never lose the data</p></li>
-<li><p>Never let the wrong people see it.</p></li>
-<li><p>Never forget the first two rules.</p></li>
-</ul>
-</dd>
-</dl>
-</div></blockquote>
+<p>Note: the functionality of <code class="docutils literal notranslate"><span class="pre">[node]ssh.port</span></code> and
+<code class="docutils literal notranslate"><span class="pre">[node]ssh.authorized_keys_file</span></code> were previously (before Tahoe-LAFS
+v1.3.0) combined, controlled by the presence of a
+<code class="docutils literal notranslate"><span class="pre">BASEDIR/authorized_keys.SSHPORT</span></code> file, in which the suffix of the
+filename indicated which port the ssh server should listen on, and the
+contents of the file provided the ssh public keys to accept. Support
+for these files has been removed completely. To <code class="docutils literal notranslate"><span class="pre">ssh</span></code> into your
+Tahoe-LAFS node, add <code class="docutils literal notranslate"><span class="pre">[node]ssh.port</span></code> and
+<code class="docutils literal notranslate"><span class="pre">[node].ssh_authorized_keys_file</span></code> statements to your <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code>.</p>
+<p>Likewise, the functionality of <code class="docutils literal notranslate"><span class="pre">[node]tub.location</span></code> is a variant of
+the now (since Tahoe-LAFS v1.3.0) unsupported
+<code class="docutils literal notranslate"><span class="pre">BASEDIR/advertised_ip_addresses</span></code> . The old file was additive (the
+addresses specified in <code class="docutils literal notranslate"><span class="pre">advertised_ip_addresses</span></code> were used in
+addition to any that were automatically discovered), whereas the new
+<code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code> directive is not (<code class="docutils literal notranslate"><span class="pre">tub.location</span></code> is used verbatim).</p>
+<p>The stats gatherer has been broken at least since Tahoe-LAFS v1.13.0.
+The (broken) functionality of <code class="docutils literal notranslate"><span class="pre">[client]stats_gatherer.furl</span></code> (which
+was previously in <code class="docutils literal notranslate"><span class="pre">BASEDIR/stats_gatherer.furl</span></code>), is scheduled to be
+completely removed after Tahoe-LAFS v1.15.0.  After that point, if
+your configuration contains a <code class="docutils literal notranslate"><span class="pre">[client]stats_gatherer.furl</span></code>, your
+node will refuse to start.</p>
 </section>
 
         </article>
@@ -283,9 +370,9 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=16df9e97"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+</div><script src="../../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
     </body>
 </html>

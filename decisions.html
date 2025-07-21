@@ -6,7 +6,7 @@
 <link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
-        <title>The Private Facts Project</title>
+        <title>Decision Records - The Private Facts Project</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=25af2a20" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">The Private Facts Project</div></a>
+      <a href="index.html"><div class="brand">The Private Facts Project</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -187,7 +187,7 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   <span class="sidebar-brand-text">The Private Facts Project</span>
   
@@ -216,7 +216,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/index.rst.txt" title="View this page">
+  <a class="muted-link" href="_sources/decisions.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -230,26 +230,92 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="private-facts">
-<h1>Private Facts<a class="headerlink" href="#private-facts" title="Link to this heading">¶</a></h1>
-<div class="toctree-wrapper compound">
-</div>
-<blockquote class="pull-quote">
-<div><dl class="simple">
-<dt>The three rules of storing data for other people:</dt><dd><ul class="simple">
-<li><p>Never lose the data</p></li>
-<li><p>Never let the wrong people see it.</p></li>
-<li><p>Never forget the first two rules.</p></li>
+          <section id="decision-records">
+<h1>Decision Records<a class="headerlink" href="#decision-records" title="Link to this heading">¶</a></h1>
+<section id="tdd-when-to-write-tests">
+<h2>TDD: When to write tests?<a class="headerlink" href="#tdd-when-to-write-tests" title="Link to this heading">¶</a></h2>
+<p>(Starting with a blank page?)</p>
+</section>
+<section id="sqlite">
+<h2>SQLite?<a class="headerlink" href="#sqlite" title="Link to this heading">¶</a></h2>
+<p>Read/write to to SQLite on start/exit (and write to local file for cache)
+(otherwise mod SQLite to use Tahoe)
+write to redis on the fly (for caching) : more dependencies</p>
+</section>
+<section id="time-zone-for-date-field">
+<h2>Time Zone for date field?<a class="headerlink" href="#time-zone-for-date-field" title="Link to this heading">¶</a></h2>
+<p>UTC would be best and then (optionally display in the user’s locale?)</p>
+</section>
+<section id="kelvin-for-temp">
+<h2>Kelvin for temp<a class="headerlink" href="#kelvin-for-temp" title="Link to this heading">¶</a></h2>
+<p>Should I collect from user in C or F rather than force them to enter Kelvin?</p>
+</section>
+<section id="flow-rate-from-0-50">
+<h2>Flow rate from 0 - 50<a class="headerlink" href="#flow-rate-from-0-50" title="Link to this heading">¶</a></h2>
+<p>Should the upper boundary be lower?</p>
+</section>
+<section id="choose-an-http-client-for-the-examples">
+<h2>Choose an HTTP client for the examples<a class="headerlink" href="#choose-an-http-client-for-the-examples" title="Link to this heading">¶</a></h2>
+<p>requests</p>
+<p>SQLite for the “database” in Private facts</p>
+</section>
+<section id="introduce-the-file-path-metaphor-later">
+<h2>Introduce the file/path metaphor later?<a class="headerlink" href="#introduce-the-file-path-metaphor-later" title="Link to this heading">¶</a></h2>
+<p>Do it later</p>
+</section>
+<section id="other-pending-content">
+<h2>Other pending content<a class="headerlink" href="#other-pending-content" title="Link to this heading">¶</a></h2>
+<p>Footnote on the LIT (for short items, that don’t even leave the client)</p>
+</section>
+<section id="domain-model">
+<h2>Domain Model<a class="headerlink" href="#domain-model" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://www.cosmicpython.com/book/chapter_01_domain_model.html#_what_is_a_domain_model">https://www.cosmicpython.com/book/chapter_01_domain_model.html#_what_is_a_domain_model</a></p>
+<p>Entity
+Value Object
+Domain Service</p>
+<section id="entity">
+<h3>Entity<a class="headerlink" href="#entity" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>User Account</p></li>
 </ul>
-</dd>
-</dl>
 </div></blockquote>
+</section>
+<section id="value-object">
+<h3>Value Object<a class="headerlink" href="#value-object" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>fURL</p></li>
+<li><p>Content</p></li>
+<li><p>Metadata (alias, path, directory)</p></li>
+</ul>
+</div></blockquote>
+<p>A user uploads content, they send a file and get a fURL</p>
+<p>app -&gt; a</p>
+<p>User downloads content, they send a fURL and get the content</p>
+<p>User creates a directory, they send a name (path?) and get fURL</p>
+<p>(User does not update)</p>
+<p>User deletes a file, they send a fURL and a delete</p>
+</section>
+</section>
+<section id="control-plane">
+<h2>Control Plane<a class="headerlink" href="#control-plane" title="Link to this heading">¶</a></h2>
+<p>Tahoe commands over Foolscap (“the API”)</p>
+</section>
+<section id="data-plane">
+<h2>Data Plane<a class="headerlink" href="#data-plane" title="Link to this heading">¶</a></h2>
+<p>Content over HTTPS</p>
+<section id="mutable-sdmf-vs-ndmf">
+<h3>Mutable: SDMF vs NDMF<a class="headerlink" href="#mutable-sdmf-vs-ndmf" title="Link to this heading">¶</a></h3>
+<p>Use SDMF for the initial small file scenarios. Later, with more elaborate file types like images and movies.</p>
+</section>
+</section>
 </section>
 
         </article>
@@ -277,8 +343,44 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Decision Records</a><ul>
+<li><a class="reference internal" href="#tdd-when-to-write-tests">TDD: When to write tests?</a></li>
+<li><a class="reference internal" href="#sqlite">SQLite?</a></li>
+<li><a class="reference internal" href="#time-zone-for-date-field">Time Zone for date field?</a></li>
+<li><a class="reference internal" href="#kelvin-for-temp">Kelvin for temp</a></li>
+<li><a class="reference internal" href="#flow-rate-from-0-50">Flow rate from 0 - 50</a></li>
+<li><a class="reference internal" href="#choose-an-http-client-for-the-examples">Choose an HTTP client for the examples</a></li>
+<li><a class="reference internal" href="#introduce-the-file-path-metaphor-later">Introduce the file/path metaphor later?</a></li>
+<li><a class="reference internal" href="#other-pending-content">Other pending content</a></li>
+<li><a class="reference internal" href="#domain-model">Domain Model</a><ul>
+<li><a class="reference internal" href="#entity">Entity</a></li>
+<li><a class="reference internal" href="#value-object">Value Object</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#control-plane">Control Plane</a></li>
+<li><a class="reference internal" href="#data-plane">Data Plane</a><ul>
+<li><a class="reference internal" href="#mutable-sdmf-vs-ndmf">Mutable: SDMF vs NDMF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

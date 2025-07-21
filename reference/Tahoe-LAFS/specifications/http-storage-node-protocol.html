@@ -1,0 +1,1526 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>Storage Node Protocol (“Great Black Swamp”, “GBS”) - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">The Private Facts Project</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <span class="sidebar-brand-text">The Private Facts Project</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../_sources/reference/Tahoe-LAFS/specifications/http-storage-node-protocol.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="storage-node-protocol-great-black-swamp-gbs">
+<h1>Storage Node Protocol (“Great Black Swamp”, “GBS”)<a class="headerlink" href="#storage-node-protocol-great-black-swamp-gbs" title="Link to this heading">¶</a></h1>
+<p>The target audience for this document is developers working on Tahoe-LAFS or on an alternate implementation intended to be interoperable.
+After reading this document,
+one should expect to understand how Tahoe-LAFS clients interact over the network with Tahoe-LAFS storage nodes.</p>
+<p>The primary goal of the introduction of this protocol is to simplify the task of implementing a Tahoe-LAFS storage server.
+Specifically, it should be possible to implement a Tahoe-LAFS storage server without a Foolscap implementation
+(substituting a simpler GBS server implementation).
+The Tahoe-LAFS client will also need to change but it is not expected that it will be noticably simplified by this change
+(though this may be the first step towards simplifying it).</p>
+<section id="glossary">
+<h2>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference external" href="https://github.com/warner/foolscap/">Foolscap</a></dt><dd><p>an RPC/RMI (Remote Procedure Call / Remote Method Invocation) protocol for use with Twisted</p>
+</dd>
+<dt>storage server</dt><dd><p>a Tahoe-LAFS process configured to offer storage and reachable over the network for store and retrieve operations</p>
+</dd>
+<dt>storage service</dt><dd><p>a Python object held in memory in the storage server which provides the implementation of the storage protocol</p>
+</dd>
+<dt>introducer</dt><dd><p>a Tahoe-LAFS process at a known location configured to re-publish announcements about the location of storage servers</p>
+</dd>
+<dt><a class="reference internal" href="url.html#furls"><span class="std std-ref">fURLs</span></a></dt><dd><p>a self-authenticating URL-like string which can be used to locate a remote object using the Foolscap protocol (the storage service is an example of such an object)</p>
+</dd>
+<dt><a class="reference internal" href="url.html#nurls"><span class="std std-ref">NURLs</span></a></dt><dd><p>a self-authenticating URL-like string almost exactly like a fURL but without being tied to Foolscap</p>
+</dd>
+<dt>swissnum</dt><dd><p>a short random string which is part of a fURL/NURL and which acts as a shared secret to authorize clients to use a storage service</p>
+</dd>
+<dt>lease</dt><dd><p>state associated with a share informing a storage server of the duration of storage desired by a client</p>
+</dd>
+<dt>share</dt><dd><p>a single unit of client-provided arbitrary data to be stored by a storage server (in practice, one of the outputs of applying ZFEC encoding to some ciphertext with some additional metadata attached)</p>
+</dd>
+<dt>bucket</dt><dd><p>a group of one or more immutable shares held by a storage server and having a common storage index</p>
+</dd>
+<dt>slot</dt><dd><p>a group of one or more mutable shares held by a storage server and having a common storage index (sometimes “slot” is considered a synonym for “storage index of a slot”)</p>
+</dd>
+<dt>storage index</dt><dd><p>a 16 byte string which can address a slot or a bucket (in practice, derived by hashing the encryption key associated with contents of that slot or bucket)</p>
+</dd>
+<dt>write enabler</dt><dd><p>a short secret string which storage servers require to be presented before allowing mutation of any mutable share</p>
+</dd>
+<dt>lease renew secret</dt><dd><p>a short secret string which storage servers required to be presented before allowing a particular lease to be renewed</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Additional terms related to the Tahoe-LAFS project in general are defined in the <span class="xref std std-doc">../glossary</span></p>
+<p>The key words
+“MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”,  “MAY”, and “OPTIONAL”
+in this document are to be interpreted as described in RFC 2119.</p>
+</section>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">¶</a></h2>
+<section id="id1">
+<h3>Foolscap<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<p>Foolscap is a remote method invocation protocol with several distinctive features.
+At its core it allows separate processes to refer each other’s objects and methods using a capability-based model.
+This allows for extremely fine-grained access control in a system that remains highly securable without becoming overwhelmingly complicated.
+Supporting this is a flexible and extensible serialization system which allows data to be exchanged between processes in carefully controlled ways.</p>
+<p>Tahoe-LAFS avails itself of only a small portion of these features.
+A Tahoe-LAFS storage server typically only exposes one object with a fixed set of methods to clients.
+A Tahoe-LAFS introducer node does roughly the same.
+Tahoe-LAFS exchanges simple data structures that have many common, standard serialized representations.</p>
+<p>In exchange for this slight use of Foolscap’s sophisticated mechanisms,
+Tahoe-LAFS pays a substantial price:</p>
+<ul class="simple">
+<li><p>Foolscap is implemented only for Python.
+Tahoe-LAFS is thus limited to being implemented only in Python.</p></li>
+<li><p>There is only one Python implementation of Foolscap.
+The implementation is therefore the de facto standard and understanding of the protocol often relies on understanding that implementation.</p></li>
+<li><p>The Foolscap developer community is very small.
+The implementation therefore advances very little and some non-trivial part of the maintenance cost falls on the Tahoe-LAFS project.</p></li>
+<li><p>The extensible serialization system imposes substantial complexity compared to the simple data structures Tahoe-LAFS actually exchanges.</p></li>
+</ul>
+</section>
+<section id="http">
+<h3>HTTP<a class="headerlink" href="#http" title="Link to this heading">¶</a></h3>
+<p>HTTP is a request/response protocol that has become the lingua franca of the internet.
+Combined with the principles of Representational State Transfer (REST) it is widely employed to create, update, and delete data in collections on the internet.
+HTTP itself provides only modest functionality in comparison to Foolscap.
+However its simplicity and widespread use have led to a diverse and almost overwhelming ecosystem of libraries, frameworks, toolkits, and so on.</p>
+<p>By adopting HTTP in place of Foolscap Tahoe-LAFS can realize the following concrete benefits:</p>
+<ul class="simple">
+<li><p>Practically every language or runtime has an HTTP protocol implementation (or a dozen of them) available.
+This change paves the way for new Tahoe-LAFS implementations using tools better suited for certain situations
+(mobile client implementations, high-performance server implementations, easily distributed desktop clients, etc).</p></li>
+<li><p>The simplicity of and vast quantity of resources about HTTP make it a very easy protocol to learn and use.
+This change reduces the barrier to entry for developers to contribute improvements to Tahoe-LAFS’s network interactions.</p></li>
+<li><p>For any given language there is very likely an HTTP implementation with a large and active developer community.
+Tahoe-LAFS can therefore benefit from the large effort being put into making better libraries for using HTTP.</p></li>
+<li><p>One of the core features of HTTP is the mundane transfer of bulk data and implementions are often capable of doing this with extreme efficiency.
+The alignment of this core feature with a core activity of Tahoe-LAFS of transferring bulk data means that a substantial barrier to improved Tahoe-LAFS runtime performance will be eliminated.</p></li>
+</ul>
+</section>
+<section id="tls">
+<h3>TLS<a class="headerlink" href="#tls" title="Link to this heading">¶</a></h3>
+<p>The Foolscap-based protocol provides <em>some</em> of Tahoe-LAFS’s confidentiality, integrity, and authentication properties by leveraging TLS.
+An HTTP-based protocol can make use of TLS in largely the same way to provide the same properties.
+Provision of these properties <em>is</em> dependant on implementers following Great Black Swamp’s rules for x509 certificate validation
+(rather than the standard “web” rules for validation).</p>
+</section>
+</section>
+<section id="design-requirements">
+<h2>Design Requirements<a class="headerlink" href="#design-requirements" title="Link to this heading">¶</a></h2>
+<section id="security">
+<h3>Security<a class="headerlink" href="#security" title="Link to this heading">¶</a></h3>
+<section id="summary">
+<h4>Summary<a class="headerlink" href="#summary" title="Link to this heading">¶</a></h4>
+<p>The storage node protocol should offer at minimum the security properties offered by the Foolscap-based protocol.
+The Foolscap-based protocol offers:</p>
+<ul class="simple">
+<li><p><strong>Peer authentication</strong> by way of checked x509 certificates</p></li>
+<li><p><strong>Message authentication</strong> by way of TLS</p></li>
+<li><p><strong>Message confidentiality</strong> by way of TLS</p>
+<ul>
+<li><p>A careful configuration of the TLS connection parameters <em>may</em> also offer <strong>forward secrecy</strong>.
+However, Tahoe-LAFS’ use of Foolscap takes no steps to ensure this is the case.</p></li>
+</ul>
+</li>
+<li><p><strong>Storage authorization</strong> by way of a capability contained in the fURL addressing a storage service.</p></li>
+</ul>
+</section>
+<section id="discussion">
+<h4>Discussion<a class="headerlink" href="#discussion" title="Link to this heading">¶</a></h4>
+<p>A client node relies on a storage node to persist certain data until a future retrieval request is made.
+In this way, the client node is vulnerable to attacks which cause the data not to be persisted.
+Though this vulnerability can be (and typically is) mitigated by including redundancy in the share encoding parameters for stored data,
+it is still sensible to attempt to minimize unnecessary vulnerability to this attack.</p>
+<p>One way to do this is for the client to be confident the storage node with which it is communicating is really the expected node.
+That is, for the client to perform <strong>peer authentication</strong> of the storage node it connects to.
+This allows it to develop a notion of that node’s reputation over time.
+The more retrieval requests the node satisfies correctly the more it probably will satisfy correctly.
+Therefore, the protocol must include some means for verifying the identify of the storage node.
+The initialization of the client with the correct identity information is out of scope for this protocol
+(the system may be trust-on-first-use, there may be a third-party identity broker, etc).</p>
+<p>With confidence that communication is proceeding with the intended storage node,
+it must also be possible to trust that data is exchanged without modification.
+That is, the protocol must include some means to perform <strong>message authentication</strong>.
+This is most likely done using cryptographic MACs (such as those used in TLS).</p>
+<p>The messages which enable the mutable shares feature include secrets related to those shares.
+For example, the write enabler secret is used to restrict the parties with write access to mutable shares.
+It is exchanged over the network as part of a write operation.
+An attacker learning this secret can overwrite share data with garbage
+(lacking a separate encryption key,
+there is no way to write data which appears legitimate to a legitimate client).
+Therefore, <strong>message confidentiality</strong> is necessary when exchanging these secrets.
+<strong>Forward secrecy</strong> is preferred so that an attacker recording an exchange today cannot launch this attack at some future point after compromising the necessary keys.</p>
+<p>A storage service offers service only to some clients.
+A client proves their authorization to use the storage service by presenting a shared secret taken from the fURL.
+In this way <strong>storage authorization</strong> is performed to prevent disallowed parties from consuming any storage resources.</p>
+</section>
+</section>
+</section>
+<section id="functionality">
+<h2>Functionality<a class="headerlink" href="#functionality" title="Link to this heading">¶</a></h2>
+<p>Tahoe-LAFS application-level information must be transferred using this protocol.
+This information is exchanged with a dozen or so request/response-oriented messages.
+Some of these messages carry large binary payloads.
+Others are small structured-data messages.
+Some facility for expansion to support new information exchanges should also be present.</p>
+</section>
+<section id="solutions">
+<h2>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">¶</a></h2>
+<p>An HTTP-based protocol, dubbed “Great Black Swamp” (or “GBS”), is described below.
+This protocol aims to satisfy the above requirements at a lower level of complexity than the current Foolscap-based protocol.</p>
+<section id="summary-non-normative">
+<h3>Summary (Non-normative)<a class="headerlink" href="#summary-non-normative" title="Link to this heading">¶</a></h3>
+<p>Communication with the storage node will take place using TLS.
+The TLS version and configuration will be dictated by an ongoing understanding of best practices.
+The storage node will present an x509 certificate during the TLS handshake.
+Storage clients will require that the certificate have a valid signature.
+The Subject Public Key Information (SPKI) hash of the certificate will constitute the storage node’s identity.
+The <strong>tub id</strong> portion of the storage node fURL will be replaced with the SPKI hash.</p>
+<p>When connecting to a storage node,
+the client will take the following steps to gain confidence it has reached the intended peer:</p>
+<ul class="simple">
+<li><p>It will perform the usual cryptographic verification of the certificate presented by the storage server.
+That is,
+it will check that the certificate itself is well-formed,
+that it is currently valid <a class="footnote-reference brackets" href="#id16" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>,
+and that the signature it carries is valid.</p></li>
+<li><p>It will compare the SPKI hash of the certificate to the expected value.
+The specifics of the comparison are the same as for the comparison specified by <a class="reference external" href="https://tools.ietf.org/html/rfc7469#section-2.4">RFC 7469</a> with “sha256” <a class="footnote-reference brackets" href="#id17" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p></li>
+</ul>
+<p>To further clarify, consider this example.
+Alice operates a storage node.
+Alice generates a key pair and secures it properly.
+Alice generates a self-signed storage node certificate with the key pair.
+Alice’s storage node announces (to an introducer) a NURL containing (among other information) the SPKI hash.
+Imagine the SPKI hash is <code class="docutils literal notranslate"><span class="pre">i5xb...</span></code>.
+This results in a NURL of <code class="docutils literal notranslate"><span class="pre">pb://i5xb...&#64;example.com:443/g3m5...#v=1</span></code>.
+Bob creates a client node pointed at the same introducer.
+Bob’s client node receives the announcement from Alice’s storage node
+(indirected through the introducer).</p>
+<p>Bob’s client node recognizes the NURL as referring to an HTTP-dialect server due to the <code class="docutils literal notranslate"><span class="pre">v=1</span></code> fragment.
+Bob’s client node can now perform a TLS handshake with a server at the address in the NURL location hints
+(<code class="docutils literal notranslate"><span class="pre">example.com:443</span></code> in this example).
+Following the above described validation procedures,
+Bob’s client node can determine whether it has reached Alice’s storage node or not.
+If and only if the validation procedure is successful does Bob’s client node conclude it has reached Alice’s storage node.
+<strong>Peer authentication</strong> has been achieved.</p>
+<p>Additionally,
+by continuing to interact using TLS,
+Bob’s client and Alice’s storage node are assured of both <strong>message authentication</strong> and <strong>message confidentiality</strong>.</p>
+<p>Bob’s client further inspects the NURL for the <em>swissnum</em>.
+When Bob’s client issues HTTP requests to Alice’s storage node it includes the <em>swissnum</em> in its requests.
+<strong>Storage authorization</strong> has been achieved.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Foolscap TubIDs are 20 bytes (SHA1 digest of the certificate).
+They are encoded with <a class="reference internal" href="#base32">Base32</a> for a length of 32 bytes.
+SPKI information discussed here is 32 bytes (SHA256 digest).
+They would be encoded in <a class="reference internal" href="#base32">Base32</a> for a length of 52 bytes.
+<a class="reference external" href="https://tools.ietf.org/html/rfc7515#appendix-C">unpadded base64url</a> provides a more compact encoding of the information while remaining URL-compatible.
+This would encode the SPKI information for a length of merely 43 bytes.
+SHA1,
+the current Foolscap hash function,
+is not a practical choice at this time due to advances made in <a class="reference external" href="https://en.wikipedia.org/wiki/SHA-1#Attacks">attacking SHA1</a>.
+The selection of a safe hash function with output smaller than SHA256 could be the subject of future improvements.
+A 224 bit hash function (SHA3-224, for example) might be suitable -
+improving the encoded length to 38 bytes.</p>
+</div>
+</section>
+<section id="transition">
+<h3>Transition<a class="headerlink" href="#transition" title="Link to this heading">¶</a></h3>
+<p>To provide a seamless user experience during this protocol transition,
+there should be a period during which both protocols are supported by storage nodes.
+The GBS announcement will be introduced in a way that <em>updated client</em> software can recognize.
+Its introduction will also be made in such a way that <em>non-updated client</em> software disregards the new information
+(of which it cannot make any use).</p>
+<p>Storage nodes will begin to operate a new GBS server.
+They may re-use their existing x509 certificate or generate a new one.
+Generation of a new certificate allows for certain non-optimal conditions to be addressed:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">commonName</span></code> of <code class="docutils literal notranslate"><span class="pre">newpb_thingy</span></code> may be changed to a more descriptive value.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">notValidAfter</span></code> field with a timestamp in the past may be updated.</p></li>
+</ul>
+<p>Storage nodes will announce a new NURL for this new HTTP-based server.
+This NURL will be announced alongside their existing Foolscap-based server’s fURL.
+Such an announcement will resemble this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;anonymous-storage-FURL&quot;</span><span class="p">:</span> <span class="s2">&quot;pb://...&quot;</span><span class="p">,</span>          <span class="c1"># The old entry</span>
+    <span class="s2">&quot;anonymous-storage-NURLs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;pb://...#v=1&quot;</span><span class="p">]</span>    <span class="c1"># The new, additional entry</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The transition process will proceed in three stages:</p>
+<ol class="arabic simple">
+<li><p>The first stage represents the starting conditions in which clients and servers can speak only Foolscap.</p></li>
+<li><p>The intermediate stage represents a condition in which some clients and servers can both speak Foolscap and GBS.</p></li>
+<li><p>The final stage represents the desired condition in which all clients and servers speak only GBS.</p></li>
+</ol>
+<p>During the first stage only one client/server interaction is possible:
+the storage server announces only Foolscap and speaks only Foolscap.
+During the final stage there is only one supported interaction:
+the client and server are both updated and speak GBS to each other.</p>
+<p>During the intermediate stage there are four supported interactions:</p>
+<ol class="arabic simple">
+<li><p>Both the client and server are non-updated.
+The interaction is just as it would be during the first stage.</p></li>
+<li><p>The client is updated and the server is non-updated.
+The client will see the Foolscap announcement and the lack of a GBS announcement.
+It will speak to the server using Foolscap.</p></li>
+<li><p>The client is non-updated and the server is updated.
+The client will see the Foolscap announcement.
+It will speak Foolscap to the storage server.</p></li>
+<li><p>Both the client and server are updated.
+The client will see the GBS announcement and disregard the Foolscap announcement.
+It will speak GBS to the server.</p></li>
+</ol>
+<p>There is one further complication:
+the client maintains a cache of storage server information
+(to avoid continuing to rely on the introducer after it has been introduced).
+The follow sequence of events is likely:</p>
+<ol class="arabic simple">
+<li><p>The client connects to an introducer.</p></li>
+<li><p>It receives an announcement for a non-updated storage server (Foolscap only).</p></li>
+<li><p>It caches this announcement.</p></li>
+<li><p>At some point, the storage server is updated.</p></li>
+<li><p>The client uses the information in its cache to open a Foolscap connection to the storage server.</p></li>
+</ol>
+<p>Ideally,
+the client would not rely on an update from the introducer to give it the GBS NURL for the updated storage server.
+In practice, we have decided not to implement this functionality.</p>
+</section>
+</section>
+<section id="server-details">
+<h2>Server Details<a class="headerlink" href="#server-details" title="Link to this heading">¶</a></h2>
+<p>The protocol primarily enables interaction with “resources” of two types:
+storage indexes
+and shares.
+A particular resource is addressed by the HTTP request path.
+Details about the interface are encoded in the HTTP message body.</p>
+<section id="string-encoding">
+<h3>String Encoding<a class="headerlink" href="#string-encoding" title="Link to this heading">¶</a></h3>
+<section id="base32">
+<span id="id4"></span><h4>Base32<a class="headerlink" href="#base32" title="Link to this heading">¶</a></h4>
+<p>Where the specification refers to Base32 the meaning is <em>unpadded</em> Base32 encoding as specified by <a class="reference external" href="https://tools.ietf.org/html/rfc4648">RFC 4648</a> using a <em>lowercase variation</em> of the alphabet from Section 6.</p>
+<p>That is, the alphabet is:</p>
+<div class="table-wrapper docutils container" id="id22">
+<table class="docutils align-default" id="id22">
+<caption><span class="caption-text">Base32 Alphabet</span><a class="headerlink" href="#id22" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Encoding</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Encoding</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Encoding</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Encoding</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>a</p></td>
+<td><p>9</p></td>
+<td><p>j</p></td>
+<td><p>18</p></td>
+<td><p>s</p></td>
+<td><p>27</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>b</p></td>
+<td><p>10</p></td>
+<td><p>k</p></td>
+<td><p>19</p></td>
+<td><p>t</p></td>
+<td><p>28</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>c</p></td>
+<td><p>11</p></td>
+<td><p>l</p></td>
+<td><p>20</p></td>
+<td><p>u</p></td>
+<td><p>29</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>d</p></td>
+<td><p>12</p></td>
+<td><p>m</p></td>
+<td><p>21</p></td>
+<td><p>v</p></td>
+<td><p>30</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>e</p></td>
+<td><p>13</p></td>
+<td><p>n</p></td>
+<td><p>22</p></td>
+<td><p>w</p></td>
+<td><p>31</p></td>
+<td><p>7</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>f</p></td>
+<td><p>14</p></td>
+<td><p>o</p></td>
+<td><p>23</p></td>
+<td><p>x</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>g</p></td>
+<td><p>15</p></td>
+<td><p>p</p></td>
+<td><p>24</p></td>
+<td><p>y</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>h</p></td>
+<td><p>16</p></td>
+<td><p>q</p></td>
+<td><p>25</p></td>
+<td><p>z</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>i</p></td>
+<td><p>17</p></td>
+<td><p>r</p></td>
+<td><p>26</p></td>
+<td><p>2</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="message-encoding">
+<h3>Message Encoding<a class="headerlink" href="#message-encoding" title="Link to this heading">¶</a></h3>
+<p>Clients and servers MUST use the <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> and <code class="docutils literal notranslate"><span class="pre">Accept</span></code> header fields as specified in <a class="reference external" href="https://tools.ietf.org/html/rfc9110">RFC 9110</a> for message body negotiation.</p>
+<p>The encoding for HTTP message bodies SHOULD be <a class="reference external" href="http://cbor.io/">CBOR</a>.
+Clients submitting requests using this encoding MUST include a <code class="docutils literal notranslate"><span class="pre">Content-Type:</span> <span class="pre">application/cbor</span></code> request header field.
+A request MAY be submitted using an alternate encoding by declaring this in the <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> header field.
+A request MAY indicate its preference for an alternate encoding in the response using the <code class="docutils literal notranslate"><span class="pre">Accept</span></code> header field.
+A request which includes no <code class="docutils literal notranslate"><span class="pre">Accept</span></code> header field MUST be interpreted in the same way as a request including a <code class="docutils literal notranslate"><span class="pre">Accept:</span> <span class="pre">application/cbor</span></code> header field.</p>
+<p>Clients and servers MAY support additional request and response message body encodings.</p>
+<p>Clients and servers SHOULD support <code class="docutils literal notranslate"><span class="pre">application/json</span></code> request and response message body encoding.
+For HTTP messages carrying binary share data,
+this is expected to be a particularly poor encoding.
+However,
+for HTTP messages carrying small payloads of strings, numbers, and containers
+it is expected that JSON will be more convenient than CBOR for ad hoc testing and manual interaction.</p>
+<p>For this same reason,
+JSON is used throughout for the examples presented here.
+Because of the simple types used throughout
+and the equivalence described in <a class="reference external" href="https://tools.ietf.org/html/rfc7049#section-4">RFC 7049</a>
+these examples should be representative regardless of which of these two encodings is chosen.</p>
+<p>There are two exceptions to this rule.</p>
+<section id="sets">
+<h4>1. Sets<a class="headerlink" href="#sets" title="Link to this heading">¶</a></h4>
+<p>For CBOR messages,
+any sequence that is semantically a set (i.e. no repeated values allowed, order doesn’t matter, and elements are hashable in Python) should be sent as a set.
+Tag 6.258 is used to indicate sets in CBOR;
+see <a class="reference external" href="https://www.iana.org/assignments/cbor-tags/cbor-tags.xhtml">the CBOR registry</a> for more details.
+The JSON encoding does not support sets.
+Sets MUST be represented as arrays in JSON-encoded messages.</p>
+</section>
+<section id="bytes">
+<h4>2. Bytes<a class="headerlink" href="#bytes" title="Link to this heading">¶</a></h4>
+<p>The CBOR encoding natively supports a bytes type while the JSON encoding does not.
+Bytes MUST be represented as strings giving the <a class="reference external" href="https://www.rfc-editor.org/rfc/rfc4648#section-4">Base64</a> representation of the original bytes value.</p>
+</section>
+</section>
+<section id="http-design">
+<h3>HTTP Design<a class="headerlink" href="#http-design" title="Link to this heading">¶</a></h3>
+<p>The HTTP interface described here is informed by the ideas of REST
+(Representational State Transfer).
+For <code class="docutils literal notranslate"><span class="pre">GET</span></code> requests query parameters are preferred over values encoded in the request body.
+For other requests query parameters are encoded into the message body.</p>
+<p>Many branches of the resource tree are conceived as homogenous containers:
+one branch contains all of the share data;
+another branch contains all of the lease data;
+etc.</p>
+<p>Clients and servers MUST use the <code class="docutils literal notranslate"><span class="pre">Authorization</span></code> header field,
+as specified in <a class="reference external" href="https://tools.ietf.org/html/rfc9110">RFC 9110</a>,
+for authorization of all requests to all endpoints specified here.
+The authentication <em>type</em> MUST be <code class="docutils literal notranslate"><span class="pre">Tahoe-LAFS</span></code>.
+Clients MUST present the <a class="reference external" href="https://www.rfc-editor.org/rfc/rfc4648#section-4">Base64</a>-encoded representation of the swissnum from the NURL used to locate the storage service as the <em>credentials</em>.</p>
+<p>If credentials are not presented or the swissnum is not associated with a storage service then the server MUST issue a <code class="docutils literal notranslate"><span class="pre">401</span> <span class="pre">UNAUTHORIZED</span></code> response and perform no other processing of the message.</p>
+<p>Requests to certain endpoints MUST include additional secrets in the <code class="docutils literal notranslate"><span class="pre">X-Tahoe-Authorization</span></code> headers field.
+The endpoints which require these secrets are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/storage/v1/lease/:storage_index</span></code>:
+The secrets included MUST be <code class="docutils literal notranslate"><span class="pre">lease-renew-secret</span></code> and <code class="docutils literal notranslate"><span class="pre">lease-cancel-secret</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/storage/v1/immutable/:storage_index</span></code>:
+The secrets included MUST be <code class="docutils literal notranslate"><span class="pre">lease-renew-secret</span></code>, <code class="docutils literal notranslate"><span class="pre">lease-cancel-secret</span></code>, and <code class="docutils literal notranslate"><span class="pre">upload-secret</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PATCH</span> <span class="pre">/storage/v1/immutable/:storage_index/:share_number</span></code>:
+The secrets included MUST be <code class="docutils literal notranslate"><span class="pre">upload-secret</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/storage/v1/immutable/:storage_index/:share_number/abort</span></code>:
+The secrets included MUST be <code class="docutils literal notranslate"><span class="pre">upload-secret</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/storage/v1/mutable/:storage_index/read-test-write</span></code>:
+The secrets included MUST be <code class="docutils literal notranslate"><span class="pre">lease-renew-secret</span></code>, <code class="docutils literal notranslate"><span class="pre">lease-cancel-secret</span></code>, and <code class="docutils literal notranslate"><span class="pre">write-enabler</span></code>.</p></li>
+</ul>
+<p>If these secrets are:</p>
+<ol class="arabic simple">
+<li><p>Missing.</p></li>
+<li><p>The wrong length.</p></li>
+<li><p>Not the expected kind of secret.</p></li>
+<li><p>They are otherwise unparseable before they are actually semantically used.</p></li>
+</ol>
+<p>the server MUST respond with <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">BAD</span> <span class="pre">REQUEST</span></code> and perform no other processing of the message.
+401 is not used because this isn’t an authorization problem, this is a “you sent garbage and should know better” bug.</p>
+<p>If authorization using the secret fails,
+then the server MUST send a <code class="docutils literal notranslate"><span class="pre">401</span> <span class="pre">UNAUTHORIZED</span></code> response and perform no other processing of the message.</p>
+</section>
+<section id="encoding">
+<h3>Encoding<a class="headerlink" href="#encoding" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">storage_index</span></code> MUST be <a class="reference internal" href="#base32">Base32</a> encoded in URLs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">share_number</span></code> MUST be a decimal representation</p></li>
+</ul>
+</section>
+<section id="general">
+<h3>General<a class="headerlink" href="#general" title="Link to this heading">¶</a></h3>
+<section id="get-storage-v1-version">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/storage/v1/version</span></code><a class="headerlink" href="#get-storage-v1-version" title="Link to this heading">¶</a></h4>
+<p>This endpoint allows clients to retrieve some basic metadata about a storage server from the storage service.
+The response MUST validate against this CDDL schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;http://allmydata.org/tahoe/protocols/storage/v1&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="s1">&#39;maximum-immutable-share-size&#39;</span> <span class="o">=&gt;</span> <span class="n">uint</span>
+    <span class="s1">&#39;maximum-mutable-share-size&#39;</span> <span class="o">=&gt;</span> <span class="n">uint</span>
+    <span class="s1">&#39;available-space&#39;</span> <span class="o">=&gt;</span> <span class="n">uint</span>
+    <span class="p">}</span>
+ <span class="s1">&#39;application-version&#39;</span> <span class="o">=&gt;</span> <span class="n">bstr</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The server SHOULD populate as many fields as possible with accurate information about its behavior.</p>
+<p>For fields which relate to a specific API
+the semantics are documented below in the section for that API.
+For fields that are more general than a single API the semantics are as follows:</p>
+<ul class="simple">
+<li><p>available-space:
+The server SHOULD use this field to advertise the amount of space that it currently considers unused and is willing to allocate for client requests.
+The value is a number of bytes.</p></li>
+</ul>
+</section>
+<section id="put-storage-v1-lease-storage-index">
+<h4><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/storage/v1/lease/:storage_index</span></code><a class="headerlink" href="#put-storage-v1-lease-storage-index" title="Link to this heading">¶</a></h4>
+<p>Either renew or create a new lease on the bucket addressed by <code class="docutils literal notranslate"><span class="pre">storage_index</span></code>.</p>
+<p>The renew secret and cancellation secret should be included as <code class="docutils literal notranslate"><span class="pre">X-Tahoe-Authorization</span></code> headers.
+For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">renew</span><span class="o">-</span><span class="n">secret</span> <span class="o">&lt;</span><span class="n">base64</span><span class="o">-</span><span class="n">lease</span><span class="o">-</span><span class="n">renew</span><span class="o">-</span><span class="n">secret</span><span class="o">&gt;</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">cancel</span><span class="o">-</span><span class="n">secret</span> <span class="o">&lt;</span><span class="n">base64</span><span class="o">-</span><span class="n">lease</span><span class="o">-</span><span class="n">cancel</span><span class="o">-</span><span class="n">secret</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If the <code class="docutils literal notranslate"><span class="pre">lease-renew-secret</span></code> value matches an existing lease
+then the expiration time of that lease will be changed to 31 days after the time of this operation.
+If it does not match an existing lease
+then a new lease will be created with this <code class="docutils literal notranslate"><span class="pre">lease-renew-secret</span></code> which expires 31 days after the time of this operation.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lease-renew-secret</span></code> and <code class="docutils literal notranslate"><span class="pre">lease-cancel-secret</span></code> values must be 32 bytes long.
+The server treats them as opaque values.
+<a class="reference internal" href="lease.html#share-leases"><span class="std std-ref">Share Leases</span></a> gives details about how the Tahoe-LAFS storage client constructs these values.</p>
+<p>In these cases the response is <code class="docutils literal notranslate"><span class="pre">NO</span> <span class="pre">CONTENT</span></code> with an empty body.</p>
+<p>It is possible that the storage server will have no shares for the given <code class="docutils literal notranslate"><span class="pre">storage_index</span></code> because:</p>
+<ul class="simple">
+<li><p>no such shares have ever been uploaded.</p></li>
+<li><p>a previous lease expired and the storage server reclaimed the storage by deleting the shares.</p></li>
+</ul>
+<p>In these cases the server takes no action and returns <code class="docutils literal notranslate"><span class="pre">NOT</span> <span class="pre">FOUND</span></code>.</p>
+<section id="id5">
+<h5>Discussion<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h5>
+<p>We considered an alternative where <code class="docutils literal notranslate"><span class="pre">lease-renew-secret</span></code> and <code class="docutils literal notranslate"><span class="pre">lease-cancel-secret</span></code> are placed in query arguments on the request path.
+This increases chances of leaking secrets in logs.
+Putting the secrets in the body reduces the chances of leaking secrets,
+but eventually we chose headers as the least likely information to be logged.</p>
+<p>Several behaviors here are blindly copied from the Foolscap-based storage server protocol.</p>
+<ul class="simple">
+<li><p>There is a cancel secret but there is no API to use it to cancel a lease (see ticket:3768).</p></li>
+<li><p>The lease period is hard-coded at 31 days.</p></li>
+</ul>
+<p>These are not necessarily ideal behaviors
+but they are adopted to avoid any <em>semantic</em> changes between the Foolscap- and HTTP-based protocols.
+It is expected that some or all of these behaviors may change in a future revision of the HTTP-based protocol.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="immutable">
+<h2>Immutable<a class="headerlink" href="#immutable" title="Link to this heading">¶</a></h2>
+<section id="writing">
+<h3>Writing<a class="headerlink" href="#writing" title="Link to this heading">¶</a></h3>
+<section id="post-storage-v1-immutable-storage-index">
+<h4><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/storage/v1/immutable/:storage_index</span></code><a class="headerlink" href="#post-storage-v1-immutable-storage-index" title="Link to this heading">¶</a></h4>
+<p>Initialize an immutable storage index with some buckets.
+The server MUST allow share data to be written to the buckets at most one time.
+The server MAY create a lease for the buckets.
+Details of the buckets to create are encoded in the request body.
+The request body MUST validate against this CDDL schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="n">share</span><span class="o">-</span><span class="n">numbers</span><span class="p">:</span> <span class="c1">#6.258([0*256 uint])</span>
+  <span class="n">allocated</span><span class="o">-</span><span class="n">size</span><span class="p">:</span> <span class="n">uint</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;share-numbers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="s2">&quot;allocated-size&quot;</span><span class="p">:</span> <span class="mi">12345</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The server SHOULD accept a value for <strong>allocated-size</strong> that is less than or equal to the lesser of the values of the server’s version message’s <strong>maximum-immutable-share-size</strong> or <strong>available-space</strong> values.</p>
+<p>The request MUST include <code class="docutils literal notranslate"><span class="pre">X-Tahoe-Authorization</span></code> HTTP headers that set the various secrets—upload, lease renewal, lease cancellation—that will be later used to authorize various operations.
+For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">renew</span><span class="o">-</span><span class="n">secret</span> <span class="o">&lt;</span><span class="n">base64</span><span class="o">-</span><span class="n">lease</span><span class="o">-</span><span class="n">renew</span><span class="o">-</span><span class="n">secret</span><span class="o">&gt;</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">cancel</span><span class="o">-</span><span class="n">secret</span> <span class="o">&lt;</span><span class="n">base64</span><span class="o">-</span><span class="n">lease</span><span class="o">-</span><span class="n">cancel</span><span class="o">-</span><span class="n">secret</span><span class="o">&gt;</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">upload</span><span class="o">-</span><span class="n">secret</span> <span class="o">&lt;</span><span class="n">base64</span><span class="o">-</span><span class="n">upload</span><span class="o">-</span><span class="n">secret</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The response body MUST include encoded information about the created buckets.
+The response body MUST validate against this CDDL schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="n">already</span><span class="o">-</span><span class="n">have</span><span class="p">:</span> <span class="c1">#6.258([0*256 uint])</span>
+  <span class="n">allocated</span><span class="p">:</span> <span class="c1">#6.258([0*256 uint])</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;already-have&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="s2">&quot;allocated&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="o">...</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p>The upload secret is an opaque _byte_ string.</p>
+<p>Handling repeat calls:</p>
+<ul class="simple">
+<li><p>If the same API call is repeated with the same upload secret, the response is the same and no change is made to server state.
+This is necessary to ensure retries work in the face of lost responses from the server.</p></li>
+<li><p>If the API calls is with a different upload secret, this implies a new client, perhaps because the old client died.
+Or it may happen because the client wants to upload a different share number than a previous client.
+New shares will be created, existing shares will be unchanged, regardless of whether the upload secret matches or not.</p></li>
+</ul>
+<section id="id6">
+<h5>Discussion<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h5>
+<p>We considered making this <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/storage/v1/immutable</span></code> instead.
+The motivation was to keep <em>storage index</em> out of the request URL.
+Request URLs have an elevated chance of being logged by something.
+We were concerned that having the <em>storage index</em> logged may increase some risks.
+However, we decided this does not matter because:</p>
+<ul class="simple">
+<li><p>the <em>storage index</em> can only be used to retrieve (not decrypt) the ciphertext-bearing share.</p></li>
+<li><p>the <em>storage index</em> is already persistently present on the storage node in the form of directory names in the storage servers <code class="docutils literal notranslate"><span class="pre">shares</span></code> directory.</p></li>
+<li><p>the request is made via HTTPS and so only Tahoe-LAFS can see the contents,
+therefore no proxy servers can perform any extra logging.</p></li>
+<li><p>Tahoe-LAFS itself does not currently log HTTP request URLs.</p></li>
+</ul>
+<p>The response includes <code class="docutils literal notranslate"><span class="pre">already-have</span></code> and <code class="docutils literal notranslate"><span class="pre">allocated</span></code> for two reasons:</p>
+<ul class="simple">
+<li><p>If an upload is interrupted and the client loses its local state that lets it know it already uploaded some shares
+then this allows it to discover this fact (by inspecting <code class="docutils literal notranslate"><span class="pre">already-have</span></code>) and only upload the missing shares (indicated by <code class="docutils literal notranslate"><span class="pre">allocated</span></code>).</p></li>
+<li><p>If an upload has completed a client may still choose to re-balance storage by moving shares between servers.
+This might be because a server has become unavailable and a remaining server needs to store more shares for the upload.
+It could also just be that the client’s preferred servers have changed.</p></li>
+</ul>
+<p>Regarding upload secrets,
+the goal is for uploading and aborting (see next sections) to be authenticated by more than just the storage index.
+In the future, we may want to generate them in a way that allows resuming/canceling when the client has issues.
+In the short term, they can just be a random byte string.
+The primary security constraint is that each upload to each server has its own unique upload key,
+tied to uploading that particular storage index to this particular server.</p>
+<p>Rejected designs for upload secrets:</p>
+<ul class="simple">
+<li><p>Upload secret per share number.
+In order to make the secret unguessable by attackers, which includes other servers,
+it must contain randomness.
+Randomness means there is no need to have a secret per share, since adding share-specific content to randomness doesn’t actually make the secret any better.</p></li>
+</ul>
+</section>
+</section>
+<section id="patch-storage-v1-immutable-storage-index-share-number">
+<h4><code class="docutils literal notranslate"><span class="pre">PATCH</span> <span class="pre">/storage/v1/immutable/:storage_index/:share_number</span></code><a class="headerlink" href="#patch-storage-v1-immutable-storage-index-share-number" title="Link to this heading">¶</a></h4>
+<p>Write data for the indicated share.
+The share number MUST belong to the storage index.
+The request body MUST be the raw share data (i.e., <code class="docutils literal notranslate"><span class="pre">application/octet-stream</span></code>).
+The request MUST include a <em>Content-Range</em> header field;
+for large transfers this allows partially complete uploads to be resumed.</p>
+<p>For example,
+a 1MiB share can be divided in to eight separate 128KiB chunks.
+Each chunk can be uploaded in a separate request.
+Each request can include a <em>Content-Range</em> value indicating its placement within the complete share.
+If any one of these requests fails then at most 128KiB of upload work needs to be retried.</p>
+<p>The server MUST recognize when all of the data has been received and mark the share as complete
+(which it can do because it was informed of the size when the storage index was initialized).</p>
+<p>The request MUST include a <code class="docutils literal notranslate"><span class="pre">X-Tahoe-Authorization</span></code> header that includes the upload secret:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">upload</span><span class="o">-</span><span class="n">secret</span> <span class="o">&lt;</span><span class="n">base64</span><span class="o">-</span><span class="n">upload</span><span class="o">-</span><span class="n">secret</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Responses:</p>
+<ul>
+<li><p>When a chunk that does not complete the share is successfully uploaded the response MUST be <code class="docutils literal notranslate"><span class="pre">OK</span></code>.
+The response body MUST indicate the range of share data that has yet to be uploaded.
+The response body MUST validate against this CDDL schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="n">required</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="o">*</span> <span class="p">{</span><span class="n">begin</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="n">uint</span><span class="p">}]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="s2">&quot;required&quot;</span><span class="p">:</span>
+  <span class="p">[</span> <span class="p">{</span> <span class="s2">&quot;begin&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">byte</span> <span class="n">position</span><span class="p">,</span> <span class="n">inclusive</span><span class="o">&gt;</span>
+    <span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span>   <span class="o">&lt;</span><span class="n">byte</span> <span class="n">position</span><span class="p">,</span> <span class="n">exclusive</span><span class="o">&gt;</span>
+    <span class="p">}</span>
+  <span class="p">,</span>
+  <span class="o">...</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>When the chunk that completes the share is successfully uploaded the response MUST be <code class="docutils literal notranslate"><span class="pre">CREATED</span></code>.</p></li>
+<li><p>If the <em>Content-Range</em> for a request covers part of the share that has already,
+and the data does not match already written data,
+the response MUST be <code class="docutils literal notranslate"><span class="pre">CONFLICT</span></code>.
+In this case the client MUST abort the upload.
+The client MAY then restart the upload from scratch.</p></li>
+</ul>
+<section id="id7">
+<h5>Discussion<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h5>
+<p><code class="docutils literal notranslate"><span class="pre">PUT</span></code> verbs are only supposed to be used to replace the whole resource,
+thus the use of <code class="docutils literal notranslate"><span class="pre">PATCH</span></code>.
+From RFC 7231:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">An</span> <span class="n">origin</span> <span class="n">server</span> <span class="n">that</span> <span class="n">allows</span> <span class="n">PUT</span> <span class="n">on</span> <span class="n">a</span> <span class="n">given</span> <span class="n">target</span> <span class="n">resource</span> <span class="n">MUST</span> <span class="n">send</span>
+<span class="n">a</span> <span class="mi">400</span> <span class="p">(</span><span class="n">Bad</span> <span class="n">Request</span><span class="p">)</span> <span class="n">response</span> <span class="n">to</span> <span class="n">a</span> <span class="n">PUT</span> <span class="n">request</span> <span class="n">that</span> <span class="n">contains</span> <span class="n">a</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Range</span> <span class="n">header</span> <span class="n">field</span> <span class="p">(</span><span class="n">Section</span> <span class="mf">4.2</span> <span class="n">of</span> <span class="p">[</span><span class="n">RFC7233</span><span class="p">]),</span> <span class="n">since</span> <span class="n">the</span>
+<span class="n">payload</span> <span class="ow">is</span> <span class="n">likely</span> <span class="n">to</span> <span class="n">be</span> <span class="n">partial</span> <span class="n">content</span> <span class="n">that</span> <span class="n">has</span> <span class="n">been</span> <span class="n">mistakenly</span> <span class="n">PUT</span>
+<span class="k">as</span> <span class="n">a</span> <span class="n">full</span> <span class="n">representation</span><span class="o">.</span>  <span class="n">Partial</span> <span class="n">content</span> <span class="n">updates</span> <span class="n">are</span> <span class="n">possible</span> <span class="n">by</span>
+<span class="n">targeting</span> <span class="n">a</span> <span class="n">separately</span> <span class="n">identified</span> <span class="n">resource</span> <span class="k">with</span> <span class="n">state</span> <span class="n">that</span> <span class="n">overlaps</span> <span class="n">a</span>
+<span class="n">portion</span> <span class="n">of</span> <span class="n">the</span> <span class="n">larger</span> <span class="n">resource</span><span class="p">,</span> <span class="ow">or</span> <span class="n">by</span> <span class="n">using</span> <span class="n">a</span> <span class="n">different</span> <span class="n">method</span> <span class="n">that</span>
+<span class="n">has</span> <span class="n">been</span> <span class="n">specifically</span> <span class="n">defined</span> <span class="k">for</span> <span class="n">partial</span> <span class="n">updates</span> <span class="p">(</span><span class="k">for</span> <span class="n">example</span><span class="p">,</span> <span class="n">the</span>
+<span class="n">PATCH</span> <span class="n">method</span> <span class="n">defined</span> <span class="ow">in</span> <span class="p">[</span><span class="n">RFC5789</span><span class="p">])</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="put-storage-v1-immutable-storage-index-share-number-abort">
+<h4><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/storage/v1/immutable/:storage_index/:share_number/abort</span></code><a class="headerlink" href="#put-storage-v1-immutable-storage-index-share-number-abort" title="Link to this heading">¶</a></h4>
+<p>This cancels an <em>in-progress</em> upload.</p>
+<p>The request MUST include a <code class="docutils literal notranslate"><span class="pre">X-Tahoe-Authorization</span></code> header that includes the upload secret:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">upload</span><span class="o">-</span><span class="n">secret</span> <span class="o">&lt;</span><span class="n">base64</span><span class="o">-</span><span class="n">upload</span><span class="o">-</span><span class="n">secret</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If there is an incomplete upload with a matching upload-secret then the server MUST consider the abort to have succeeded.
+In this case the response MUST be <code class="docutils literal notranslate"><span class="pre">OK</span></code>.
+The server MUST respond to all future requests as if the operations related to this upload did not take place.</p>
+<p>If there is no incomplete upload with a matching upload-secret then the server MUST respond with <code class="docutils literal notranslate"><span class="pre">Method</span> <span class="pre">Not</span> <span class="pre">Allowed</span></code> (405).
+The server MUST make no client-visible changes to its state in this case.</p>
+</section>
+<section id="post-storage-v1-immutable-storage-index-share-number-corrupt">
+<h4><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/storage/v1/immutable/:storage_index/:share_number/corrupt</span></code><a class="headerlink" href="#post-storage-v1-immutable-storage-index-share-number-corrupt" title="Link to this heading">¶</a></h4>
+<p>Advise the server the data read from the indicated share was corrupt.
+The request body includes an human-meaningful text string with details about the corruption.
+It also includes potentially important details about the share.
+The request body MUST validate against this CDDL schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="n">reason</span><span class="p">:</span> <span class="n">tstr</span> <span class="o">.</span><span class="n">size</span> <span class="p">(</span><span class="mf">1..32765</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;expected hash abcd, got hash efgh&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The report pertains to the immutable share with a <strong>storage index</strong> and <strong>share number</strong> given in the request path.
+If the identified <strong>storage index</strong> and <strong>share number</strong> are known to the server then the response SHOULD be accepted and made available to server administrators.
+In this case the response SHOULD be <code class="docutils literal notranslate"><span class="pre">OK</span></code>.
+If the response is not accepted then the response SHOULD be <code class="docutils literal notranslate"><span class="pre">Not</span> <span class="pre">Found</span></code> (404).</p>
+<section id="id8">
+<h5>Discussion<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h5>
+<p>The seemingly odd length limit on <code class="docutils literal notranslate"><span class="pre">reason</span></code> is chosen so that the <em>encoded</em> representation of the message is limited to 32768.</p>
+</section>
+</section>
+</section>
+<section id="reading">
+<h3>Reading<a class="headerlink" href="#reading" title="Link to this heading">¶</a></h3>
+<section id="get-storage-v1-immutable-storage-index-shares">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/storage/v1/immutable/:storage_index/shares</span></code><a class="headerlink" href="#get-storage-v1-immutable-storage-index-shares" title="Link to this heading">¶</a></h4>
+<p>Retrieve a list (semantically, a set) indicating all shares available for the indicated storage index.
+The response body MUST validate against this CDDL schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#6.258([0*256 uint])</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If the <strong>storage index</strong> in the request path is not known to the server then the response MUST include an empty list.</p>
+</section>
+<section id="get-storage-v1-immutable-storage-index-share-number">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/storage/v1/immutable/:storage_index/:share_number</span></code><a class="headerlink" href="#get-storage-v1-immutable-storage-index-share-number" title="Link to this heading">¶</a></h4>
+<p>Read a contiguous sequence of bytes from one share in one bucket.
+The response body MUST be the raw share data (i.e., <code class="docutils literal notranslate"><span class="pre">application/octet-stream</span></code>).
+The <code class="docutils literal notranslate"><span class="pre">Range</span></code> header MAY be used to request exactly one <code class="docutils literal notranslate"><span class="pre">bytes</span></code> range,
+in which case the response code MUST be <code class="docutils literal notranslate"><span class="pre">Partial</span> <span class="pre">Content</span></code> (206).
+Interpretation and response behavior MUST be as specified in RFC 7233 § 4.1.
+Multiple ranges in a single request are <em>not</em> supported;
+open-ended ranges are also not supported.
+Clients MUST NOT send requests using these features.</p>
+<p>If the response reads beyond the end of the data,
+the response MUST be shorter than the requested range.
+It MUST contain all data up to the end of the share and then end.
+The resulting <code class="docutils literal notranslate"><span class="pre">Content-Range</span></code> header MUST be consistent with the returned data.</p>
+<p>If the response to a query is an empty range,
+the server MUST send a <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">Content</span></code> (204) response.</p>
+<section id="id9">
+<h5>Discussion<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h5>
+<p>Multiple <code class="docutils literal notranslate"><span class="pre">bytes</span></code> ranges are not supported.
+HTTP requires that the <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> of the response in that case be <code class="docutils literal notranslate"><span class="pre">multipart/...</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">multipart</span></code> major type brings along string sentinel delimiting as a means to frame the different response parts.
+There are many drawbacks to this framing technique:</p>
+<ol class="arabic simple">
+<li><p>It is resource-intensive to generate.</p></li>
+<li><p>It is resource-intensive to parse.</p></li>
+<li><p>It is complex to parse safely <a class="footnote-reference brackets" href="#id18" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id19" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id20" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id21" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>.</p></li>
+</ol>
+<p>A previous revision of this specification allowed requesting one or more contiguous sequences from one or more shares.
+This <em>superficially</em> mirrored the Foolscap based interface somewhat closely.
+The interface was simplified to this version because this version is all that is required to let clients retrieve any desired information.
+It only requires that the client issue multiple requests.
+This can be done with pipelining or parallel requests to avoid an additional latency penalty.
+In the future,
+if there are performance goals,
+benchmarks can demonstrate whether they are achieved by a more complicated interface or some other change.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="mutable">
+<h2>Mutable<a class="headerlink" href="#mutable" title="Link to this heading">¶</a></h2>
+<section id="id14">
+<h3>Writing<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<section id="post-storage-v1-mutable-storage-index-read-test-write">
+<h4><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/storage/v1/mutable/:storage_index/read-test-write</span></code><a class="headerlink" href="#post-storage-v1-mutable-storage-index-read-test-write" title="Link to this heading">¶</a></h4>
+<p>General purpose read-test-and-write operation for mutable storage indexes.
+A mutable storage index is also called a “slot”
+(particularly by the existing Tahoe-LAFS codebase).
+The first write operation on a mutable storage index creates it
+(that is,
+there is no separate “create this storage index” operation as there is for the immutable storage index type).</p>
+<p>The request MUST include <code class="docutils literal notranslate"><span class="pre">X-Tahoe-Authorization</span></code> headers with write enabler and lease secrets:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">write</span><span class="o">-</span><span class="n">enabler</span> <span class="o">&lt;</span><span class="n">base64</span><span class="o">-</span><span class="n">write</span><span class="o">-</span><span class="n">enabler</span><span class="o">-</span><span class="n">secret</span><span class="o">&gt;</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">cancel</span><span class="o">-</span><span class="n">secret</span> <span class="o">&lt;</span><span class="n">base64</span><span class="o">-</span><span class="n">lease</span><span class="o">-</span><span class="n">cancel</span><span class="o">-</span><span class="n">secret</span><span class="o">&gt;</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">renew</span><span class="o">-</span><span class="n">secret</span> <span class="o">&lt;</span><span class="n">base64</span><span class="o">-</span><span class="n">lease</span><span class="o">-</span><span class="n">renew</span><span class="o">-</span><span class="n">secret</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The request body MUST include test, read, and write vectors for the operation.
+The request body MUST validate against this CDDL schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;test-write-vectors&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="o">*</span><span class="mi">256</span> <span class="n">share_number</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;test&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="o">*</span><span class="mi">30</span> <span class="p">{</span><span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span> <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span> <span class="s2">&quot;specimen&quot;</span><span class="p">:</span> <span class="n">bstr</span><span class="p">}]</span>
+      <span class="s2">&quot;write&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">*</span> <span class="p">{</span><span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">bstr</span><span class="p">}]</span>
+      <span class="s2">&quot;new-length&quot;</span><span class="p">:</span> <span class="n">uint</span> <span class="o">/</span> <span class="n">null</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="s2">&quot;read-vector&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="o">*</span><span class="mi">30</span> <span class="p">{</span><span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span> <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">}]</span>
+<span class="p">}</span>
+<span class="n">share_number</span> <span class="o">=</span> <span class="n">uint</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;test-write-vectors&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;test&quot;</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+                <span class="s2">&quot;specimen&quot;</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span>
+            <span class="p">},</span> <span class="o">...</span><span class="p">],</span>
+            <span class="s2">&quot;write&quot;</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+                <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span>
+            <span class="p">},</span> <span class="o">...</span><span class="p">],</span>
+            <span class="s2">&quot;new-length&quot;</span><span class="p">:</span> <span class="mi">5</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;read-vector&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">},</span> <span class="o">...</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The response body contains a boolean indicating whether the tests all succeed
+(and writes were applied) and a mapping giving read data (pre-write).
+The response body MUST validate against this CDDL schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+  <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="o">*</span><span class="mi">256</span> <span class="n">share_number</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="o">*</span> <span class="n">bstr</span><span class="p">]}</span>
+<span class="p">}</span>
+<span class="n">share_number</span> <span class="o">=</span> <span class="n">uint</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">],</span>
+        <span class="mi">5</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">],</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A client MAY send a test vector or read vector to bytes beyond the end of existing data.
+In this case a server MUST behave as if the test or read vector referred to exactly as much data exists.</p>
+<p>For example,
+consider the case where the server has 5 bytes of data for a particular share.
+If a client sends a read vector with an <code class="docutils literal notranslate"><span class="pre">offset</span></code> of 1 and a <code class="docutils literal notranslate"><span class="pre">size</span></code> of 4 then the server MUST respond with all of the data except the first byte.
+If a client sends a read vector with the same <code class="docutils literal notranslate"><span class="pre">offset</span></code> and a <code class="docutils literal notranslate"><span class="pre">size</span></code> of 5 (or any larger value) then the server MUST respond in the same way.</p>
+<p>Similarly,
+if there is no data at all,
+an empty byte string is returned no matter what the offset or length.</p>
+</section>
+</section>
+<section id="id15">
+<h3>Reading<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
+<section id="get-storage-v1-mutable-storage-index-shares">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/storage/v1/mutable/:storage_index/shares</span></code><a class="headerlink" href="#get-storage-v1-mutable-storage-index-shares" title="Link to this heading">¶</a></h4>
+<p>Retrieve a set indicating all shares available for the indicated storage index.
+The response body MUST validate against this CDDL schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#6.258([0*256 uint])</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="get-storage-v1-mutable-storage-index-share-number">
+<h4><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/storage/v1/mutable/:storage_index/:share_number</span></code><a class="headerlink" href="#get-storage-v1-mutable-storage-index-share-number" title="Link to this heading">¶</a></h4>
+<p>Read data from the indicated mutable shares, just like <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/storage/v1/immutable/:storage_index</span></code>.</p>
+<p>The response body MUST be the raw share data (i.e., <code class="docutils literal notranslate"><span class="pre">application/octet-stream</span></code>).
+The <code class="docutils literal notranslate"><span class="pre">Range</span></code> header MAY be used to request exactly one <code class="docutils literal notranslate"><span class="pre">bytes</span></code> range,
+in which case the response code MUST be <code class="docutils literal notranslate"><span class="pre">Partial</span> <span class="pre">Content</span></code> (206).
+Interpretation and response behavior MUST be specified in RFC 7233 § 4.1.
+Multiple ranges in a single request are <em>not</em> supported;
+open-ended ranges are also not supported.
+Clients MUST NOT send requests using these features.</p>
+<p>If the response reads beyond the end of the data,
+the response MUST be shorter than the requested range.
+It MUST contain all data up to the end of the share and then end.
+The resulting <code class="docutils literal notranslate"><span class="pre">Content-Range</span></code> header MUST be consistent with the returned data.</p>
+<p>If the response to a query is an empty range,
+the server MUST send a <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">Content</span></code> (204) response.</p>
+</section>
+<section id="post-storage-v1-mutable-storage-index-share-number-corrupt">
+<h4><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/storage/v1/mutable/:storage_index/:share_number/corrupt</span></code><a class="headerlink" href="#post-storage-v1-mutable-storage-index-share-number-corrupt" title="Link to this heading">¶</a></h4>
+<p>Advise the server the data read from the indicated share was corrupt.
+Just like the immutable version.</p>
+</section>
+</section>
+</section>
+<section id="sample-interactions">
+<h2>Sample Interactions<a class="headerlink" href="#sample-interactions" title="Link to this heading">¶</a></h2>
+<p>This section contains examples of client/server interactions to help illuminate the above specification.
+This section is non-normative.</p>
+<section id="immutable-data">
+<h3>Immutable Data<a class="headerlink" href="#immutable-data" title="Link to this heading">¶</a></h3>
+<ol class="arabic">
+<li><p>Create a bucket for storage index <code class="docutils literal notranslate"><span class="pre">AAAAAAAAAAAAAAAA</span></code> to hold two immutable shares, discovering that share <code class="docutils literal notranslate"><span class="pre">1</span></code> was already uploaded:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="o">/</span><span class="n">storage</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">immutable</span><span class="o">/</span><span class="n">AAAAAAAAAAAAAAAA</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">Tahoe</span><span class="o">-</span><span class="n">LAFS</span> <span class="n">nurl</span><span class="o">-</span><span class="n">swissnum</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">renew</span><span class="o">-</span><span class="n">secret</span> <span class="n">efgh</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">cancel</span><span class="o">-</span><span class="n">secret</span> <span class="n">jjkl</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">upload</span><span class="o">-</span><span class="n">secret</span> <span class="n">xyzf</span>
+
+<span class="p">{</span><span class="s2">&quot;share-numbers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="s2">&quot;allocated-size&quot;</span><span class="p">:</span> <span class="mi">48</span><span class="p">}</span>
+
+<span class="mi">200</span> <span class="n">OK</span>
+<span class="p">{</span><span class="s2">&quot;already-have&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;allocated&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">]}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Upload the content for immutable share <code class="docutils literal notranslate"><span class="pre">7</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PATCH</span> <span class="o">/</span><span class="n">storage</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">immutable</span><span class="o">/</span><span class="n">AAAAAAAAAAAAAAAA</span><span class="o">/</span><span class="mi">7</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">Tahoe</span><span class="o">-</span><span class="n">LAFS</span> <span class="n">nurl</span><span class="o">-</span><span class="n">swissnum</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Range</span><span class="p">:</span> <span class="nb">bytes</span> <span class="mi">0</span><span class="o">-</span><span class="mi">15</span><span class="o">/</span><span class="mi">48</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">upload</span><span class="o">-</span><span class="n">secret</span> <span class="n">xyzf</span>
+<span class="o">&lt;</span><span class="n">first</span> <span class="mi">16</span> <span class="nb">bytes</span> <span class="n">of</span> <span class="n">share</span> <span class="n">data</span><span class="o">&gt;</span>
+
+<span class="mi">200</span> <span class="n">OK</span>
+<span class="p">{</span> <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span><span class="s2">&quot;begin&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">48</span> <span class="p">}</span> <span class="p">]</span> <span class="p">}</span>
+
+<span class="n">PATCH</span> <span class="o">/</span><span class="n">storage</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">immutable</span><span class="o">/</span><span class="n">AAAAAAAAAAAAAAAA</span><span class="o">/</span><span class="mi">7</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">Tahoe</span><span class="o">-</span><span class="n">LAFS</span> <span class="n">nurl</span><span class="o">-</span><span class="n">swissnum</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Range</span><span class="p">:</span> <span class="nb">bytes</span> <span class="mi">16</span><span class="o">-</span><span class="mi">31</span><span class="o">/</span><span class="mi">48</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">upload</span><span class="o">-</span><span class="n">secret</span> <span class="n">xyzf</span>
+<span class="o">&lt;</span><span class="n">second</span> <span class="mi">16</span> <span class="nb">bytes</span> <span class="n">of</span> <span class="n">share</span> <span class="n">data</span><span class="o">&gt;</span>
+
+<span class="mi">200</span> <span class="n">OK</span>
+<span class="p">{</span> <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span><span class="s2">&quot;begin&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">48</span> <span class="p">}</span> <span class="p">]</span> <span class="p">}</span>
+
+<span class="n">PATCH</span> <span class="o">/</span><span class="n">storage</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">immutable</span><span class="o">/</span><span class="n">AAAAAAAAAAAAAAAA</span><span class="o">/</span><span class="mi">7</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">Tahoe</span><span class="o">-</span><span class="n">LAFS</span> <span class="n">nurl</span><span class="o">-</span><span class="n">swissnum</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Range</span><span class="p">:</span> <span class="nb">bytes</span> <span class="mi">32</span><span class="o">-</span><span class="mi">47</span><span class="o">/</span><span class="mi">48</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">upload</span><span class="o">-</span><span class="n">secret</span> <span class="n">xyzf</span>
+<span class="o">&lt;</span><span class="n">final</span> <span class="mi">16</span> <span class="nb">bytes</span> <span class="n">of</span> <span class="n">share</span> <span class="n">data</span><span class="o">&gt;</span>
+
+<span class="mi">201</span> <span class="n">CREATED</span>
+</pre></div>
+</div>
+</li>
+<li><p>Download the content of the previously uploaded immutable share <code class="docutils literal notranslate"><span class="pre">7</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>GET /storage/v1/immutable/AAAAAAAAAAAAAAAA?share=7
+Authorization: Tahoe-LAFS nurl-swissnum
+Range: bytes=0-47
+
+200 OK
+Content-Range: bytes 0-47/48
+&lt;complete 48 bytes of previously uploaded data&gt;
+</pre></div>
+</div>
+</li>
+<li><p>Renew the lease on all immutable shares in bucket <code class="docutils literal notranslate"><span class="pre">AAAAAAAAAAAAAAAA</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PUT</span> <span class="o">/</span><span class="n">storage</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">lease</span><span class="o">/</span><span class="n">AAAAAAAAAAAAAAAA</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">Tahoe</span><span class="o">-</span><span class="n">LAFS</span> <span class="n">nurl</span><span class="o">-</span><span class="n">swissnum</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">cancel</span><span class="o">-</span><span class="n">secret</span> <span class="n">jjkl</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">renew</span><span class="o">-</span><span class="n">secret</span> <span class="n">efgh</span>
+
+<span class="mi">204</span> <span class="n">NO</span> <span class="n">CONTENT</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="mutable-data">
+<h3>Mutable Data<a class="headerlink" href="#mutable-data" title="Link to this heading">¶</a></h3>
+<p>1. Create mutable share number <code class="docutils literal notranslate"><span class="pre">3</span></code> with <code class="docutils literal notranslate"><span class="pre">10</span></code> bytes of data in slot <code class="docutils literal notranslate"><span class="pre">BBBBBBBBBBBBBBBB</span></code>.
+The special test vector of size 1 but empty bytes will only pass
+if there is no existing share,
+otherwise it will read a byte which won’t match <cite>b””</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="o">/</span><span class="n">storage</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">mutable</span><span class="o">/</span><span class="n">BBBBBBBBBBBBBBBB</span><span class="o">/</span><span class="n">read</span><span class="o">-</span><span class="n">test</span><span class="o">-</span><span class="n">write</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">Tahoe</span><span class="o">-</span><span class="n">LAFS</span> <span class="n">nurl</span><span class="o">-</span><span class="n">swissnum</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">write</span><span class="o">-</span><span class="n">enabler</span> <span class="n">abcd</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">cancel</span><span class="o">-</span><span class="n">secret</span> <span class="n">efgh</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">renew</span><span class="o">-</span><span class="n">secret</span> <span class="n">ijkl</span>
+
+<span class="p">{</span>
+    <span class="s2">&quot;test-write-vectors&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="mi">3</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;test&quot;</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;specimen&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+            <span class="p">}],</span>
+            <span class="s2">&quot;write&quot;</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxxxx&quot;</span>
+            <span class="p">}],</span>
+            <span class="s2">&quot;new-length&quot;</span><span class="p">:</span> <span class="mi">10</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;read-vector&quot;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+
+<span class="mi">200</span> <span class="n">OK</span>
+<span class="p">{</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p>Safely rewrite the contents of a known version of mutable share number <code class="docutils literal notranslate"><span class="pre">3</span></code> (or fail):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="o">/</span><span class="n">storage</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">mutable</span><span class="o">/</span><span class="n">BBBBBBBBBBBBBBBB</span><span class="o">/</span><span class="n">read</span><span class="o">-</span><span class="n">test</span><span class="o">-</span><span class="n">write</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">Tahoe</span><span class="o">-</span><span class="n">LAFS</span> <span class="n">nurl</span><span class="o">-</span><span class="n">swissnum</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">write</span><span class="o">-</span><span class="n">enabler</span> <span class="n">abcd</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">cancel</span><span class="o">-</span><span class="n">secret</span> <span class="n">efgh</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">renew</span><span class="o">-</span><span class="n">secret</span> <span class="n">ijkl</span>
+
+<span class="p">{</span>
+    <span class="s2">&quot;test-write-vectors&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="mi">3</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;test&quot;</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">length</span> <span class="n">of</span> <span class="n">checkstring</span><span class="o">&gt;</span><span class="p">,</span>
+                <span class="s2">&quot;specimen&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;checkstring&gt;&quot;</span>
+            <span class="p">}],</span>
+            <span class="s2">&quot;write&quot;</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;yyyyyyyyyy&quot;</span>
+            <span class="p">}],</span>
+            <span class="s2">&quot;new-length&quot;</span><span class="p">:</span> <span class="mi">10</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;read-vector&quot;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+
+<span class="mi">200</span> <span class="n">OK</span>
+<span class="p">{</span>
+    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Download the contents of share number <code class="docutils literal notranslate"><span class="pre">3</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>GET /storage/v1/mutable/BBBBBBBBBBBBBBBB?share=3
+Authorization: Tahoe-LAFS nurl-swissnum
+Range: bytes=0-16
+
+200 OK
+Content-Range: bytes 0-15/16
+&lt;complete 16 bytes of previously uploaded data&gt;
+</pre></div>
+</div>
+</li>
+<li><p>Renew the lease on previously uploaded mutable share in slot <code class="docutils literal notranslate"><span class="pre">BBBBBBBBBBBBBBBB</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PUT</span> <span class="o">/</span><span class="n">storage</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">lease</span><span class="o">/</span><span class="n">BBBBBBBBBBBBBBBB</span>
+<span class="n">Authorization</span><span class="p">:</span> <span class="n">Tahoe</span><span class="o">-</span><span class="n">LAFS</span> <span class="n">nurl</span><span class="o">-</span><span class="n">swissnum</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">cancel</span><span class="o">-</span><span class="n">secret</span> <span class="n">efgh</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Tahoe</span><span class="o">-</span><span class="n">Authorization</span><span class="p">:</span> <span class="n">lease</span><span class="o">-</span><span class="n">renew</span><span class="o">-</span><span class="n">secret</span> <span class="n">ijkl</span>
+
+<span class="mi">204</span> <span class="n">NO</span> <span class="n">CONTENT</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id16" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
+<p>The security value of checking <code class="docutils literal notranslate"><span class="pre">notValidBefore</span></code> and <code class="docutils literal notranslate"><span class="pre">notValidAfter</span></code> is not entirely clear.
+The arguments which apply to web-facing certificates do not seem to apply
+(due to the decision for Tahoe-LAFS to operate independently of the web-oriented CA system).</p>
+<p>Arguably, complexity is reduced by allowing an existing TLS implementation which wants to make these checks make them
+(compared to including additional code to either bypass them or disregard their results).
+Reducing complexity, at least in general, is often good for security.</p>
+<p>On the other hand, checking the validity time period forces certificate regeneration
+(which comes with its own set of complexity).</p>
+<p>A possible compromise is to recommend certificates with validity periods of many years or decades.
+“Recommend” may be read as “provide software supporting the generation of”.</p>
+<p>What about key theft?
+If certificates are valid for years then a successful attacker can pretend to be a valid storage node for years.
+However, short-validity-period certificates are no help in this case.
+The attacker can generate new, valid certificates using the stolen keys.</p>
+<p>Therefore, the only recourse to key theft
+(really <em>identity theft</em>)
+is to burn the identity and generate a new one.
+Burning the identity is a non-trivial task.
+It is worth solving but it is not solved here.</p>
+</aside>
+<aside class="footnote brackets" id="id17" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">2</a><span class="fn-bracket">]</span></span>
+<p>More simply:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hashlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">sha256</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives.serialization</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+  <span class="n">Encoding</span><span class="p">,</span>
+  <span class="n">PublicFormat</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pybase64</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlsafe_b64encode</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check_tub_id</span><span class="p">(</span><span class="n">tub_id</span><span class="p">):</span>
+    <span class="n">spki_bytes</span> <span class="o">=</span> <span class="n">cert</span><span class="o">.</span><span class="n">public_key</span><span class="p">()</span><span class="o">.</span><span class="n">public_bytes</span><span class="p">(</span><span class="n">Encoding</span><span class="o">.</span><span class="n">DER</span><span class="p">,</span> <span class="n">PublicFormat</span><span class="o">.</span><span class="n">SubjectPublicKeyInfo</span><span class="p">)</span>
+    <span class="n">spki_sha256</span> <span class="o">=</span> <span class="n">sha256</span><span class="p">(</span><span class="n">spki_bytes</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+    <span class="n">spki_encoded</span> <span class="o">=</span> <span class="n">urlsafe_b64encode</span><span class="p">(</span><span class="n">spki_sha256</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">spki_encoded</span> <span class="o">==</span> <span class="n">tub_id</span>
+</pre></div>
+</div>
+<p>Note we use <a class="reference external" href="https://tools.ietf.org/html/rfc7515#appendix-C">unpadded base64url</a> rather than the Foolscap- and Tahoe-LAFS-preferred Base32.</p>
+</aside>
+<aside class="footnote brackets" id="id18" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">3</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.cvedetails.com/cve/CVE-2017-5638/">https://www.cvedetails.com/cve/CVE-2017-5638/</a></p>
+</aside>
+<aside class="footnote brackets" id="id19" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">4</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://pivotal.io/security/cve-2018-1272">https://pivotal.io/security/cve-2018-1272</a></p>
+</aside>
+<aside class="footnote brackets" id="id20" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">5</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://nvd.nist.gov/vuln/detail/CVE-2017-5124">https://nvd.nist.gov/vuln/detail/CVE-2017-5124</a></p>
+</aside>
+<aside class="footnote brackets" id="id21" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">6</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://efail.de/">https://efail.de/</a></p>
+</aside>
+</aside>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, The Tahoe-LAFS Developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Storage Node Protocol (“Great Black Swamp”, “GBS”)</a><ul>
+<li><a class="reference internal" href="#glossary">Glossary</a></li>
+<li><a class="reference internal" href="#motivation">Motivation</a><ul>
+<li><a class="reference internal" href="#id1">Foolscap</a></li>
+<li><a class="reference internal" href="#http">HTTP</a></li>
+<li><a class="reference internal" href="#tls">TLS</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#design-requirements">Design Requirements</a><ul>
+<li><a class="reference internal" href="#security">Security</a><ul>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#discussion">Discussion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#functionality">Functionality</a></li>
+<li><a class="reference internal" href="#solutions">Solutions</a><ul>
+<li><a class="reference internal" href="#summary-non-normative">Summary (Non-normative)</a></li>
+<li><a class="reference internal" href="#transition">Transition</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#server-details">Server Details</a><ul>
+<li><a class="reference internal" href="#string-encoding">String Encoding</a><ul>
+<li><a class="reference internal" href="#base32">Base32</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#message-encoding">Message Encoding</a><ul>
+<li><a class="reference internal" href="#sets">1. Sets</a></li>
+<li><a class="reference internal" href="#bytes">2. Bytes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#http-design">HTTP Design</a></li>
+<li><a class="reference internal" href="#encoding">Encoding</a></li>
+<li><a class="reference internal" href="#general">General</a><ul>
+<li><a class="reference internal" href="#get-storage-v1-version"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/storage/v1/version</span></code></a></li>
+<li><a class="reference internal" href="#put-storage-v1-lease-storage-index"><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/storage/v1/lease/:storage_index</span></code></a><ul>
+<li><a class="reference internal" href="#id5">Discussion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#immutable">Immutable</a><ul>
+<li><a class="reference internal" href="#writing">Writing</a><ul>
+<li><a class="reference internal" href="#post-storage-v1-immutable-storage-index"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/storage/v1/immutable/:storage_index</span></code></a><ul>
+<li><a class="reference internal" href="#id6">Discussion</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#patch-storage-v1-immutable-storage-index-share-number"><code class="docutils literal notranslate"><span class="pre">PATCH</span> <span class="pre">/storage/v1/immutable/:storage_index/:share_number</span></code></a><ul>
+<li><a class="reference internal" href="#id7">Discussion</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#put-storage-v1-immutable-storage-index-share-number-abort"><code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/storage/v1/immutable/:storage_index/:share_number/abort</span></code></a></li>
+<li><a class="reference internal" href="#post-storage-v1-immutable-storage-index-share-number-corrupt"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/storage/v1/immutable/:storage_index/:share_number/corrupt</span></code></a><ul>
+<li><a class="reference internal" href="#id8">Discussion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reading">Reading</a><ul>
+<li><a class="reference internal" href="#get-storage-v1-immutable-storage-index-shares"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/storage/v1/immutable/:storage_index/shares</span></code></a></li>
+<li><a class="reference internal" href="#get-storage-v1-immutable-storage-index-share-number"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/storage/v1/immutable/:storage_index/:share_number</span></code></a><ul>
+<li><a class="reference internal" href="#id9">Discussion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mutable">Mutable</a><ul>
+<li><a class="reference internal" href="#id14">Writing</a><ul>
+<li><a class="reference internal" href="#post-storage-v1-mutable-storage-index-read-test-write"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/storage/v1/mutable/:storage_index/read-test-write</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id15">Reading</a><ul>
+<li><a class="reference internal" href="#get-storage-v1-mutable-storage-index-shares"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/storage/v1/mutable/:storage_index/shares</span></code></a></li>
+<li><a class="reference internal" href="#get-storage-v1-mutable-storage-index-share-number"><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/storage/v1/mutable/:storage_index/:share_number</span></code></a></li>
+<li><a class="reference internal" href="#post-storage-v1-mutable-storage-index-share-number-corrupt"><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/storage/v1/mutable/:storage_index/:share_number/corrupt</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sample-interactions">Sample Interactions</a><ul>
+<li><a class="reference internal" href="#immutable-data">Immutable Data</a></li>
+<li><a class="reference internal" href="#mutable-data">Mutable Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

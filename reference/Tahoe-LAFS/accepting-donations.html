@@ -1,15 +1,15 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="./">
+<html class="no-js" lang="en" data-content_root="../../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+<link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
-        <title>The Private Facts Project</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=25af2a20" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+        <title>Storage Server Donations - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
 
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">The Private Facts Project</div></a>
+      <a href="../../index.html"><div class="brand">The Private Facts Project</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -187,11 +187,11 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   <span class="sidebar-brand-text">The Private Facts Project</span>
   
-</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
@@ -216,7 +216,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/index.rst.txt" title="View this page">
+  <a class="muted-link" href="../../_sources/reference/Tahoe-LAFS/accepting-donations.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -230,26 +230,79 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="private-facts">
-<h1>Private Facts<a class="headerlink" href="#private-facts" title="Link to this heading">¶</a></h1>
-<div class="toctree-wrapper compound">
-</div>
-<blockquote class="pull-quote">
-<div><dl class="simple">
-<dt>The three rules of storing data for other people:</dt><dd><ul class="simple">
-<li><p>Never lose the data</p></li>
-<li><p>Never let the wrong people see it.</p></li>
-<li><p>Never forget the first two rules.</p></li>
+          <section id="storage-server-donations">
+<h1>Storage Server Donations<a class="headerlink" href="#storage-server-donations" title="Link to this heading">¶</a></h1>
+<p>The following is a configuration convention which allows users to anonymously support the operators of storage servers.
+Donations are made using <a class="reference external" href="https://z.cash/support/security/privacy-security-recommendations.html#transaction">Zcash shielded transactions</a> to limit the amount of personal information incidentally conveyed.</p>
+<section id="sending-donations">
+<h2>Sending Donations<a class="headerlink" href="#sending-donations" title="Link to this heading">¶</a></h2>
+<p>To support a storage server following this convention, you need several things:</p>
+<ul class="simple">
+<li><p>a Zcash wallet capable of sending shielded transactions
+(at least until Zcash 1.1.1 this requires a Zcash full node)</p></li>
+<li><p>a shielded address with sufficient balance</p></li>
+<li><p>a running Tahoe-LAFS client node which knows about the recipient storage server</p></li>
 </ul>
-</dd>
-</dl>
-</div></blockquote>
+<p>For additional protection, you may also wish to operate your Zcash wallet and full node using Tor.</p>
+<section id="find-zcash-shielded-address">
+<h3>Find Zcash Shielded Address<a class="headerlink" href="#find-zcash-shielded-address" title="Link to this heading">¶</a></h3>
+<p>To find an address at which a storage server operator wishes to receive donations,
+launch the Tahoe-LAFS web UI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tahoe webopen
+</pre></div>
+</div>
+<p>Inspect the page for the storage server area.
+This will have a heading like <em>Connected to N of M known storage servers</em>.
+Each storage server in this section will have a nickname.
+A storage server with a nickname beginning with <code class="docutils literal notranslate"><span class="pre">zcash:</span></code> is signaling it accepts Zcash donations.
+Copy the full address following the <code class="docutils literal notranslate"><span class="pre">zcash:</span></code> prefix and save it for the next step.
+This is the donation address.
+Donation addresses beginning with <code class="docutils literal notranslate"><span class="pre">z</span></code> are shielded.
+It is recommended that all donations be sent from and to shielded addresses.</p>
+</section>
+<section id="send-the-donation">
+<h3>Send the Donation<a class="headerlink" href="#send-the-donation" title="Link to this heading">¶</a></h3>
+<p>First, select a donation amount.
+Next, use a Zcash wallet to send the selected amount to the donation address.
+Using the Zcash cli wallet, this can be done with commands like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ DONATION_ADDRESS=&quot;...&quot;
+$ AMOUNT=&quot;...&quot;
+$ YOUR_ADDRESS=&quot;...&quot;
+$ zcash-cli z_sendmany $YOUR_ADDRESS &quot;[{\&quot;address\&quot;: \&quot;$DONATION_ADDRESS\&quot;, \&quot;amount\&quot;: $AMOUNT}]&quot;
+</pre></div>
+</div>
+<p>Remember that you must also have funds to pay the transaction fee
+(which defaults to 0.0001 ZEC in mid-2018).</p>
+</section>
+</section>
+<section id="receiving-donations">
+<h2>Receiving Donations<a class="headerlink" href="#receiving-donations" title="Link to this heading">¶</a></h2>
+<p>To receive donations from users following this convention, you need the following:</p>
+<ul class="simple">
+<li><p>a Zcash shielded address</p></li>
+</ul>
+<section id="configuring-tahoe-lafs">
+<h3>Configuring Tahoe-LAFS<a class="headerlink" href="#configuring-tahoe-lafs" title="Link to this heading">¶</a></h3>
+<p>The Zcash shielded address is placed in the storage server’s <code class="docutils literal notranslate"><span class="pre">nickname</span></code> field.
+Edit <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code> and edit the <code class="docutils literal notranslate"><span class="pre">nickname</span></code> field in the <code class="docutils literal notranslate"><span class="pre">node</span></code> section like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+<span class="n">nickname</span> <span class="o">=</span> <span class="n">zcash</span><span class="p">:</span><span class="n">zcABCDEF</span><span class="o">....</span>
+</pre></div>
+</div>
+<p>Then restart the storage server.</p>
+</section>
+</section>
+<section id="further-reading">
+<h2>Further Reading<a class="headerlink" href="#further-reading" title="Link to this heading">¶</a></h2>
+<p>To acquaint yourself with the security and privacy properties of Zcash,
+refer to the <a class="reference external" href="http://zcash.readthedocs.io/en/latest/">Zcash documentation</a>.</p>
+</section>
 </section>
 
         </article>
@@ -277,15 +330,43 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Storage Server Donations</a><ul>
+<li><a class="reference internal" href="#sending-donations">Sending Donations</a><ul>
+<li><a class="reference internal" href="#find-zcash-shielded-address">Find Zcash Shielded Address</a></li>
+<li><a class="reference internal" href="#send-the-donation">Send the Donation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#receiving-donations">Receiving Donations</a><ul>
+<li><a class="reference internal" href="#configuring-tahoe-lafs">Configuring Tahoe-LAFS</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#further-reading">Further Reading</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=16df9e97"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+</div><script src="../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
     </body>
 </html>

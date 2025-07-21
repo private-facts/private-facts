@@ -1,0 +1,606 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>Managed Grid - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">The Private Facts Project</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">The Private Facts Project</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/reference/Tahoe-LAFS/managed-grid.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="managed-grid">
+<h1>Managed Grid<a class="headerlink" href="#managed-grid" title="Link to this heading">¶</a></h1>
+<p>This document explains the “Grid Manager” concept and the
+<cite>grid-manager</cite> command. Someone operating a grid may choose to use a
+Grid Manager. Operators of storage-servers and clients will then be
+given additional configuration in this case.</p>
+<section id="overview-and-motivation">
+<h2>Overview and Motivation<a class="headerlink" href="#overview-and-motivation" title="Link to this heading">¶</a></h2>
+<p>In a grid using an Introducer, a client will use any storage-server
+the Introducer announces (and the Introducer will announce any
+storage-server that connects to it). This means that anyone with the
+Introducer fURL can connect storage to the grid.</p>
+<p>Sometimes, this is just what you want!</p>
+<p>For some use-cases, though, you want to have clients only use certain
+servers. One case might be a “managed” grid, where some entity runs
+the grid; clients of this grid don’t want their uploads to go to
+“unmanaged” storage if some other client decides to provide storage.</p>
+<p>One way to limit which storage servers a client connects to is via the
+“server list” (<a class="reference internal" href="configuration.html#server-list"><span class="std std-ref">Static Server Definitions</span></a>) (aka “Introducerless”
+mode). Clients are given static lists of storage-servers, and connect
+only to those. This means manually updating these lists if the storage
+servers change, however.</p>
+<p>Another method is for clients to use <cite>[client] peers.preferred=</cite>
+configuration option (<a class="reference internal" href="configuration.html#client-configuration"><span class="std std-ref">Client Configuration</span></a>), which suffers
+from a similar disadvantage.</p>
+</section>
+<section id="grid-manager">
+<h2>Grid Manager<a class="headerlink" href="#grid-manager" title="Link to this heading">¶</a></h2>
+<p>A “grid-manager” consists of some data defining a keypair (along with
+some other details) and Tahoe sub-commands to manipulate the data and
+produce certificates to give to storage-servers. Certificates assert
+the statement: “Grid Manager X suggests you use storage-server Y to
+upload shares to” (X and Y are public-keys). Such a certificate
+consists of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>the version of the format the certificate conforms to (<cite>1</cite>)</p></li>
+<li><p>the public-key of a storage-server</p></li>
+<li><p>an expiry timestamp</p></li>
+<li><p>a signature of the above</p></li>
+</ul>
+</div></blockquote>
+<p>A client will always use any storage-server for downloads (expired
+certificate, or no certificate) because clients check the ciphertext
+and re-assembled plaintext against the keys in the capability;
+“grid-manager” certificates only control uploads.</p>
+<p>Clients make use of this functionality by configuring one or more Grid Manager public keys.
+This tells the client to only upload to storage-servers that have a currently-valid certificate from any of the Grid Managers their client allows.
+In case none are configured, the default behavior (of using any storage server) prevails.</p>
+</section>
+<section id="grid-manager-data-storage">
+<h2>Grid Manager Data Storage<a class="headerlink" href="#grid-manager-data-storage" title="Link to this heading">¶</a></h2>
+<p>The data defining the grid-manager is stored in an arbitrary
+directory, which you indicate with the <code class="docutils literal notranslate"><span class="pre">--config</span></code> option (in the
+future, we may add the ability to store the data directly in a grid,
+at which time you may be able to pass a directory-capability to this
+option).</p>
+<p>If you don’t want to store the configuration on disk at all, you may
+use <code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">-</span></code> (the last character is a dash) and write a valid
+JSON configuration to stdin.</p>
+<p>All commands require the <code class="docutils literal notranslate"><span class="pre">--config</span></code> option and they all behave
+similarly for “data from stdin” versus “data from disk”. A directory
+(and not a file) is used on disk because in that mode, each
+certificate issued is also stored alongside the configuration
+document; in “stdin / stdout” mode, an issued certificate is only
+ever available on stdout.</p>
+<p>The configuration is a JSON document. It is subject to change as Grid
+Manager evolves. It contains a version number in the
+<cite>grid_manager_config_version</cite> key which will increment whenever the
+document schema changes.</p>
+<section id="grid-manager-create">
+<h3>grid-manager create<a class="headerlink" href="#grid-manager-create" title="Link to this heading">¶</a></h3>
+<p>Create a new grid-manager.</p>
+<p>If you specify <code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">-</span></code> then a new grid-manager configuration is
+written to stdout. Otherwise, a new grid-manager is created in the
+directory specified by the <code class="docutils literal notranslate"><span class="pre">--config</span></code> option. It is an error if the
+directory already exists.</p>
+</section>
+<section id="grid-manager-public-identity">
+<h3>grid-manager public-identity<a class="headerlink" href="#grid-manager-public-identity" title="Link to this heading">¶</a></h3>
+<p>Print out a grid-manager’s public key. This key is derived from the
+private-key of the grid-manager, so a valid grid-manager config must
+be given via <code class="docutils literal notranslate"><span class="pre">--config</span></code></p>
+<p>This public key is what is put in clients’ configuration to actually
+validate and use grid-manager certificates.</p>
+</section>
+<section id="grid-manager-add">
+<h3>grid-manager add<a class="headerlink" href="#grid-manager-add" title="Link to this heading">¶</a></h3>
+<p>Takes two args: <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">pubkey</span></code>. The <code class="docutils literal notranslate"><span class="pre">name</span></code> is an arbitrary local
+identifier for the new storage node (also sometimes called “a petname”
+or “nickname”). The pubkey is the tahoe-encoded key from a <code class="docutils literal notranslate"><span class="pre">node.pubkey</span></code>
+file in the storage-server’s node directory (minus any
+whitespace). For example, if <code class="docutils literal notranslate"><span class="pre">~/storage0</span></code> contains a storage-node,
+you might do something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>grid-manager --config ./gm0 add storage0 $(cat ~/storage0/node.pubkey)
+</pre></div>
+</div>
+<p>This adds a new storage-server to a Grid Manager’s
+configuration. (Since it mutates the configuration, if you used
+<code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">-</span></code> the new configuration will be printed to stdout). The
+usefulness of the <code class="docutils literal notranslate"><span class="pre">name</span></code> is solely for reference within this Grid
+Manager.</p>
+</section>
+<section id="grid-manager-list">
+<h3>grid-manager list<a class="headerlink" href="#grid-manager-list" title="Link to this heading">¶</a></h3>
+<p>Lists all storage-servers that have previously been added using
+<code class="docutils literal notranslate"><span class="pre">grid-manager</span> <span class="pre">add</span></code>.</p>
+</section>
+<section id="grid-manager-sign">
+<h3>grid-manager sign<a class="headerlink" href="#grid-manager-sign" title="Link to this heading">¶</a></h3>
+<p>Takes two args: <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">expiry_days</span></code>. The <code class="docutils literal notranslate"><span class="pre">name</span></code> is a nickname used
+previously in a <code class="docutils literal notranslate"><span class="pre">grid-manager</span> <span class="pre">add</span></code> command and <code class="docutils literal notranslate"><span class="pre">expiry_days</span></code> is
+the number of days in the future when the certificate should expire.</p>
+<p>Note that this mutates the state of the grid-manager if it is on disk,
+by adding this certificate to our collection of issued
+certificates. If you used <code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">-</span></code>, the certificate isn’t
+persisted anywhere except to stdout (so if you wish to keep it
+somewhere, that is up to you).</p>
+<p>This command creates a new “version 1” certificate for a
+storage-server (identified by its public key). The new certificate is
+printed to stdout. If you stored the config on disk, the new
+certificate will (also) be in a file named like <code class="docutils literal notranslate"><span class="pre">alice.cert.0</span></code>.</p>
+</section>
+</section>
+<section id="enrolling-a-storage-server-cli">
+<h2>Enrolling a Storage Server: CLI<a class="headerlink" href="#enrolling-a-storage-server-cli" title="Link to this heading">¶</a></h2>
+<section id="tahoe-admin-add-grid-manager-cert">
+<h3>tahoe admin add-grid-manager-cert<a class="headerlink" href="#tahoe-admin-add-grid-manager-cert" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><cite>–filename</cite>: the file to read the cert from</p></li>
+<li><p><cite>–name</cite>: the name of this certificate</p></li>
+</ul>
+<p>Import a “version 1” storage-certificate produced by a grid-manager A
+storage server may have zero or more such certificates installed; for
+now just one is sufficient. You will have to re-start your node after
+this. Subsequent announcements to the Introducer will include this
+certificate.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This command will simply edit the <cite>tahoe.cfg</cite> file and direct you
+to re-start. In the Future(tm), we should consider (in exarkun’s
+words):</p>
+<blockquote>
+<div><p>“A python program you run as a new process” might not be the
+best abstraction to layer on top of the configuration
+persistence system, though.  It’s a nice abstraction for users
+(although most users would probably rather have a GUI) but it’s
+not a great abstraction for automation.  So at some point it
+may be better if there is CLI -&gt; public API -&gt; configuration
+persistence system.  And maybe “public API” is even a network
+API for the storage server so it’s equally easy to access from
+an agent implemented in essentially any language and maybe if
+the API is exposed by the storage node itself then this also
+gives you live-configuration-updates, avoiding the need for
+node restarts (not that this is the only way to accomplish
+this, but I think it’s a good way because it avoids the need
+for messes like inotify and it supports the notion that the
+storage node process is in charge of its own configuration
+persistence system, not just one consumer among many … which
+has some nice things going for it … though how this interacts
+exactly with further node management automation might bear
+closer scrutiny).</p>
+</div></blockquote>
+</div>
+</section>
+</section>
+<section id="enrolling-a-storage-server-config">
+<h2>Enrolling a Storage Server: Config<a class="headerlink" href="#enrolling-a-storage-server-config" title="Link to this heading">¶</a></h2>
+<p>You may edit the <code class="docutils literal notranslate"><span class="pre">[storage]</span></code> section of the <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code> file to
+turn on grid-management with <code class="docutils literal notranslate"><span class="pre">grid_management</span> <span class="pre">=</span> <span class="pre">true</span></code>. You then must
+also provide a <code class="docutils literal notranslate"><span class="pre">[grid_management_certificates]</span></code> section in the
+config-file which lists <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">=</span> <span class="pre">path/to/certificate</span></code> pairs.</p>
+<p>These certificate files are issued by the <code class="docutils literal notranslate"><span class="pre">grid-manager</span> <span class="pre">sign</span></code>
+command; these should be transmitted to the storage server operator
+who includes them in the config for the storage server. Relative paths
+are based from the node directory. Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">storage</span><span class="p">]</span>
+<span class="n">grid_management</span> <span class="o">=</span> <span class="n">true</span>
+
+<span class="p">[</span><span class="n">grid_management_certificates</span><span class="p">]</span>
+<span class="n">default</span> <span class="o">=</span> <span class="n">example_grid</span><span class="o">.</span><span class="n">cert</span>
+</pre></div>
+</div>
+<p>This will cause us to give this certificate to any Introducers we
+connect to (and subsequently, the Introducer will give the certificate
+out to clients).</p>
+</section>
+<section id="enrolling-a-client-config">
+<h2>Enrolling a Client: Config<a class="headerlink" href="#enrolling-a-client-config" title="Link to this heading">¶</a></h2>
+<p>You may instruct a Tahoe client to use only storage servers from given
+Grid Managers. If there are no such keys, any servers are used
+(but see <a class="reference external" href="https://tahoe-lafs.org/trac/tahoe-lafs/ticket/3979">https://tahoe-lafs.org/trac/tahoe-lafs/ticket/3979</a>).  If
+there are one or more keys, the client will only upload to a storage
+server that has a valid certificate (from any of the keys).</p>
+<p>To specify public-keys, add a <code class="docutils literal notranslate"><span class="pre">[grid_managers]</span></code> section to the
+config. This consists of <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">=</span> <span class="pre">value</span></code> pairs where <code class="docutils literal notranslate"><span class="pre">name</span></code> is an
+arbitrary name and <code class="docutils literal notranslate"><span class="pre">value</span></code> is a public-key of a Grid
+Manager. Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">grid_managers</span><span class="p">]</span>
+<span class="n">example_grid</span> <span class="o">=</span> <span class="n">pub</span><span class="o">-</span><span class="n">v0</span><span class="o">-</span><span class="n">vqimc4s5eflwajttsofisp5st566dbq36xnpp4siz57ufdavpvlq</span>
+</pre></div>
+</div>
+<p>See also <a class="reference external" href="https://tahoe-lafs.org/trac/tahoe-lafs/ticket/3507">https://tahoe-lafs.org/trac/tahoe-lafs/ticket/3507</a> which
+proposes a command to edit the config.</p>
+</section>
+<section id="example-setup-of-a-new-managed-grid">
+<h2>Example Setup of a New Managed Grid<a class="headerlink" href="#example-setup-of-a-new-managed-grid" title="Link to this heading">¶</a></h2>
+<p>This example creates an actual grid, but it’s all just on one machine
+with different “node directories” and a separate tahoe process for
+each node. Usually of course each storage server would be on a
+separate computer.</p>
+<p>Note that we use the <code class="docutils literal notranslate"><span class="pre">daemonize</span></code> command in the following but that’s
+only one way to handle “running a command in the background”. You
+could instead run commands that start with <code class="docutils literal notranslate"><span class="pre">daemonize</span> <span class="pre">...</span></code> in their
+own shell/terminal window or via something like <code class="docutils literal notranslate"><span class="pre">systemd</span></code></p>
+<p>We’ll store our Grid Manager configuration on disk, in
+<code class="docutils literal notranslate"><span class="pre">./gm0</span></code>. To initialize this directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">-</span><span class="n">manager</span> <span class="o">--</span><span class="n">config</span> <span class="o">./</span><span class="n">gm0</span> <span class="n">create</span>
+</pre></div>
+</div>
+<p>(If you already have a grid, you can <a class="reference internal" href="#skip-ahead"><span class="std std-ref">skip ahead</span></a>.)</p>
+<p>First of all, create an Introducer. Note that we actually have to run
+it briefly before it creates the “Introducer fURL” we want for the
+next steps:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tahoe</span> <span class="n">create</span><span class="o">-</span><span class="n">introducer</span> <span class="o">--</span><span class="n">listen</span><span class="o">=</span><span class="n">tcp</span> <span class="o">--</span><span class="n">port</span><span class="o">=</span><span class="mi">5555</span> <span class="o">--</span><span class="n">location</span><span class="o">=</span><span class="n">tcp</span><span class="p">:</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5555</span> <span class="o">./</span><span class="n">introducer</span>
+<span class="n">daemonize</span> <span class="n">tahoe</span> <span class="o">-</span><span class="n">d</span> <span class="n">introducer</span> <span class="n">run</span>
+</pre></div>
+</div>
+<p>Next, we attach a couple of storage nodes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>tahoe create-node --introducer $(cat introducer/private/introducer.furl) --nickname storage0 --webport 6001 --location tcp:localhost:6003 --port 6003 ./storage0
+tahoe create-node --introducer $(cat introducer/private/introducer.furl) --nickname storage1 --webport 6101 --location tcp:localhost:6103 --port 6103 ./storage1
+daemonize tahoe -d storage0 run
+daemonize tahoe -d storage1 run
+</pre></div>
+</div>
+<p id="skip-ahead">We can now tell the Grid Manager about our new storage servers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>grid-manager --config ./gm0 add storage0 $(cat storage0/node.pubkey)
+grid-manager --config ./gm0 add storage1 $(cat storage1/node.pubkey)
+</pre></div>
+</div>
+<p>To produce a new certificate for each node, we do this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">-</span><span class="n">manager</span> <span class="o">--</span><span class="n">config</span> <span class="o">./</span><span class="n">gm0</span> <span class="n">sign</span> <span class="n">storage0</span> <span class="o">&gt;</span> <span class="o">./</span><span class="n">storage0</span><span class="o">/</span><span class="n">gridmanager</span><span class="o">.</span><span class="n">cert</span>
+<span class="n">grid</span><span class="o">-</span><span class="n">manager</span> <span class="o">--</span><span class="n">config</span> <span class="o">./</span><span class="n">gm0</span> <span class="n">sign</span> <span class="n">storage1</span> <span class="o">&gt;</span> <span class="o">./</span><span class="n">storage1</span><span class="o">/</span><span class="n">gridmanager</span><span class="o">.</span><span class="n">cert</span>
+</pre></div>
+</div>
+<p>Now, we want our storage servers to actually announce these
+certificates into the grid. We do this by adding some configuration
+(in <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">storage</span><span class="p">]</span>
+<span class="n">grid_management</span> <span class="o">=</span> <span class="n">true</span>
+
+<span class="p">[</span><span class="n">grid_manager_certificates</span><span class="p">]</span>
+<span class="n">default</span> <span class="o">=</span> <span class="n">gridmanager</span><span class="o">.</span><span class="n">cert</span>
+</pre></div>
+</div>
+<p>Add the above bit to each node’s <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code> and re-start the
+storage nodes. (Alternatively, use the <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">add-grid-manager</span></code>
+command).</p>
+<p>Now try adding a new storage server <code class="docutils literal notranslate"><span class="pre">storage2</span></code>. This client can join
+the grid just fine, and announce itself to the Introducer as providing
+storage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>tahoe create-node --introducer $(cat introducer/private/introducer.furl) --nickname storage2 --webport 6301 --location tcp:localhost:6303 --port 6303 ./storage2
+daemonize tahoe -d storage2 run
+</pre></div>
+</div>
+<p>At this point any client will upload to any of these three
+storage-servers. Make a client “alice” and try!</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>tahoe create-client --introducer $(cat introducer/private/introducer.furl) --nickname alice --webport 6401 --shares-total=3 --shares-needed=2 --shares-happy=3 ./alice
+daemonize tahoe -d alice run
+tahoe -d alice put README.rst  # prints out a read-cap
+find storage2/storage/shares  # confirm storage2 has a share
+</pre></div>
+</div>
+<p>Now we want to make Alice only upload to the storage servers that the
+grid-manager has given certificates to (<code class="docutils literal notranslate"><span class="pre">storage0</span></code> and
+<code class="docutils literal notranslate"><span class="pre">storage1</span></code>). We need the grid-manager’s public key to put in Alice’s
+configuration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">-</span><span class="n">manager</span> <span class="o">--</span><span class="n">config</span> <span class="o">./</span><span class="n">gm0</span> <span class="n">public</span><span class="o">-</span><span class="n">identity</span>
+</pre></div>
+</div>
+<p>Put the key printed out above into Alice’s <code class="docutils literal notranslate"><span class="pre">tahoe.cfg</span></code> in section
+<code class="docutils literal notranslate"><span class="pre">client</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">grid_managers</span><span class="p">]</span>
+<span class="n">example_name</span> <span class="o">=</span> <span class="n">pub</span><span class="o">-</span><span class="n">v0</span><span class="o">-</span><span class="n">vqimc4s5eflwajttsofisp5st566dbq36xnpp4siz57ufdavpvlq</span>
+</pre></div>
+</div>
+<p>Now, re-start the “alice” client. Since we made Alice’s parameters
+require 3 storage servers to be reachable (<code class="docutils literal notranslate"><span class="pre">--happy=3</span></code>), all their
+uploads should now fail (so <code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">put</span></code> will fail) because they
+won’t use storage2 and thus can’t “achieve happiness”.</p>
+<p>A proposal to expose more information about Grid Manager and
+certificate status in the Welcome page is discussed in
+<a class="reference external" href="https://tahoe-lafs.org/trac/tahoe-lafs/ticket/3506">https://tahoe-lafs.org/trac/tahoe-lafs/ticket/3506</a></p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, The Tahoe-LAFS Developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Managed Grid</a><ul>
+<li><a class="reference internal" href="#overview-and-motivation">Overview and Motivation</a></li>
+<li><a class="reference internal" href="#grid-manager">Grid Manager</a></li>
+<li><a class="reference internal" href="#grid-manager-data-storage">Grid Manager Data Storage</a><ul>
+<li><a class="reference internal" href="#grid-manager-create">grid-manager create</a></li>
+<li><a class="reference internal" href="#grid-manager-public-identity">grid-manager public-identity</a></li>
+<li><a class="reference internal" href="#grid-manager-add">grid-manager add</a></li>
+<li><a class="reference internal" href="#grid-manager-list">grid-manager list</a></li>
+<li><a class="reference internal" href="#grid-manager-sign">grid-manager sign</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#enrolling-a-storage-server-cli">Enrolling a Storage Server: CLI</a><ul>
+<li><a class="reference internal" href="#tahoe-admin-add-grid-manager-cert">tahoe admin add-grid-manager-cert</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#enrolling-a-storage-server-config">Enrolling a Storage Server: Config</a></li>
+<li><a class="reference internal" href="#enrolling-a-client-config">Enrolling a Client: Config</a></li>
+<li><a class="reference internal" href="#example-setup-of-a-new-managed-grid">Example Setup of a New Managed Grid</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

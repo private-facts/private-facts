@@ -1,0 +1,545 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>Tahoe Logging - The Private Facts Project</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">The Private Facts Project</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <span class="sidebar-brand-text">The Private Facts Project</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/reference/Tahoe-LAFS/logging.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="tahoe-logging">
+<h1>Tahoe Logging<a class="headerlink" href="#tahoe-logging" title="Link to this heading">¶</a></h1>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#overview">Overview</a></p></li>
+<li><p><a class="reference internal" href="#realtime-logging">Realtime Logging</a></p></li>
+<li><p><a class="reference internal" href="#incidents">Incidents</a></p></li>
+<li><p><a class="reference internal" href="#working-with-flogfiles">Working with flogfiles</a></p></li>
+<li><p><a class="reference internal" href="#gatherers">Gatherers</a></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#incident-gatherer">Incident Gatherer</a></p></li>
+<li><p><a class="reference internal" href="#log-gatherer">Log Gatherer</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference internal" href="#adding-log-messages">Adding log messages</a></p></li>
+<li><p><a class="reference internal" href="#log-messages-during-unit-tests">Log Messages During Unit Tests</a></p></li>
+</ol>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>Tahoe uses the Foolscap logging mechanism (known as the “flog” subsystem) to
+record information about what is happening inside the Tahoe node. This is
+primarily for use by programmers and grid operators who want to find out what
+went wrong.</p>
+<p>The Foolscap logging system is documented at
+<a class="reference external" href="https://github.com/warner/foolscap/blob/latest-release/doc/logging.rst">https://github.com/warner/foolscap/blob/latest-release/doc/logging.rst</a>.</p>
+<p>The Foolscap distribution includes a utility named “<code class="docutils literal notranslate"><span class="pre">flogtool</span></code>” that is
+used to get access to many Foolscap logging features. <code class="docutils literal notranslate"><span class="pre">flogtool</span></code> should get
+installed into the same virtualenv as the <code class="docutils literal notranslate"><span class="pre">tahoe</span></code> command.</p>
+</section>
+<section id="realtime-logging">
+<h2>Realtime Logging<a class="headerlink" href="#realtime-logging" title="Link to this heading">¶</a></h2>
+<p>When you are working on Tahoe code, and want to see what the node is doing,
+the easiest tool to use is “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">tail</span></code>”. This connects to the Tahoe
+node and subscribes to hear about all log events. These events are then
+displayed to stdout, and optionally saved to a file.</p>
+<p>“<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">tail</span></code>” connects to the “logport”, for which the FURL is stored
+in <code class="docutils literal notranslate"><span class="pre">BASEDIR/private/logport.furl</span></code> . The following command will connect to
+this port and start emitting log information:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">flogtool</span> <span class="n">tail</span> <span class="n">BASEDIR</span><span class="o">/</span><span class="n">private</span><span class="o">/</span><span class="n">logport</span><span class="o">.</span><span class="n">furl</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">--save-to</span> <span class="pre">FILENAME</span></code> option will save all received events to a file,
+where then can be examined later with “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">dump</span></code>” or “<code class="docutils literal notranslate"><span class="pre">flogtool</span>
+<span class="pre">web-viewer</span></code>”. The <code class="docutils literal notranslate"><span class="pre">--catch-up</span></code> option will ask the node to dump all stored
+events before subscribing to new ones (without <code class="docutils literal notranslate"><span class="pre">--catch-up</span></code>, you will only
+hear about events that occur after the tool has connected and subscribed).</p>
+</section>
+<section id="incidents">
+<h2>Incidents<a class="headerlink" href="#incidents" title="Link to this heading">¶</a></h2>
+<p>Foolscap keeps a short list of recent events in memory. When something goes
+wrong, it writes all the history it has (and everything that gets logged in
+the next few seconds) into a file called an “incident”. These files go into
+<code class="docutils literal notranslate"><span class="pre">BASEDIR/logs/incidents/</span></code> , in a file named
+“<code class="docutils literal notranslate"><span class="pre">incident-TIMESTAMP-UNIQUE.flog.bz2</span></code>”. The default definition of
+“something goes wrong” is the generation of a log event at the <code class="docutils literal notranslate"><span class="pre">log.WEIRD</span></code>
+level or higher, but other criteria could be implemented.</p>
+<p>The typical “incident report” we’ve seen in a large Tahoe grid is about 40kB
+compressed, representing about 1800 recent events.</p>
+<p>These “flogfiles” have a similar format to the files saved by “<code class="docutils literal notranslate"><span class="pre">flogtool</span>
+<span class="pre">tail</span> <span class="pre">--save-to</span></code>”. They are simply lists of log events, with a small header
+to indicate which event triggered the incident.</p>
+<p>The “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">dump</span> <span class="pre">FLOGFILE</span></code>” command will take one of these <code class="docutils literal notranslate"><span class="pre">.flog.bz2</span></code>
+files and print their contents to stdout, one line per event. The raw event
+dictionaries can be dumped by using “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">dump</span> <span class="pre">--verbose</span> <span class="pre">FLOGFILE</span></code>”.</p>
+<p>The “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">web-viewer</span></code>” command can be used to examine the flogfile in
+a web browser. It runs a small HTTP server and emits the URL on stdout.  This
+view provides more structure than the output of “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">dump</span></code>”: the
+parent/child relationships of log events is displayed in a nested format.
+“<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">web-viewer</span></code>” is still fairly immature.</p>
+</section>
+<section id="working-with-flogfiles">
+<h2>Working with flogfiles<a class="headerlink" href="#working-with-flogfiles" title="Link to this heading">¶</a></h2>
+<p>The “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">filter</span></code>” command can be used to take a large flogfile
+(perhaps one created by the log-gatherer, see below) and copy a subset of
+events into a second file. This smaller flogfile may be easier to work with
+than the original. The arguments to “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">filter</span></code>” specify filtering
+criteria: a predicate that each event must match to be copied into the target
+file. <code class="docutils literal notranslate"><span class="pre">--before</span></code> and <code class="docutils literal notranslate"><span class="pre">--after</span></code> are used to exclude events outside a given
+window of time. <code class="docutils literal notranslate"><span class="pre">--above</span></code> will retain events above a certain severity
+level. <code class="docutils literal notranslate"><span class="pre">--from</span></code> retains events send by a specific tubid.
+<code class="docutils literal notranslate"><span class="pre">--strip-facility</span></code> removes events that were emitted with a given facility
+(like <code class="docutils literal notranslate"><span class="pre">foolscap.negotiation</span></code> or <code class="docutils literal notranslate"><span class="pre">tahoe.upload</span></code>).</p>
+</section>
+<section id="gatherers">
+<h2>Gatherers<a class="headerlink" href="#gatherers" title="Link to this heading">¶</a></h2>
+<p>In a deployed Tahoe grid, it is useful to get log information automatically
+transferred to a central log-gatherer host. This offloads the (admittedly
+modest) storage requirements to a different host and provides access to
+logfiles from multiple nodes (web-API, storage, or helper) in a single place.</p>
+<p>There are two kinds of gatherers: “log gatherer” and “stats gatherer”. Each
+produces a FURL which needs to be placed in the <code class="docutils literal notranslate"><span class="pre">NODEDIR/tahoe.cfg</span></code> file of
+each node that is to publish to the gatherer, under the keys
+“log_gatherer.furl” and “stats_gatherer.furl” respectively. When the Tahoe
+node starts, it will connect to the configured gatherers and offer its
+logport: the gatherer will then use the logport to subscribe to hear about
+events.</p>
+<p>The gatherer will write to files in its working directory, which can then be
+examined with tools like “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">dump</span></code>” as described above.</p>
+<section id="incident-gatherer">
+<h3>Incident Gatherer<a class="headerlink" href="#incident-gatherer" title="Link to this heading">¶</a></h3>
+<p>The “incident gatherer” only collects Incidents: records of the log events
+that occurred just before and slightly after some high-level “trigger event”
+was recorded. Each incident is classified into a “category”: a short string
+that summarizes what sort of problem took place. These classification
+functions are written after examining a new/unknown incident. The idea is to
+recognize when the same problem is happening multiple times.</p>
+<p>A collection of classification functions that are useful for Tahoe nodes are
+provided in <code class="docutils literal notranslate"><span class="pre">misc/incident-gatherer/support_classifiers.py</span></code> . There is
+roughly one category for each <code class="docutils literal notranslate"><span class="pre">log.WEIRD</span></code>-or-higher level event in the
+Tahoe source code.</p>
+<p>The incident gatherer is created with the “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">create-incident-gatherer</span>
+<span class="pre">WORKDIR</span></code>” command, and started with “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">run</span></code>”. The generated
+“<code class="docutils literal notranslate"><span class="pre">gatherer.tac</span></code>” file should be modified to add classifier functions.</p>
+<p>The incident gatherer writes incident names (which are simply the relative
+pathname of the <code class="docutils literal notranslate"><span class="pre">incident-\*.flog.bz2</span></code> file) into <code class="docutils literal notranslate"><span class="pre">classified/CATEGORY</span></code>.
+For example, the <code class="docutils literal notranslate"><span class="pre">classified/mutable-retrieve-uncoordinated-write-error</span></code>
+file contains a list of all incidents which were triggered by an
+uncoordinated write that was detected during mutable file retrieval (caused
+when somebody changed the contents of the mutable file in between the node’s
+mapupdate step and the retrieve step). The <code class="docutils literal notranslate"><span class="pre">classified/unknown</span></code> file
+contains a list of all incidents that did not match any of the classification
+functions.</p>
+<p>At startup, the incident gatherer will automatically reclassify any incident
+report which is not mentioned in any of the <code class="docutils literal notranslate"><span class="pre">classified/\*</span></code> files. So the
+usual workflow is to examine the incidents in <code class="docutils literal notranslate"><span class="pre">classified/unknown</span></code>, add a
+new classification function, delete <code class="docutils literal notranslate"><span class="pre">classified/unknown</span></code>, then bound the
+gatherer with “<code class="docutils literal notranslate"><span class="pre">tahoe</span> <span class="pre">restart</span> <span class="pre">WORKDIR</span></code>”. The incidents which can be
+classified with the new functions will be added to their own
+<code class="docutils literal notranslate"><span class="pre">classified/FOO</span></code> lists, and the remaining ones will be put in
+<code class="docutils literal notranslate"><span class="pre">classified/unknown</span></code>, where the process can be repeated until all events
+are classifiable.</p>
+<p>The incident gatherer is still fairly immature: future versions will have a
+web interface and an RSS feed, so operations personnel can track problems in
+the storage grid.</p>
+<p>In our experience, each incident takes about two seconds to transfer from the
+node that generated it to the gatherer. The gatherer will automatically catch
+up to any incidents which occurred while it is offline.</p>
+</section>
+<section id="log-gatherer">
+<h3>Log Gatherer<a class="headerlink" href="#log-gatherer" title="Link to this heading">¶</a></h3>
+<p>The “Log Gatherer” subscribes to hear about every single event published by
+the connected nodes, regardless of severity. This server writes these log
+events into a large flogfile that is rotated (closed, compressed, and
+replaced with a new one) on a periodic basis. Each flogfile is named
+according to the range of time it represents, with names like
+“<code class="docutils literal notranslate"><span class="pre">from-2008-08-26-132256--to-2008-08-26-162256.flog.bz2</span></code>”. The flogfiles
+contain events from many different sources, making it easier to correlate
+things that happened on multiple machines (such as comparing a client node
+making a request with the storage servers that respond to that request).</p>
+<p>Create the Log Gatherer with the “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">create-gatherer</span> <span class="pre">WORKDIR</span></code>”
+command, and start it with “<code class="docutils literal notranslate"><span class="pre">twistd</span> <span class="pre">-ny</span> <span class="pre">gatherer.tac</span></code>”. Then copy the contents of the
+<code class="docutils literal notranslate"><span class="pre">log_gatherer.furl</span></code> file it creates into the <code class="docutils literal notranslate"><span class="pre">BASEDIR/tahoe.cfg</span></code> file
+(under the key <code class="docutils literal notranslate"><span class="pre">log_gatherer.furl</span></code> of the section <code class="docutils literal notranslate"><span class="pre">[node]</span></code>) of all nodes
+that should be sending it log events. (See <a class="reference internal" href="configuration.html"><span class="doc">Configuring a Tahoe-LAFS node</span></a>)</p>
+<p>The “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">filter</span></code>” command, described above, is useful to cut down the
+potentially large flogfiles into a more focussed form.</p>
+<p>Busy nodes, particularly web-API nodes which are performing recursive
+deep-size/deep-stats/deep-check operations, can produce a lot of log events.
+To avoid overwhelming the node (and using an unbounded amount of memory for
+the outbound TCP queue), publishing nodes will start dropping log events when
+the outbound queue grows too large. When this occurs, there will be gaps
+(non-sequential event numbers) in the log-gatherer’s flogfiles.</p>
+</section>
+</section>
+<section id="adding-log-messages">
+<h2>Adding log messages<a class="headerlink" href="#adding-log-messages" title="Link to this heading">¶</a></h2>
+<p>When adding new code, the Tahoe developer should add a reasonable number of
+new log events. For details, please see the Foolscap logging documentation,
+but a few notes are worth stating here:</p>
+<ul class="simple">
+<li><p>use a facility prefix of “<code class="docutils literal notranslate"><span class="pre">tahoe.</span></code>”, like “<code class="docutils literal notranslate"><span class="pre">tahoe.mutable.publish</span></code>”</p></li>
+<li><p>assign each severe (<code class="docutils literal notranslate"><span class="pre">log.WEIRD</span></code> or higher) event a unique message
+identifier, as the <code class="docutils literal notranslate"><span class="pre">umid=</span></code> argument to the <code class="docutils literal notranslate"><span class="pre">log.msg()</span></code> call. The
+<code class="docutils literal notranslate"><span class="pre">misc/coding_tools/make_umid</span></code> script may be useful for this purpose.
+This will make it easier to write a classification function for these
+messages.</p></li>
+<li><p>use the <code class="docutils literal notranslate"><span class="pre">parent=</span></code> argument whenever the event is causally/temporally
+clustered with its parent. For example, a download process that involves
+three sequential hash fetches could announce the send and receipt of those
+hash-fetch messages with a <code class="docutils literal notranslate"><span class="pre">parent=</span></code> argument that ties them to the
+overall download process. However, each new web-API download request should
+be unparented.</p></li>
+<li><p>use the <code class="docutils literal notranslate"><span class="pre">format=</span></code> argument in preference to the <code class="docutils literal notranslate"><span class="pre">message=</span></code> argument.
+E.g. use <code class="docutils literal notranslate"><span class="pre">log.msg(format=&quot;got</span> <span class="pre">%(n)d</span> <span class="pre">shares,</span> <span class="pre">need</span> <span class="pre">%(k)d&quot;,</span> <span class="pre">n=n,</span> <span class="pre">k=k)</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">log.msg(&quot;got</span> <span class="pre">%d</span> <span class="pre">shares,</span> <span class="pre">need</span> <span class="pre">%d&quot;</span> <span class="pre">%</span> <span class="pre">(n,k))</span></code>. This will allow
+later tools to analyze the event without needing to scrape/reconstruct the
+structured data out of the formatted string.</p></li>
+<li><p>Pass extra information as extra keyword arguments, even if they aren’t
+included in the <code class="docutils literal notranslate"><span class="pre">format=</span></code> string. This information will be displayed in
+the “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">dump</span> <span class="pre">--verbose</span></code>” output, as well as being available to
+other tools. The <code class="docutils literal notranslate"><span class="pre">umid=</span></code> argument should be passed this way.</p></li>
+<li><p>use <code class="docutils literal notranslate"><span class="pre">log.err</span></code> for the catch-all <code class="docutils literal notranslate"><span class="pre">addErrback</span></code> that gets attached to the
+end of any given Deferred chain. When used in conjunction with
+<code class="docutils literal notranslate"><span class="pre">LOGTOTWISTED=1</span></code>, <code class="docutils literal notranslate"><span class="pre">log.err()</span></code> will tell Twisted about the error-nature
+of the log message, causing Trial to flunk the test (with an “ERROR”
+indication that prints a copy of the Failure, including a traceback).
+Don’t use <code class="docutils literal notranslate"><span class="pre">log.err</span></code> for events that are <code class="docutils literal notranslate"><span class="pre">BAD</span></code> but handled (like hash
+failures: since these are often deliberately provoked by test code, they
+should not cause test failures): use <code class="docutils literal notranslate"><span class="pre">log.msg(level=BAD)</span></code> for those
+instead.</p></li>
+</ul>
+</section>
+<section id="log-messages-during-unit-tests">
+<h2>Log Messages During Unit Tests<a class="headerlink" href="#log-messages-during-unit-tests" title="Link to this heading">¶</a></h2>
+<p>If a test is failing and you aren’t sure why, start by enabling
+<code class="docutils literal notranslate"><span class="pre">FLOGTOTWISTED=1</span></code> like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">test</span> <span class="n">FLOGTOTWISTED</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">FLOGTOTWISTED=1</span></code>, sufficiently-important log events will be written
+into <code class="docutils literal notranslate"><span class="pre">_trial_temp/test.log</span></code>, which may give you more ideas about why the
+test is failing.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">_trial_temp/test.log</span></code> will not receive messages below the
+<code class="docutils literal notranslate"><span class="pre">level=OPERATIONAL</span></code> threshold. You can change the threshold via the <code class="docutils literal notranslate"><span class="pre">FLOGLEVEL</span></code>
+variable, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">test</span> <span class="n">FLOGLEVEL</span><span class="o">=</span><span class="mi">10</span> <span class="n">FLOGTOTWISTED</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>(The level numbers are listed in src/allmydata/util/log.py.)</p>
+<p>To look at the detailed foolscap logging messages, run the tests like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">test</span> <span class="n">FLOGFILE</span><span class="o">=</span><span class="n">flog</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">bz2</span> <span class="n">FLOGLEVEL</span><span class="o">=</span><span class="mi">1</span> <span class="n">FLOGTOTWISTED</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>The first environment variable will cause foolscap log events to be written
+to <code class="docutils literal notranslate"><span class="pre">./flog.out.bz2</span></code> (instead of merely being recorded in the circular
+buffers for the use of remote subscribers or incident reports). The second
+will cause all log events to be written out, not just the higher-severity
+ones. The third will cause twisted log events (like the markers that indicate
+when each unit test is starting and stopping) to be copied into the flogfile,
+making it easier to correlate log events with unit tests.</p>
+<p>Enabling this form of logging appears to roughly double the runtime of the
+unit tests. The <code class="docutils literal notranslate"><span class="pre">flog.out.bz2</span></code> file is approximately 2MB.</p>
+<p>You can then use “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">dump</span></code>” or “<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">web-viewer</span></code>” on the
+resulting <code class="docutils literal notranslate"><span class="pre">flog.out</span></code> file.</p>
+<p>(”<code class="docutils literal notranslate"><span class="pre">flogtool</span> <span class="pre">tail</span></code>” and the log-gatherer are not useful during unit tests,
+since there is no single Tub to which all the log messages are published).</p>
+<p>It is possible for setting these environment variables to cause spurious test
+failures in tests with race condition bugs. All known instances of this have
+been fixed as of Tahoe-LAFS v1.7.1.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, The Tahoe-LAFS Developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Tahoe Logging</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#realtime-logging">Realtime Logging</a></li>
+<li><a class="reference internal" href="#incidents">Incidents</a></li>
+<li><a class="reference internal" href="#working-with-flogfiles">Working with flogfiles</a></li>
+<li><a class="reference internal" href="#gatherers">Gatherers</a><ul>
+<li><a class="reference internal" href="#incident-gatherer">Incident Gatherer</a></li>
+<li><a class="reference internal" href="#log-gatherer">Log Gatherer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#adding-log-messages">Adding log messages</a></li>
+<li><a class="reference internal" href="#log-messages-during-unit-tests">Log Messages During Unit Tests</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=16df9e97"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>
