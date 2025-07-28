@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import os
+import sys
+
+
+sys.path.insert(0, os.path.abspath("source"))
+
 extensions = ['sphinx.ext.autodoc',
-              'furo',
+    'sphinx.ext.githubpages',
               ]
 
 templates_path = ['_templates']
