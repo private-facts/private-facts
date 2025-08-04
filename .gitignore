@@ -217,3 +217,5 @@ tahoe-server/storage0/storage/
 tahoe-server/storage0/shares/
 tahoe-server/client0/private/
 running.process*
+
+**/private/
