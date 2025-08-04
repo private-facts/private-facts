@@ -1,19 +1,26 @@
 @startuml
 
-actor "Tahoe_client_test.py" as pf
-Boundary "Tahoe_client.py" as tahoe
+Actor "FrontEnd \nApp" as user
+entity "FastAPI \nREST module" as pf
+Boundary "Tahoe Introducer \nTestGrid" as tahoe
 
-group UPDATE mutables - Happy
-    pf -> tahoe : upload string "testdata"
+group User enters data
+    user -> pf : submit the string "testdata"
+    activate tahoe
+    pf -> tahoe : (HTTPX POST) string "testdata"
+    tahoe -> pf :  cap_string , 200
+    deactivate tahoe
+    pf -> user : "OK, here is the special URL"
+end
+
+group Next, user changes data
+    user -> pf : "ref X has new data"
     activate pf
         activate tahoe
-        tahoe -> pf :  cap_string , 200
-        pf -> tahoe : update cap_string to "datatest"
+        pf -> tahoe : new value for "cap_string" is "datatest"
         tahoe -> pf : cap_string , 201
-        pf -> tahoe : read from cap_string
-        tahoe -> pf: "datatest"
         deactivate tahoe
-        pf -> pf : assert "datatest"
-end
+        pf -> user : "data updated"
     deactivate pf
+end
 @enduml

@@ -5,7 +5,7 @@ entity "Private\nFacts" as pf
 Boundary "Tahoe\n'Gateway Client' " as tahoe
 database "Tahoe\nStorage Client" as disk
 
-group Create content
+group User enters text
 activate user
     user --> pf : "A row of facts"
     activate pf
@@ -15,7 +15,7 @@ activate user
         tahoe -> tahoe : encrypt
         tahoe --> tahoe : look up storage servers
         tahoe ->  disk : send (shares) to storage server(s)
-tahoe <-- disk : return storage URL
+        tahoe <-- disk : return storage URL
         tahoe -> pf : return cap string
         deactivate tahoe
     pf -> user : returns a cap string
@@ -23,5 +23,8 @@ tahoe <-- disk : return storage URL
     user --> user : "store row + cap string"
 user --> user : update UI
 deactivate user
+
+group User uploads a file
+end
 end
 @enduml
