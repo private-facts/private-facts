@@ -211,3 +211,13 @@ __marimo__/
 
 scratch.*
 hello_world_out.txt
+
+tahoe-server/storage0/storage/shares/
+tahoe-server/storage0/private/api_auth_token
+tahoe-server/storage0/private/logport.furl
+tahoe-server/storage0/running.process
+tahoe-server/client0/private/api_auth_token
+tahoe-server/client0/private/logport.furl
+tahoe-server/client0/running.process
+
+.idea/
