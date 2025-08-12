@@ -12,11 +12,30 @@ dev SESSION_NAME="tahoe-dev":
     tmux split-window -t {{SESSION_NAME}}:0 -h
     tmux split-window -t {{SESSION_NAME}}:0.1 -v
 
+    tmux select-pane -t {{SESSION_NAME}}:0.0 -T "User"
+    tmux select-pane -t {{SESSION_NAME}}:0.1 -T "Tahoe Storage"
+    tmux select-pane -t {{SESSION_NAME}}:0.2 -T "Tahoe Client"
+
     tmux send-keys -t {{SESSION_NAME}}:0.1 'uv run tahoe run tahoe-server/storage0' Enter
     tmux send-keys -t {{SESSION_NAME}}:0.2 'uv run tahoe run tahoe-server/client0' Enter
 
     tmux select-pane -t {{SESSION_NAME}}:0.0
     
+    tmux attach-session -t {{SESSION_NAME}}
+
+
+
+# Start the development environment in verbose mode
+devv SESSION_NAME="tahoe-dev":
+    tmux new-session -d -s {{SESSION_NAME}}
+    tmux split-window -t {{SESSION_NAME}}:0 -h
+    tmux split-window -t {{SESSION_NAME}}:0.1 -v
+
+    tmux send-keys -t {{SESSION_NAME}}:0.1 'uv run tahoe run --node-directory tahoe-server/storage0' --spew Enter
+    tmux send-keys -t {{SESSION_NAME}}:0.2 'uv run tahoe run --node-directory tahoe-server/client0' --spew Enter
+
+    tmux select-pane -t {{SESSION_NAME}}:0.0
+
     tmux attach-session -t {{SESSION_NAME}}
 
 # Start dev environment and run the hello script

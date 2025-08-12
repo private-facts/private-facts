@@ -7,7 +7,7 @@ name = "private-facts"
 version = "0.1.0"
 description = "Tahoe-lafs example app"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
     "attrs==23.2.0",
     "cryptography<42",
