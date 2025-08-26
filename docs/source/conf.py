@@ -13,7 +13,7 @@ extensions = ['sphinx.ext.autodoc',
 templates_path = ['_templates']
 source_suffix = {'.rst': 'restructuredtext', '.md': 'restructuredtext'}
 master_doc = 'index'
-project = u'Tahoe-LAFS'
+project = u'Private Facts'
 copyright = u'2025, The Private Facts Developers'
 author = u'The Private Facts Developers'
 
@@ -46,7 +46,7 @@ html_static_path = ['_static']
 html_show_sourcelink = True
 html_show_sphinx = True
 html_show_copyright = True
-htmlhelp_basename = 'Tahoe-LAFS-doc'
+htmlhelp_basename = 'Private-Facts-doc'
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
