@@ -14,8 +14,8 @@ templates_path = ['_templates']
 source_suffix = {'.rst': 'restructuredtext', '.md': 'restructuredtext'}
 master_doc = 'index'
 project = u'Tahoe-LAFS'
-copyright = u'2025, The Tahoe-LAFS Developers'
-author = u'The Tahoe-LAFS Developers'
+copyright = u'2025, The Private Facts Developers'
+author = u'The Private Facts Developers'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
